@@ -1,5 +1,5 @@
 {
-  "name": "healthcare-app-client",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,7 +12,7 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.0.4",
+    "react-scripts": "2.1.1",
     "react-vis": "^1.11.2"
   },
   "scripts": {
