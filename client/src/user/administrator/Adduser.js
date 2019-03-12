@@ -67,13 +67,13 @@ class Administrator_add_user extends Component {
         signup(adduserRequest)
         .then(response => {
             notification.success({
-                message: 'Healthcare App',
+                message: 'EquiV',
                 description: "You've successfully registered a new user!",
             });
             this.props.history.push("/manageusers");
         }).catch(error => {
             notification.error({
-                message: 'Healthcare App',
+                message: 'EquiV',
                 description: error.message || 'Sorry! Something went wrong. Please try again!'
             });
         });

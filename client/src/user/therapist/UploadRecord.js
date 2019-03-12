@@ -135,13 +135,13 @@ class Therapist_uploadrecord extends Component {
         createRecord(createRecordRequest, uploadedFile)
         .then(response => {
             notification.success({
-                message: 'Healthcare App',
+                message: 'EquiV',
                 description: "Record created!",
             });
             this.props.history.push("/mypatients/" + this.state.patientIC.value);
         }).catch(error => {
             notification.error({
-                message: 'Healthcare App',
+                message: 'EquiV',
                 description: error.message || 'Sorry! Something went wrong. Please try again!'
             });
         });
@@ -236,14 +236,14 @@ class Therapist_uploadrecord extends Component {
                                    .then(response => {
                                      context.setState({isLoading: false});
                                      notification.success({
-                                         message: 'Healthcare App',
+                                         message: 'EquiV',
                                          description: "Record created!",
                                      });
                                      context.props.history.push("/mypatients/" + context.state.patientIC.value);
                                     }).catch(error => {
                                      context.setState({isLoading: false});
                                      notification.error({
-                                         message: 'Healthcare App',
+                                         message: 'EquiV',
                                          description: error.message || 'Sorry! Something went wrong. Please try again!'
                                      });
                                    })
@@ -257,7 +257,7 @@ class Therapist_uploadrecord extends Component {
                  }).catch(error => {
                    context.setState({isLoading: false});
                    notification.error({
-                      message: 'Healthcare App',
+                      message: 'EquiV',
                       description: error.message || 'Sorry! Something went wrong. Please try again!'
                   });
                 })
@@ -265,14 +265,14 @@ class Therapist_uploadrecord extends Component {
           }).catch(error => {
              context.setState({isLoading: false});
              notification.error({
-                message: 'Healthcare App',
+                message: 'EquiV',
                 description: error.message || 'Sorry! Something went wrong. Please try again!'
           });
         })
        }).catch(error => {
            context.setState({isLoading: false});
            notification.error({
-              message: 'Healthcare App',
+              message: 'EquiV',
               description: error.message || 'Sorry! Something went wrong. Please try again!'
         });
        })
@@ -390,12 +390,12 @@ class Therapist_uploadrecord extends Component {
 function openNotificationError(type) {
     if (type===0) {
       notification["error"]({
-       message: 'Healthcare App',
+       message: 'EquiV',
        description: 'Connection timed out',
      });
     } else {
       notification["error"]({
-       message: 'Healthcare App',
+       message: 'EquiV',
        description: 'Failed to identify you, please try again.',
      });
     }

@@ -135,7 +135,7 @@ class LoginForm extends Component {
                                       }).catch(error => {
                                         context.setState({isLoading: false});
                                         notification.error({
-                                            message: 'Healthcare App',
+                                            message: 'EquiV',
                                             description: error.message || 'Sorry! Something went wrong. Please try again!'
                                         });
                                       })
@@ -149,7 +149,7 @@ class LoginForm extends Component {
                     }).catch(error => {
                         context.setState({isLoading: false});
                         notification.error({
-                            message: 'Healthcare App',
+                            message: 'EquiV',
                             description: error.message || 'Sorry! Something went wrong. Please try again!'
                         });
                     })
@@ -158,12 +158,12 @@ class LoginForm extends Component {
                     context.setState({isLoading: false});
                     if(error.status === 401) {
                         notification.error({
-                            message: 'Healthcare App',
+                            message: 'EquiV',
                             description: 'Your NRIC/Password/Role is/are incorrect. Please try again!'
                         });
                     } else {
                         notification.error({
-                            message: 'Healthcare App',
+                            message: 'EquiV',
                             description: error.message || 'Sorry! Something went wrong. Please try again!'
                         });
                     }
@@ -171,7 +171,7 @@ class LoginForm extends Component {
             }).catch(error => {
                context.setState({isLoading: false});
                notification.error({
-                   message: 'Healthcare App',
+                   message: 'EquiV',
                    description: error.message || 'Sorry! Something went wrong. Please try again!'
                });
             })
@@ -205,12 +205,12 @@ class LoginForm extends Component {
         }).catch(error => {
             if(error.status === 401) {
                 notification.error({
-                    message: 'Healthcare App',
+                    message: 'EquiV',
                     description: 'Your NRIC/Password/Role is/are incorrect. Please try again!'
                 });
             } else {
                 notification.error({
-                    message: 'Healthcare App',
+                    message: 'EquiV',
                     description: error.message || 'Sorry! Something went wrong. Please try again!'
                 });
             }
@@ -327,12 +327,12 @@ class LoginForm extends Component {
 function openNotificationError(type) {
   if (type===0) {
     notification["error"]({
-     message: 'Healthcare App',
+     message: 'EquiV',
      description: 'Connection timed out',
    });
   } else {
     notification["error"]({
-     message: 'Healthcare App',
+     message: 'EquiV',
      description: 'Failed to identify you, please try again.',
    });
   }

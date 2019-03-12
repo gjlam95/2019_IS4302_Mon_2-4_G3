@@ -199,7 +199,7 @@ class Therapist_patientrecords extends Component {
 
         }).catch(error => {
             notification.error({
-                message: 'Healthcare App',
+                message: 'EquiV',
                 description: error.message || 'Sorry! Something went wrong. Please try again!'
             });
             e.target.checked = "false";
@@ -214,7 +214,7 @@ class Therapist_patientrecords extends Component {
 
         }).catch(error => {
             notification.error({
-                message: 'Healthcare App',
+                message: 'EquiV',
                 description: error.message || 'Sorry! Something went wrong. Please try again!'
             });
             e.target.checked = "true";

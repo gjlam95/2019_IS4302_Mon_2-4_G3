@@ -86,14 +86,14 @@ class Patient_editnote extends Component {
         updateNote(updateRequest)
         .then(response => {
             notification.success({
-                message: 'Healthcare App',
+                message: 'EquiV',
                 description: `You've successfully edited your note!`
             });
 
             this.props.history.push("/mydata");
         }).catch(error => {
             notification.error({
-                message: 'Healthcare App',
+                message: 'EquiV',
                 description: error.message || 'Sorry! Something went wrong. Please try again!'
             });
         });

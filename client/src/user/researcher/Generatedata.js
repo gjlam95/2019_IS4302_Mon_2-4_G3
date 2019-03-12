@@ -38,7 +38,7 @@ class GenerateDataForm extends Component {
         this.setState({tableData: response})
       }).catch(error => {
           notification.error({
-              message: 'Healthcare App',
+              message: 'EquiV',
               description: error.message || 'Sorry! Something went wrong. Please try again!'
           });
       });

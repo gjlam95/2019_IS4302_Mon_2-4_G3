@@ -30,12 +30,12 @@ class Administrator_link_users extends Component {
       assign(linkuserRequest)
       .then(response => {
           notification.success({
-              message: 'Healthcare App',
+              message: 'EquiV',
               description: "You've successfully assigned the users!",
           });
       }).catch(error => {
           notification.error({
-              message: 'Healthcare App',
+              message: 'EquiV',
               description: error.message || 'Sorry! Something went wrong. Please try again!'
           });
       });
@@ -50,13 +50,13 @@ class Administrator_link_users extends Component {
       unassign(delinkuserRequest)
       .then(response => {
           notification.success({
-              message: 'Healthcare App',
+              message: 'EquiV',
               description: "You've successfully unassigned the users!",
           });
           this.props.history.push("/link");
       }).catch(error => {
           notification.error({
-              message: 'Healthcare App',
+              message: 'EquiV',
               description: error.message || 'Sorry! Something went wrong. Please try again!'
           });
       });

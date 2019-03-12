@@ -234,7 +234,7 @@ class Patient_mydata extends Component {
 
       }).catch(error => {
           notification.error({
-              message: 'Healthcare App',
+              message: 'EquiV',
               description: error.message || 'Sorry! Something went wrong. Please try again!'
           });
       });
@@ -253,7 +253,7 @@ class Patient_mydata extends Component {
 
       }).catch(error => {
           notification.error({
-              message: 'Healthcare App',
+              message: 'EquiV',
               description: error.message || 'Sorry! Something went wrong. Please try again!'
           });
       });

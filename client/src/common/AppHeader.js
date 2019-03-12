@@ -129,7 +129,7 @@ class AppHeader extends Component {
             <Header className="app-header">
             <div className="container">
               <div className="app-title" >
-                <Link to="/">Healthcare App</Link>
+                <Link to="/">EquiV</Link>
               </div>
               <Menu
                 className="app-menu"

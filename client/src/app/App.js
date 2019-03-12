@@ -43,7 +43,7 @@ const { Content } = Layout;
 
 const Home = () => (
   <div>
-    <h1>Welcome to the Healthcare App Webpage!</h1>
+    <h1>Welcome to EquiV!</h1>
   </div>
 )
 
@@ -75,19 +75,19 @@ class App extends Component {
       });
       this.props.history.push("/login");
       notification["success"]({
-        message: 'Healthcare App',
+        message: 'EquiV',
         description: "You're successfully logged out.",
       });
 
     }).catch(error => {
         if(error.status === 401) {
             notification.error({
-                message: 'Healthcare App',
+                message: 'EquiV',
                 description: 'Your NRIC/Password/Role is/are incorrect. Please try again!'
             });
         } else {
             notification.error({
-                message: 'Healthcare App',
+                message: 'EquiV',
                 description: error.message || 'Sorry! Something went wrong. Please try again!'
             });
         }
@@ -96,7 +96,7 @@ class App extends Component {
 
   handleLogin() {
     notification.success({
-      message: 'Healthcare App',
+      message: 'EquiV',
       description: "You're successfully logged in.",
     });
     this.loadCurrentUser();

@@ -47,13 +47,13 @@ class Administrator_manage_users extends Component {
       deleteUser(index.nric)
       .then(response => {
           notification.success({
-              message: 'Healthcare App',
+              message: 'EquiV',
               description: "You've successfully deleted a user!",
           });
           window.location.reload();
       }).catch(error => {
           notification.error({
-              message: 'Healthcare App',
+              message: 'EquiV',
               description: error.message || 'Sorry! Something went wrong. Please try again!'
           });
       });

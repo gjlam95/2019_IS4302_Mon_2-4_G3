@@ -72,14 +72,14 @@ class Therapist_newnote extends Component {
         createNote(noteRequest)
         .then(response => {
             notification.success({
-                message: 'Healthcare App',
+                message: 'EquiV',
                 description: `You've successfully created a new note for ${this.state.patient.nric}!`
             });
             const previousLink = `/mypatients/${this.state.patient.nric}`;
             this.props.history.push(previousLink);
         }).catch(error => {
             notification.error({
-                message: 'Healthcare App',
+                message: 'EquiV',
                 description: error.message || 'Sorry! Something went wrong. Please try again!'
             });
         });
