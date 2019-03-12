@@ -1,0 +1,21 @@
+.adduser-container {
+    max-width: 420px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.adduser-form-button {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.adduser-form-button[disabled], .adduser-form-button[disabled]:hover, .adduser-form-button[disabled]:focus {
+    opacity: 0.6;
+    color: #fff;
+    background-color: #1890ff;
+    border-color: #1890ff;
+}
+
+.adduser-form input {
+    margin-bottom: 3px;
+}
