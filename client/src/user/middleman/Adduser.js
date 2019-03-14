@@ -15,7 +15,7 @@ import { Form, Input, Button, Select, notification } from 'antd';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class Administrator_add_user extends Component {
+class Middleman_add_user extends Component {
   constructor(props) {
         super(props);
         this.state = {
@@ -226,7 +226,7 @@ class Administrator_add_user extends Component {
                                 <Option value="therapist">Therapist</Option>
                                 <Option value="researcher">Researcher</Option>
                                 <Option value="external partner">External Partner</Option>
-                                <Option value="administrator">Administrator</Option>
+                                <Option value="middleman">Middleman</Option>
                             </Select>
                         </FormItem>
                         <FormItem
@@ -489,4 +489,4 @@ class Administrator_add_user extends Component {
     }
 }
 
-export default Administrator_add_user;
+export default Middleman_add_user;

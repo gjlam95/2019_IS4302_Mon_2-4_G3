@@ -85,7 +85,7 @@ class AppHeader extends Component {
                   handleMenuClick={this.handleMenuClick}/>
               </Menu.Item>
             ];
-          } else if(this.props.currentUser.role === "administrator") {
+          } else if(this.props.currentUser.role === "middleman") {
             menuItems = [
               <Menu.Item key="/logs">
                 <Link to="/logs">

@@ -5,7 +5,7 @@ import './Linkusers.css';
 
 const FormItem = Form.Item;
 
-class Administrator_link_users extends Component {
+class Middleman_link_users extends Component {
   constructor(props) {
         super(props);
         this.state = {
@@ -147,4 +147,4 @@ class Administrator_link_users extends Component {
   }
 }
 
-export default Administrator_link_users;
+export default Middleman_link_users;

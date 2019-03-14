@@ -19,10 +19,10 @@ import Therapist_uploadrecord from '../user/therapist/UploadRecord';
 import Patient_mydata from '../user/patient/MyData';
 import Patient_newnote from '../user/patient/NewNote';
 import Patient_editnote from '../user/patient/EditNote';
-import Administrator_logs from '../user/administrator/Logs';
-import Administrator_link_users from '../user/administrator/Linkusers';
-import Administrator_manage_users from '../user/administrator/Manageusers';
-import Administrator_add_user from '../user/administrator/Adduser';
+import Middleman_logs from '../user/middleman/Logs';
+import Middleman_link_users from '../user/middleman/Linkusers';
+import Middleman_manage_users from '../user/middleman/Manageusers';
+import Middleman_add_user from '../user/middleman/Adduser';
 import Researcher_generate_data from '../user/researcher/Generatedata';
 import External_add_user from '../user/external_partner/Adduser';
 import External_upload_database from '../user/external_partner/Uploaddatabase';
@@ -30,7 +30,7 @@ import LoadingIndicator from '../common/LoadingIndicator';
 import PatientRoute from '../common/PatientRoute';
 import TherapistRoute from '../common/TherapistRoute';
 import ResearcherRoute from '../common/ResearcherRoute';
-import AdministratorRoute from '../common/AdministratorRoute';
+import MiddlemanRoute from '../common/MiddlemanRoute';
 import ExternalPartnerRoute from '../common/ExternalPartnerRoute';
 import NotFound from '../common/NotFound';
 
@@ -205,14 +205,14 @@ class App extends Component {
                       render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
                     <ExternalPartnerRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/uploaddatabase" component={External_upload_database}></ExternalPartnerRoute>
                     <ExternalPartnerRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/adduser" component={External_add_user}></ExternalPartnerRoute>
-                    <ExternalPartnerRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/link" component={Administrator_link_users}></ExternalPartnerRoute>
+                    <ExternalPartnerRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/link" component={Middleman_link_users}></ExternalPartnerRoute>
                     <Route component={NotFound}></Route>
                   </Switch>
                 </div>
               </Content>
             </Layout>
         );
-      } else if(this.state.currentUser.role === "administrator") {
+      } else if(this.state.currentUser.role === "middleman") {
         return (
             <Layout className="app-container">
               <AppHeader isAuthenticated={this.state.isAuthenticated}
@@ -224,10 +224,10 @@ class App extends Component {
                   <Switch>
                     <Route exact path="/" component={Home}>
                     </Route>
-                    <AdministratorRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/logs" component={Administrator_logs}></AdministratorRoute>
-                    <AdministratorRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/link" component={Administrator_link_users}></AdministratorRoute>
-                    <AdministratorRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/manageusers" component={Administrator_manage_users}></AdministratorRoute>
-                    <AdministratorRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/adduser" component={Administrator_add_user}></AdministratorRoute>
+                    <MiddlemanRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/logs" component={Middleman_logs}></MiddlemanRoute>
+                    <MiddlemanRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/link" component={Middleman_link_users}></MiddlemanRoute>
+                    <MiddlemanRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/manageusers" component={Middleman_manage_users}></MiddlemanRoute>
+                    <MiddlemanRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/adduser" component={Middleman_add_user}></MiddlemanRoute>
                     <Route component={NotFound}></Route>
                   </Switch>
                 </div>

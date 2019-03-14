@@ -5,11 +5,11 @@ import {
 import NotFound from '../common/NotFound';
 
 
-const AdministratorRoute = ({ component: Component, authenticated, role, path }) => (
+const MiddlemanRoute = ({ component: Component, authenticated, role, path }) => (
     <Route
       path={path}
       render={props =>
-        ((authenticated && role === "administrator") ? (
+        ((authenticated && role === "middleman") ? (
           <Component path {...props} />
         ) : (
           <NotFound />
@@ -18,4 +18,4 @@ const AdministratorRoute = ({ component: Component, authenticated, role, path })
     />
 );
 
-export default AdministratorRoute;
+export default MiddlemanRoute;

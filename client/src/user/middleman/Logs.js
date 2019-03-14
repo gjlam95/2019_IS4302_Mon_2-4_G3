@@ -3,7 +3,7 @@ import { Layout } from 'antd';
 import { getLogs } from '../../util/APIUtils';
 import './Logs.css';
 
-class Administrator_logs extends Component {
+class Middleman_logs extends Component {
   constructor(props) {
       super(props);
       this.state = {
@@ -56,4 +56,4 @@ class Administrator_logs extends Component {
     }
 }
 
-export default Administrator_logs;
+export default Middleman_logs;

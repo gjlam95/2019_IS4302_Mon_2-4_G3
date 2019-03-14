@@ -16,7 +16,7 @@ class AddUserButton extends Component {
   }
 }
 
-class Administrator_manage_users extends Component {
+class Middleman_manage_users extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -109,4 +109,4 @@ class Administrator_manage_users extends Component {
     }
 }
 
-export default Administrator_manage_users;
+export default Middleman_manage_users;
