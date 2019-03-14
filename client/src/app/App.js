@@ -24,14 +24,14 @@ import Middleman_link_users from '../user/middleman/Linkusers';
 import Middleman_manage_users from '../user/middleman/Manageusers';
 import Middleman_add_user from '../user/middleman/Adduser';
 import Researcher_generate_data from '../user/researcher/Generatedata';
-import External_add_user from '../user/external_partner/Adduser';
-import External_upload_database from '../user/external_partner/Uploaddatabase';
+import Dealer_add_user from '../user/dealer/Adduser';
+import Dealer_upload_database from '../user/dealer/Uploaddatabase';
 import LoadingIndicator from '../common/LoadingIndicator';
 import PatientRoute from '../common/PatientRoute';
 import TherapistRoute from '../common/TherapistRoute';
 import ResearcherRoute from '../common/ResearcherRoute';
 import MiddlemanRoute from '../common/MiddlemanRoute';
-import ExternalPartnerRoute from '../common/ExternalPartnerRoute';
+import DealerRoute from '../common/DealerRoute';
 import NotFound from '../common/NotFound';
 
 import { Layout, notification } from 'antd';
@@ -189,7 +189,7 @@ class App extends Component {
               </Content>
             </Layout>
         );
-      } else if(this.state.currentUser.role === "external partner") {
+      } else if(this.state.currentUser.role === "dealer") {
         return (
             <Layout className="app-container">
               <AppHeader isAuthenticated={this.state.isAuthenticated}
@@ -203,9 +203,9 @@ class App extends Component {
                     </Route>
                     <Route path="/login"
                       render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
-                    <ExternalPartnerRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/uploaddatabase" component={External_upload_database}></ExternalPartnerRoute>
-                    <ExternalPartnerRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/adduser" component={External_add_user}></ExternalPartnerRoute>
-                    <ExternalPartnerRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/link" component={Middleman_link_users}></ExternalPartnerRoute>
+                    <DealerRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/uploaddatabase" component={Dealer_upload_database}></DealerRoute>
+                    <DealerRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/adduser" component={Dealer_add_user}></DealerRoute>
+                    <DealerRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/link" component={Middleman_link_users}></DealerRoute>
                     <Route component={NotFound}></Route>
                   </Switch>
                 </div>

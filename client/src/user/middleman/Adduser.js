@@ -225,7 +225,7 @@ class Middleman_add_user extends Component {
                                 <Option value="patient">Patient</Option>
                                 <Option value="therapist">Therapist</Option>
                                 <Option value="researcher">Researcher</Option>
-                                <Option value="external partner">External Partner</Option>
+                                <Option value="dealer">External Partner</Option>
                                 <Option value="middleman">Middleman</Option>
                             </Select>
                         </FormItem>

@@ -5,11 +5,11 @@ import {
 import NotFound from '../common/NotFound';
 
 
-const ExternalPartnerRoute = ({ component: Component, authenticated, role, path }) => (
+const DealerRoute = ({ component: Component, authenticated, role, path }) => (
     <Route
       path={path}
       render={props =>
-        ((authenticated && role === "external partner") ? (
+        ((authenticated && role === "dealer") ? (
           <Component path {...props} />
         ) : (
           <NotFound />
@@ -18,4 +18,4 @@ const ExternalPartnerRoute = ({ component: Component, authenticated, role, path 
     />
 );
 
-export default ExternalPartnerRoute;
+export default DealerRoute;
