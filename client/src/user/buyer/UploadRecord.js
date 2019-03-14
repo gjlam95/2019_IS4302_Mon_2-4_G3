@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import { Form, Input, Layout, Upload, Button, Icon, Select, notification, Spin  } from 'antd';
 import { matchPath } from 'react-router';
-import { getSellerProfile, createRecord, createRecordSignature, verifyCreateRecordTagSignature } from '../../util/APIUtils';
-import { convertBase64StrToUint8Array, wait, splitByMaxLength,
-dis, concatenate, getTagSigAndMsg, writeUid, readUid, disconUid} from '../../util/MFAUtils';
+import { getSellerProfile, createRecord } from '../../util/APIUtils';
 import './UploadRecord.css';
 
 const FormItem = Form.Item;
 const { Content } = Layout;
-var encoder = new TextEncoder('utf-8');
-var writeChar, readChar, disconnectChar, deviceConnected;
-var valueRecArray = [];
 const Option = Select.Option;
 const firstData = ['illness', 'reading'];
 const secondData = {
@@ -154,131 +149,6 @@ class Buyer_uploadrecord extends Component {
       return false;
     };
 
-    startConnection() {
-      valueRecArray = [];
-         let context = this;
-         let ivStr;
-         const createRecordRequest = {
-             type: this.state.type.value,
-             subtype: this.state.subtype.value,
-             title: this.state.title.value,
-             sellerIC: this.state.sellerIC.value
-         };
-         const uploadedFile = this.state.selectedFileList[0];
-         this.setState({isLoading:true});
-         navigator.bluetooth.requestDevice({
-           filters: [ {services:[0x2220]},]
-         })
-           .then(device => {
-             return device.gatt.connect();
-           })
-           .then(server => {
-             return server.getPrimaryService(0x2220);
-           })
-           .then(service => {
-             return service.getCharacteristics();
-           })
-           .then(charArray => {
-             for (let char of charArray) {
-               if (char.properties.write === true && char.uuid.startsWith(writeUid)) {
-                 writeChar = char;
-               }
-               if (char.properties.read === true && char.uuid.startsWith(readUid)) {
-                 readChar = char;
-               }
-               if (char.uuid.startsWith(disconUid)) {
-                 disconnectChar = char;
-               }
-             }
-           createRecordSignature(createRecordRequest, uploadedFile)
-           .then(response => {
-             ivStr = response.iv;
-             let combined = convertBase64StrToUint8Array(response.combined);
-             let signature = convertBase64StrToUint8Array(response.signature);
-             let iv = convertBase64StrToUint8Array(ivStr);
-             let stringEnder = encoder.encode("//");
-             let sendMsg = concatenate(Uint8Array, combined, signature, stringEnder);
-             let numOfChunks = Math.ceil(sendMsg.byteLength / 20);
-             var msgChunks = splitByMaxLength(sendMsg, numOfChunks);
-             var prevPromise = Promise.resolve();
-             for (let i=0; i< numOfChunks; i++) {
-               prevPromise = prevPromise.then(function() {
-                 return writeChar.writeValue(msgChunks[i]).then(function() {
-                   if (i === numOfChunks-1) {
-                     wait(11000);
-                       var prevWhilePromise = Promise.resolve();
-                       for (let j=0; j< 7; j++) {
-                          prevWhilePromise = prevWhilePromise.then(function() {
-                            return readChar.readValue().then(value => {
-                              let valueRec = new Uint8Array(value.buffer);
-                              if (valueRec[0]===48 && valueRec[1]===48 && j===0) {
-                                context.setState({isLoading: false});
-                                dis(disconnectChar);
-                                openNotificationError(0);
-                              }
-                              if (valueRec[0]===33 && valueRec[1]===33) {
-                                context.setState({isLoading: false});
-                                dis(disconnectChar);
-                                openNotificationError(1);
-                              }
-                              for (let i=0; i<value.buffer.byteLength; i++) {
-                                valueRecArray.push(valueRec[i]);
-                              }
-                              let ack = "ACK" + j;
-                              ack = encoder.encode(ack);
-                              return writeChar.writeValue(ack).then(function() {
-                                if (j===6) {
-                                  dis(disconnectChar);
-                                  let encryptedMsg = getTagSigAndMsg(valueRecArray);
-                                  let ivMsg = {iv: ivStr};
-                                  let reqToSend =  Object.assign({}, encryptedMsg, ivMsg);
-                                  verifyCreateRecordTagSignature(createRecordRequest, uploadedFile, reqToSend)
-                                   .then(response => {
-                                     context.setState({isLoading: false});
-                                     notification.success({
-                                         message: 'EquiV',
-                                         description: "Record created!",
-                                     });
-                                     context.props.history.push("/mysellers/" + context.state.sellerIC.value);
-                                    }).catch(error => {
-                                     context.setState({isLoading: false});
-                                     notification.error({
-                                         message: 'EquiV',
-                                         description: error.message || 'Sorry! Something went wrong. Please try again!'
-                                     });
-                                   })
-                                }
-                              })
-                            })
-                          })
-                        }
-                      }
-                   })
-                 }).catch(error => {
-                   context.setState({isLoading: false});
-                   notification.error({
-                      message: 'EquiV',
-                      description: error.message || 'Sorry! Something went wrong. Please try again!'
-                  });
-                })
-            }
-          }).catch(error => {
-             context.setState({isLoading: false});
-             notification.error({
-                message: 'EquiV',
-                description: error.message || 'Sorry! Something went wrong. Please try again!'
-          });
-        })
-       }).catch(error => {
-           context.setState({isLoading: false});
-           notification.error({
-              message: 'EquiV',
-              description: error.message || 'Sorry! Something went wrong. Please try again!'
-        });
-       })
-    }
-
-
     componentDidMount() {
         const match = matchPath(this.props.history.location.pathname, {
           path: '/mysellers/:nric/uploadrecord',
@@ -386,20 +256,5 @@ class Buyer_uploadrecord extends Component {
         );
     }
   }
-
-function openNotificationError(type) {
-    if (type===0) {
-      notification["error"]({
-       message: 'EquiV',
-       description: 'Connection timed out',
-     });
-    } else {
-      notification["error"]({
-       message: 'EquiV',
-       description: 'Failed to identify you, please try again.',
-     });
-    }
-  }
-
 
 export default Buyer_uploadrecord;

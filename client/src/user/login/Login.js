@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
-import { login, getServerSignature, verifyTagSignature } from '../../util/APIUtils';
+import { login } from '../../util/APIUtils';
 import './Login.css';
 import { AUTH_TOKEN, NRIC_LENGTH } from '../../constants';
-import { convertBase64StrToUint8Array, wait, splitByMaxLength,
-dis, concatenate, getTagSigAndMsg, writeUid, readUid, disconUid } from '../../util/MFAUtils';
 import { Form, Input, Button, Icon, Select, notification, Spin } from 'antd';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-
-
-var encoder = new TextEncoder('utf-8');
-var writeChar, readChar, disconnectChar, deviceConnected;
-var valueRecArray = [];
-
 
 class Login extends Component {
     render() {
@@ -192,20 +184,6 @@ class LoginForm extends Component {
         }
     }
 
-}
-
-function openNotificationError(type) {
-  if (type===0) {
-    notification["error"]({
-     message: 'EquiV',
-     description: 'Connection timed out',
-   });
-  } else {
-    notification["error"]({
-     message: 'EquiV',
-     description: 'Failed to identify you, please try again.',
-   });
-  }
 }
 
 export default Login;
