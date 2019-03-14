@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Layout, Upload, Button, Icon, Select, notification, Spin  } from 'antd';
 import { matchPath } from 'react-router';
-import { getPatientProfile, createRecord, createRecordSignature, verifyCreateRecordTagSignature } from '../../util/APIUtils';
+import { getSellerProfile, createRecord, createRecordSignature, verifyCreateRecordTagSignature } from '../../util/APIUtils';
 import { convertBase64StrToUint8Array, wait, splitByMaxLength,
 dis, concatenate, getTagSigAndMsg, writeUid, readUid, disconUid} from '../../util/MFAUtils';
 import './UploadRecord.css';
@@ -33,7 +33,7 @@ class Therapist_uploadrecord extends Component {
           title: {
             value: null
           },
-          patientIC: {
+          sellerIC: {
             value: null
           },
           selectedFileList: [],
@@ -41,7 +41,7 @@ class Therapist_uploadrecord extends Component {
             startData: secondData[firstData[0]],
             nextData: secondData[firstData[0]][0],
           },
-          patient: null,
+          seller: null,
           isLoading: false,
         }
         this.handleFirstDataChange = this.handleFirstDataChange.bind(this);
@@ -50,18 +50,18 @@ class Therapist_uploadrecord extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.beforeUpload = this.beforeUpload.bind(this);
         this.verifyFieldsFilled = this.verifyFieldsFilled.bind(this);
-        this.loadPatientProfile = this.loadPatientProfile.bind(this);
+        this.loadSellerProfile = this.loadSellerProfile.bind(this);
     }
 
-    loadPatientProfile(pat_nric) {
+    loadSellerProfile(pat_nric) {
         this.setState({
             isLoading: true
         });
 
-        getPatientProfile(pat_nric)
+        getSellerProfile(pat_nric)
         .then(response => {
             this.setState({
-                patient: response,
+                seller: response,
                 isLoading: false
             });
         }).catch(error => {
@@ -81,7 +81,7 @@ class Therapist_uploadrecord extends Component {
 
     verifyFieldsFilled() {
       return (this.state.type.value===null || this.state.title.value===null ||
-              this.state.patientIC.value===null || this.state.selectedFileList.length===0);
+              this.state.sellerIC.value===null || this.state.selectedFileList.length===0);
     }
 
     handleInputChange(event) {
@@ -129,7 +129,7 @@ class Therapist_uploadrecord extends Component {
             type: this.state.type.value,
             subtype: this.state.subtype.value,
             title: this.state.title.value,
-            patientIC: this.state.patientIC.value
+            sellerIC: this.state.sellerIC.value
         };
         const uploadedFile = this.state.selectedFileList[0]
         createRecord(createRecordRequest, uploadedFile)
@@ -138,7 +138,7 @@ class Therapist_uploadrecord extends Component {
                 message: 'EquiV',
                 description: "Record created!",
             });
-            this.props.history.push("/mypatients/" + this.state.patientIC.value);
+            this.props.history.push("/mysellers/" + this.state.sellerIC.value);
         }).catch(error => {
             notification.error({
                 message: 'EquiV',
@@ -162,7 +162,7 @@ class Therapist_uploadrecord extends Component {
              type: this.state.type.value,
              subtype: this.state.subtype.value,
              title: this.state.title.value,
-             patientIC: this.state.patientIC.value
+             sellerIC: this.state.sellerIC.value
          };
          const uploadedFile = this.state.selectedFileList[0];
          this.setState({isLoading:true});
@@ -239,7 +239,7 @@ class Therapist_uploadrecord extends Component {
                                          message: 'EquiV',
                                          description: "Record created!",
                                      });
-                                     context.props.history.push("/mypatients/" + context.state.patientIC.value);
+                                     context.props.history.push("/mysellers/" + context.state.sellerIC.value);
                                     }).catch(error => {
                                      context.setState({isLoading: false});
                                      notification.error({
@@ -281,27 +281,27 @@ class Therapist_uploadrecord extends Component {
 
     componentDidMount() {
         const match = matchPath(this.props.history.location.pathname, {
-          path: '/mypatients/:nric/uploadrecord',
+          path: '/mysellers/:nric/uploadrecord',
           exact: true,
           strict: false
         });
         const pat_nric = match.params.nric;
         this.setState({
-            patientIC: {
+            sellerIC: {
               value: pat_nric
             }
         });
-        this.loadPatientProfile(pat_nric);
+        this.loadSellerProfile(pat_nric);
     }
 
     componentWillReceiveProps(nextProps) {
         if(this.props.match.params.nric !== nextProps.match.params.nric) {
             this.setState({
-                patientIC: {
+                sellerIC: {
                   value: nextProps.match.params.nric
                 }
             });
-            this.loadPatientProfile(nextProps.match.params.nric);
+            this.loadSellerProfile(nextProps.match.params.nric);
         }
     }
 
@@ -309,13 +309,13 @@ class Therapist_uploadrecord extends Component {
     render() {
         return (
           <div className="upload-data">
-            {  this.state.patient ? (
+            {  this.state.seller ? (
                 <Layout className="layout">
                   <Content>
                     <div style={{ background: '#ECECEC' }}>
-                      <div className="name">&nbsp;&nbsp;{this.state.patient.name}</div>
-                      <div className="subtitle">&nbsp;&nbsp;&nbsp;&nbsp;NRIC: {this.state.patient.nric}
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Phone Number: {this.state.patient.phone}</div>
+                      <div className="name">&nbsp;&nbsp;{this.state.seller.name}</div>
+                      <div className="subtitle">&nbsp;&nbsp;&nbsp;&nbsp;NRIC: {this.state.seller.nric}
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Phone Number: {this.state.seller.phone}</div>
                       <br />
                     </div>
                     <div className="createRecord-container">
@@ -372,7 +372,7 @@ class Therapist_uploadrecord extends Component {
                                         className="createRecord-form-button"
                                         onClick={this.startConnection.bind(this)}
                                         disabled={this.verifyFieldsFilled()}
-                                        >Connect Patient Tag To Create Record</Button>
+                                        >Connect Seller Tag To Create Record</Button>
                                 </FormItem>
                             </Form>
                           </Spin>

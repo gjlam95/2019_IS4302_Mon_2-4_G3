@@ -59,7 +59,7 @@ class AppHeader extends Component {
                   handleMenuClick={this.handleMenuClick}/>
               </Menu.Item>
             ];
-          } else if(this.props.currentUser.role === "patient") {
+          } else if(this.props.currentUser.role === "seller") {
             menuItems = [
               <Menu.Item key="/mydata">
                 <Link to="/mydata">
@@ -74,8 +74,8 @@ class AppHeader extends Component {
             ];
           } else if(this.props.currentUser.role === "therapist") {
             menuItems = [
-              <Menu.Item key="/mypatients">
-                <Link to="/mypatients">
+              <Menu.Item key="/mysellers">
+                <Link to="/mysellers">
                   <Icon type="medicine-box" />
                 </Link>
               </Menu.Item>,

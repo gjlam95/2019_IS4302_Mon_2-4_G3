@@ -1,52 +1,66 @@
+/* eslint-disable */
 import React, { Component } from 'react';
-import { createNote, getCurrentUser } from '../../util/APIUtils';
+import { matchPath } from 'react-router';
+import { updateNote, getMyNotes } from '../../util/APIUtils';
 import { NOTE_CONTENT_MAX_LENGTH } from '../../constants';
 import { Layout, Button, Input, Form, notification } from 'antd';
-import './NewNote.css';
+import './EditNote.css';
 
 const FormItem = Form.Item;
 const { Content } = Layout;
 const { TextArea } = Input;
 
-class Patient_newnote extends Component {
+class Seller_editnote extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            content: "",
-            currentUser: null,
+            content: '',
+            noteid: '',
+            contentobtained: false,
             isLoading: false
         }
 
-        this.getCurrentPatient = this.getCurrentPatient.bind(this);
+        this.loadNoteContent = this.loadNoteContent.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.isFormInvalid = this.isFormInvalid.bind(this);
     }
 
-    getCurrentPatient() {
-        this.setState({
-            isLoading: true
-        });
 
-        getCurrentUser()
-        .then((response) => {
-            this.setState({
-                currentUser: response,
-                isLoading: false
-            });
-        }).catch(error => {
-            if(error.status === 404) {
+
+    loadNoteContent(note_id) {
+      this.setState({
+          noteid: note_id,
+          isLoading: true
+      });
+
+      getMyNotes()
+      .then((response) => {
+          for (var i = 0; i < response.content.length; i++) {
+              var currentid = response.content[i].noteID;
+              if (currentid == this.state.noteid) {
                 this.setState({
-                    notFound: true,
+                    content: { value: response.content[i].noteContent },
+                    contentobtained: true,
                     isLoading: false
                 });
-            } else {
-                this.setState({
-                    serverError: true,
-                    isLoading: false
-                });
-            }
-        });
+                break;
+              }
+          }
+
+      }).catch(error => {
+          if(error.status === 404) {
+              this.setState({
+                  notFound: true,
+                  isLoading: false
+              });
+          } else {
+              this.setState({
+                  serverError: true,
+                  isLoading: false
+              });
+          }
+      });
     }
 
 
@@ -65,17 +79,18 @@ class Patient_newnote extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const noteRequest = {
-            patientNric: this.state.currentUser.nric,
+        const updateRequest = {
+            noteID: this.state.noteid,
             noteContent: this.state.content.value
         };
-        createNote(noteRequest)
+        updateNote(updateRequest)
         .then(response => {
             notification.success({
                 message: 'EquiV',
-                description: `You've successfully created a new note!`
+                description: `You've successfully edited your note!`
             });
-            this.props.history.push('/mydata');
+
+            this.props.history.push("/mydata");
         }).catch(error => {
             notification.error({
                 message: 'EquiV',
@@ -114,21 +129,35 @@ class Patient_newnote extends Component {
     }
 
     componentDidMount() {
-        this.getCurrentPatient();
+        const match = matchPath(this.props.history.location.pathname, {
+          path: '/mydata/editnote/:id',
+          exact: true,
+          strict: false
+        });
+
+        const note_id = match.params.id;
+        this.loadNoteContent(note_id);
+    }
+
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props.match.params.id !== nextProps.match.params.id) {
+            this.loadNoteContent(nextProps.match.params.id);
+        }
     }
 
     render() {
 
         return (
-          <div className="patient-data">
-            {  this.state.currentUser ? (
+          <div className="seller-data">
+            {  (this.state.contentobtained) ? (
                 <Layout className="layout">
                   <Content>
                     <div className="title">
-                      New Note &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      Edit Note { this.state.noteid } &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
-                    <div className="newnote-container">
-                      <Form onSubmit={this.handleSubmit} className="newnote-form">
+                    <div className="editnote-container">
+                      <Form onSubmit={this.handleSubmit} className="editnote-form">
                           <FormItem
                               label="Content"
                               hasFeedback
@@ -145,8 +174,8 @@ class Patient_newnote extends Component {
                               <Button type="primary"
                                   htmlType="submit"
                                   size="large"
-                                  className="newnote-form-button"
-                                  disabled={this.isFormInvalid()}>Add note</Button>
+                                  className="editnote-form-button"
+                                  disabled={this.isFormInvalid()}>Edit note</Button>
                           </FormItem>
                       </Form>
                     </div>
@@ -159,4 +188,4 @@ class Patient_newnote extends Component {
     }
 }
 
-export default Patient_newnote;
+export default Seller_editnote;

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { matchPath } from 'react-router';
-import { getPatientProfile, getCurrentUser, updateNote, getAllTherapistNotes } from '../../util/APIUtils';
+import { getSellerProfile, getCurrentUser, updateNote, getAllTherapistNotes } from '../../util/APIUtils';
 import { NOTE_CONTENT_MAX_LENGTH } from '../../constants';
 import { Layout, Button, Input, Form, notification } from 'antd';
 import './EditNote.css';
@@ -16,12 +16,12 @@ class Therapist_editnote extends Component {
         this.state = {
             content: '',
             noteid: '',
-            patient: null,
+            seller: null,
             currentUser: null,
             isLoading: false
         }
         this.getCurrentTherapist = this.getCurrentTherapist.bind(this);
-        this.loadPatientProfile = this.loadPatientProfile.bind(this);
+        this.loadSellerProfile = this.loadSellerProfile.bind(this);
         this.loadNoteContent = this.loadNoteContent.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -54,15 +54,15 @@ class Therapist_editnote extends Component {
         });
     }
 
-    loadPatientProfile(pat_nric) {
+    loadSellerProfile(pat_nric) {
         this.setState({
             isLoading: true
         });
 
-        getPatientProfile(pat_nric)
+        getSellerProfile(pat_nric)
         .then(response => {
             this.setState({
-                patient: response,
+                seller: response,
                 isLoading: false
             });
         }).catch(error => {
@@ -139,9 +139,9 @@ class Therapist_editnote extends Component {
         .then(response => {
             notification.success({
                 message: 'EquiV',
-                description: `You've successfully edited a note for ${this.state.patient.nric}!`
+                description: `You've successfully edited a note for ${this.state.seller.nric}!`
             });
-            const previousLink = `/mypatients/${this.state.patient.nric}`;
+            const previousLink = `/mysellers/${this.state.seller.nric}`;
             this.props.history.push(previousLink);
         }).catch(error => {
             notification.error({
@@ -182,7 +182,7 @@ class Therapist_editnote extends Component {
 
     componentDidMount() {
         const match = matchPath(this.props.history.location.pathname, {
-          path: '/mypatients/:nric/editnote/:id',
+          path: '/mysellers/:nric/editnote/:id',
           exact: true,
           strict: false
         });
@@ -190,7 +190,7 @@ class Therapist_editnote extends Component {
         const pat_nric = match.params.nric;
         const note_id = match.params.id;
         this.getCurrentTherapist();
-        this.loadPatientProfile(pat_nric);
+        this.loadSellerProfile(pat_nric);
         this.loadNoteContent(pat_nric, note_id);
     }
 
@@ -199,7 +199,7 @@ class Therapist_editnote extends Component {
         if(this.props.match.params.nric !== nextProps.match.params.nric ||
            this.props.match.params.id !== nextProps.match.params.id) {
             this.getCurrentTherapist();
-            this.loadPatientProfile(nextProps.match.params.nric);
+            this.loadSellerProfile(nextProps.match.params.nric);
             this.loadNoteContent(nextProps.match.params.nric, nextProps.match.params.id);
         }
     }
@@ -207,14 +207,14 @@ class Therapist_editnote extends Component {
     render() {
 
         return (
-          <div className="patient-data">
-            {  this.state.patient ? (
+          <div className="seller-data">
+            {  this.state.seller ? (
                 <Layout className="layout">
                   <Content>
                     <div style={{ background: '#ECECEC' }}>
-                      <div className="name">&nbsp;&nbsp;{this.state.patient.name}</div>
-                      <div className="subtitle">&nbsp;&nbsp;&nbsp;&nbsp;NRIC: {this.state.patient.nric}
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Phone Number: {this.state.patient.phone}</div>
+                      <div className="name">&nbsp;&nbsp;{this.state.seller.name}</div>
+                      <div className="subtitle">&nbsp;&nbsp;&nbsp;&nbsp;NRIC: {this.state.seller.nric}
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Phone Number: {this.state.seller.phone}</div>
                       <br />
                     </div>
                     <div className="title">

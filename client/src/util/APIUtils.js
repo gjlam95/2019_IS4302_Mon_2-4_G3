@@ -223,7 +223,7 @@ export function getCurrentUser() {
     });
 }
 
-// Patient API calls
+// Seller API calls
 export function getAllMyTherapists() {
     return request({
         url: API + "/treatments/getTherapists/",
@@ -240,7 +240,7 @@ export function getAllRecords() {
 
 export function getMyRecords() {
     return request({
-        url: API + "/records/patient/",
+        url: API + "/records/seller/",
         method: 'GET'
     });
 }
@@ -278,7 +278,7 @@ export function verifyCreateRecordTagSignature(newRecord, file, reqToSend) {
 
 export function getGivenPermissions() {
       return request({
-          url: API + "/permissions/patient/given/",
+          url: API + "/permissions/seller/given/",
           method: 'GET'
       });
 }
@@ -307,7 +307,7 @@ export function getTherapistNotes() {
 
 
 // Therapist API calls
-export function getPatientProfile(nric) {
+export function getSellerProfile(nric) {
     return request({
         url: API + "/treatments/getUserSummary/" + nric,
         method: 'GET'
@@ -325,16 +325,16 @@ export function createRecord(newRecord, file) {
     });
 }
 
-export function getPatientPermittedRecords(pat_nric) {
+export function getSellerPermittedRecords(pat_nric) {
     return request({
-        url: API + "/records/therapist/patient/" + pat_nric,
+        url: API + "/records/therapist/seller/" + pat_nric,
         method: 'GET'
     });
 }
 
 export function getAllTherapistNotes(pat_nric) {
     return request({
-        url: API + "/notes/getPatient/" + pat_nric + "/",
+        url: API + "/notes/getSeller/" + pat_nric + "/",
         method: 'GET'
     });
 }
@@ -354,14 +354,14 @@ export function checkNotePermission(note_id) {
     });
 }
 
-export function getPatients() {
+export function getSellers() {
     return request({
-        url: API + "/treatments/getPatients/",
+        url: API + "/treatments/getSellers/",
         method: 'GET'
     });
 }
 
-// Therapist and Patient API calls
+// Therapist and Seller API calls
 export function createNote(req) {
     return request({
         url: API + "/notes/create/",

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { matchPath } from 'react-router';
-import { getPatientProfile, createNote } from '../../util/APIUtils';
+import { getSellerProfile, createNote } from '../../util/APIUtils';
 import { NOTE_CONTENT_MAX_LENGTH } from '../../constants';
 import { Layout, Button, Input, Form, notification } from 'antd';
 import './NewNote.css';
@@ -14,25 +14,25 @@ class Therapist_newnote extends Component {
         super(props);
         this.state = {
             content: "",
-            patient: null,
+            seller: null,
             isLoading: false
         }
 
-        this.loadPatientProfile = this.loadPatientProfile.bind(this);
+        this.loadSellerProfile = this.loadSellerProfile.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.isFormInvalid = this.isFormInvalid.bind(this);
     }
 
-    loadPatientProfile(pat_nric) {
+    loadSellerProfile(pat_nric) {
         this.setState({
             isLoading: true
         });
 
-        getPatientProfile(pat_nric)
+        getSellerProfile(pat_nric)
         .then(response => {
             this.setState({
-                patient: response,
+                seller: response,
                 isLoading: false
             });
         }).catch(error => {
@@ -66,16 +66,16 @@ class Therapist_newnote extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const noteRequest = {
-            patientNric: this.state.patient.nric,
+            sellerNric: this.state.seller.nric,
             noteContent: this.state.content.value
         };
         createNote(noteRequest)
         .then(response => {
             notification.success({
                 message: 'EquiV',
-                description: `You've successfully created a new note for ${this.state.patient.nric}!`
+                description: `You've successfully created a new note for ${this.state.seller.nric}!`
             });
-            const previousLink = `/mypatients/${this.state.patient.nric}`;
+            const previousLink = `/mysellers/${this.state.seller.nric}`;
             this.props.history.push(previousLink);
         }).catch(error => {
             notification.error({
@@ -116,32 +116,32 @@ class Therapist_newnote extends Component {
 
     componentDidMount() {
         const match = matchPath(this.props.history.location.pathname, {
-          path: '/mypatients/:nric/newnote',
+          path: '/mysellers/:nric/newnote',
           exact: true,
           strict: false
         });
         const pat_nric = match.params.nric;
-        this.loadPatientProfile(pat_nric);
+        this.loadSellerProfile(pat_nric);
     }
 
 
     componentWillReceiveProps(nextProps) {
         if(this.props.match.params.nric !== nextProps.match.params.nric) {
-            this.loadPatientProfile(nextProps.match.params.nric);
+            this.loadSellerProfile(nextProps.match.params.nric);
         }
     }
 
     render() {
 
         return (
-          <div className="patient-data">
-            {  this.state.patient ? (
+          <div className="seller-data">
+            {  this.state.seller ? (
                 <Layout className="layout">
                   <Content>
                     <div style={{ background: '#ECECEC' }}>
-                      <div className="name">&nbsp;&nbsp;{this.state.patient.name}</div>
-                      <div className="subtitle">&nbsp;&nbsp;&nbsp;&nbsp;NRIC: {this.state.patient.nric}
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Phone Number: {this.state.patient.phone}</div>
+                      <div className="name">&nbsp;&nbsp;{this.state.seller.name}</div>
+                      <div className="subtitle">&nbsp;&nbsp;&nbsp;&nbsp;NRIC: {this.state.seller.nric}
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Phone Number: {this.state.seller.phone}</div>
                       <br />
                     </div>
                     <div className="title">

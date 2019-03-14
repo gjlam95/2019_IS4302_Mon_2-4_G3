@@ -129,7 +129,7 @@ class LoginForm extends Component {
                                 value: value
                             }})}
                         placeholder="Select your role">
-                        <Option value="patient">Patient</Option>
+                        <Option value="seller">Seller</Option>
                         <Option value="therapist">Therapist</Option>
                         <Option value="researcher">Researcher</Option>
                         <Option value="dealer">External Partner</Option>

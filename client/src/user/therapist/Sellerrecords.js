@@ -3,29 +3,29 @@ import {
     Link
 } from 'react-router-dom';
 import { matchPath } from 'react-router';
-import { getPatientPermittedRecords, getPatientProfile,
+import { getSellerPermittedRecords, getSellerProfile,
          getAllTherapistNotes, getCurrentUser, setNotePermission, checkNotePermission } from '../../util/APIUtils';
 import { Layout, Table, Button, Checkbox, notification } from 'antd';
 import update from 'immutability-helper';
-import './Patientrecords.css';
+import './Sellerrecords.css';
 
 const { Content } = Layout;
 
-class Therapist_patientrecords extends Component {
+class Therapist_sellerrecords extends Component {
     constructor(props) {
         super(props);
         this.state = {
             patrecords: [],
             mynotes: [],
             othernotes: [],
-            patient: null,
+            seller: null,
             currentUser: null,
             permissionadded: false,
             isLoading: false
         }
         this.getCurrentTherapist = this.getCurrentTherapist.bind(this);
-        this.loadPatientRecords = this.loadPatientRecords.bind(this);
-        this.loadPatientProfile = this.loadPatientProfile.bind(this);
+        this.loadSellerRecords = this.loadSellerRecords.bind(this);
+        this.loadSellerProfile = this.loadSellerProfile.bind(this);
         this.loadNotes = this.loadNotes.bind(this);
         this.radioOnChange = this.radioOnChange.bind(this);
 
@@ -138,12 +138,12 @@ class Therapist_patientrecords extends Component {
       });
     }
 
-    loadPatientRecords(pat_nric) {
+    loadSellerRecords(pat_nric) {
         this.setState({
             isLoading: true
         });
 
-        getPatientPermittedRecords(pat_nric)
+        getSellerPermittedRecords(pat_nric)
         .then((patdata) => {
             this.setState({ patrecords: patdata.content,
                             isLoading: false });
@@ -161,15 +161,15 @@ class Therapist_patientrecords extends Component {
         });
     }
 
-    loadPatientProfile(pat_nric) {
+    loadSellerProfile(pat_nric) {
         this.setState({
             isLoading: true
         });
 
-        getPatientProfile(pat_nric)
+        getSellerProfile(pat_nric)
         .then(response => {
             this.setState({
-                patient: response,
+                seller: response,
                 isLoading: false
             });
         }).catch(error => {
@@ -192,7 +192,7 @@ class Therapist_patientrecords extends Component {
       if (checked) {
         const notePermissionRequest = {
             noteID: e.target.value,
-            isVisibleToPatient: "true"
+            isVisibleToSeller: "true"
         };
         setNotePermission(notePermissionRequest)
         .then(response => {
@@ -207,7 +207,7 @@ class Therapist_patientrecords extends Component {
       } else {
         const notePermissionRequest = {
             noteID: e.target.value,
-            isVisibleToPatient: "false"
+            isVisibleToSeller: "false"
         };
         setNotePermission(notePermissionRequest)
         .then(response => {
@@ -224,23 +224,23 @@ class Therapist_patientrecords extends Component {
 
     componentDidMount() {
         const match = matchPath(this.props.history.location.pathname, {
-          path: '/mypatients/:nric',
+          path: '/mysellers/:nric',
           exact: true,
           strict: false
         });
         const pat_nric = match.params.nric;
         this.getCurrentTherapist();
-        this.loadPatientProfile(pat_nric);
+        this.loadSellerProfile(pat_nric);
         this.loadNotes(pat_nric);
-        this.loadPatientRecords(pat_nric);
+        this.loadSellerRecords(pat_nric);
     }
 
     componentWillReceiveProps(nextProps) {
         if(this.props.match.params.nric !== nextProps.match.params.nric) {
             this.getCurrentTherapist();
-            this.loadPatientProfile(nextProps.match.params.nric);
+            this.loadSellerProfile(nextProps.match.params.nric);
             this.loadNotes(nextProps.match.params.nric);
-            this.loadPatientRecords(nextProps.match.params.nric);
+            this.loadSellerRecords(nextProps.match.params.nric);
 
         }
     }
@@ -315,7 +315,7 @@ class Therapist_patientrecords extends Component {
           dataIndex: 'defaultPermission',
           render: text => ''
         },{
-          title: 'Allow patient to view?',
+          title: 'Allow seller to view?',
           dataIndex: 'consent',
           width: '20%',
           align: 'center',
@@ -329,18 +329,18 @@ class Therapist_patientrecords extends Component {
         }];
 
         return (
-          <div className="patient-data">
-            {  (this.state.permissionadded && this.state.patient && this.state.patrecords) ? (
+          <div className="seller-data">
+            {  (this.state.permissionadded && this.state.seller && this.state.patrecords) ? (
                 <Layout className="layout">
                   <Content>
                     <div style={{ background: '#ECECEC' }}>
-                      <div className="name">&nbsp;&nbsp;{this.state.patient.name}</div>
-                      <div className="subtitle">&nbsp;&nbsp;&nbsp;&nbsp;NRIC: {this.state.patient.nric}
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Phone Number: {this.state.patient.phone}</div>
+                      <div className="name">&nbsp;&nbsp;{this.state.seller.name}</div>
+                      <div className="subtitle">&nbsp;&nbsp;&nbsp;&nbsp;NRIC: {this.state.seller.nric}
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Phone Number: {this.state.seller.phone}</div>
                       <br />
                     </div>
                     <div className="title">
-                      Patient's Records &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      Seller's Records &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       <Link to={ this.props.history.location.pathname + "/uploadrecord"}>
                         <Button type="primary" icon="upload" size="default">Upload record</Button>
                       </Link>
@@ -366,4 +366,4 @@ class Therapist_patientrecords extends Component {
     }
 }
 
-export default Therapist_patientrecords;
+export default Therapist_sellerrecords;

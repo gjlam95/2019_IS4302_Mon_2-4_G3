@@ -13,7 +13,7 @@ import './MyData.css';
 const Option = Select.Option;
 const { Content } = Layout;
 
-class Patient_mydata extends Component {
+class Seller_mydata extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -353,7 +353,7 @@ class Patient_mydata extends Component {
         }];
 
         return (
-          <div className="patient-data">
+          <div className="seller-data">
            {  (this.state.myrecordscompleted && this.state.mynotescompleted && this.state.mytherapists && this.state.therapistsnotescompleted) ? (
                  <Layout className="layout">
                    <Content>
@@ -381,4 +381,4 @@ class Patient_mydata extends Component {
     }
 }
 
-export default Patient_mydata;
+export default Seller_mydata;

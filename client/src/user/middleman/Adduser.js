@@ -222,7 +222,7 @@ class Middleman_add_user extends Component {
                                     roles : {
                                         value: value
                                     }})}>
-                                <Option value="patient">Patient</Option>
+                                <Option value="seller">Seller</Option>
                                 <Option value="therapist">Therapist</Option>
                                 <Option value="researcher">Researcher</Option>
                                 <Option value="dealer">External Partner</Option>

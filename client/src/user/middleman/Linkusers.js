@@ -10,9 +10,9 @@ class Middleman_link_users extends Component {
         super(props);
         this.state = {
           therapist1: '',
-          patient1: '',
+          seller1: '',
           therapist2: '',
-          patient2: '',
+          seller2: '',
           endDate: ''
         }
         this.handleAssign = this.handleAssign.bind(this);
@@ -24,7 +24,7 @@ class Middleman_link_users extends Component {
       event.preventDefault();
       const linkuserRequest = {
           therapistNric: encodeURIComponent(this.state.therapist1.value),
-          patientNric: encodeURIComponent(this.state.patient1.value),
+          sellerNric: encodeURIComponent(this.state.seller1.value),
           endDate: encodeURIComponent(this.state.endDate.value)
       };
       assign(linkuserRequest)
@@ -45,7 +45,7 @@ class Middleman_link_users extends Component {
       event.preventDefault();
       const delinkuserRequest = {
           therapistNric: this.state.therapist2.value,
-          patientNric: this.state.patient2.value
+          sellerNric: this.state.seller2.value
       };
       unassign(delinkuserRequest)
       .then(response => {
@@ -77,7 +77,7 @@ class Middleman_link_users extends Component {
   render() {
       return (
           <div className="linkuser-container">
-              <h1 className="page-title">Therapist -> Patient(s)</h1>
+              <h1 className="page-title">Therapist -> Seller(s)</h1>
               <div className="linkuser-content">
                   <Form onSubmit={this.handleAssign} className="linkuser-form">
                       <FormItem
@@ -89,11 +89,11 @@ class Middleman_link_users extends Component {
                               onChange={(event) => {this.handleInputChange(event)}} />
                       </FormItem>
                       <FormItem
-                          label="Patient NRIC">
+                          label="Seller NRIC">
                           <Input
                               size="large"
-                              name="patient1"
-                              value={this.state.patient1.value}
+                              name="seller1"
+                              value={this.state.seller1.value}
                               onChange={(event) => {this.handleInputChange(event)}} />
                       </FormItem>
                       <FormItem
@@ -114,7 +114,7 @@ class Middleman_link_users extends Component {
                       </FormItem>
                   </Form>
               </div>
-              <h1 className="page-title">Therapist -/> Patient(s)</h1>
+              <h1 className="page-title">Therapist -/> Seller(s)</h1>
               <div className="linkuser-content">
                   <Form onSubmit={this.handleUnassign} className="linkuser-form">
                       <FormItem
@@ -126,11 +126,11 @@ class Middleman_link_users extends Component {
                               onChange={(event) => {this.handleInputChange(event)}} />
                       </FormItem>
                       <FormItem
-                          label="Patient NRIC">
+                          label="Seller NRIC">
                           <Input
                               size="large"
-                              name="patient2"
-                              value={this.state.patient2.value}
+                              name="seller2"
+                              value={this.state.seller2.value}
                               onChange={(event) => {this.handleInputChange(event)}} />
                       </FormItem>
                       <FormItem>
