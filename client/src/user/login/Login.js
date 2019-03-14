@@ -131,7 +131,7 @@ class LoginForm extends Component {
                         placeholder="Select your role">
                         <Option value="seller">Seller</Option>
                         <Option value="therapist">Therapist</Option>
-                        <Option value="researcher">Researcher</Option>
+                        <Option value="evaluator">Evaluator</Option>
                         <Option value="dealer">Dealer</Option>
                         <Option value="middleman">Middleman</Option>
                     </Select>

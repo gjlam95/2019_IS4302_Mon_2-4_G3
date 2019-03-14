@@ -23,7 +23,7 @@ class AppHeader extends Component {
     render() {
         let menuItems;
         if(this.props.currentUser) {
-          if(this.props.currentUser.role === "researcher") {
+          if(this.props.currentUser.role === "evaluator") {
             menuItems = [
               <Menu.Item key="/generatedata">
                 <Link to="/generatedata">

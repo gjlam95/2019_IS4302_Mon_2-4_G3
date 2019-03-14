@@ -224,7 +224,7 @@ class External_add_user extends Component {
                                     }})}>
                                 <Option value="seller">Seller</Option>
                                 <Option value="therapist">Therapist</Option>
-                                <Option value="researcher">Researcher</Option>
+                                <Option value="evaluator">Evaluator</Option>
                             </Select>
                         </FormItem>
                         <FormItem

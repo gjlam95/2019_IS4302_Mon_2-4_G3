@@ -23,13 +23,13 @@ import Middleman_logs from '../user/middleman/Logs';
 import Middleman_link_users from '../user/middleman/Linkusers';
 import Middleman_manage_users from '../user/middleman/Manageusers';
 import Middleman_add_user from '../user/middleman/Adduser';
-import Researcher_generate_data from '../user/researcher/Generatedata';
+import Evaluator_generate_data from '../user/evaluator/Generatedata';
 import Dealer_add_user from '../user/dealer/Adduser';
 import Dealer_upload_database from '../user/dealer/Uploaddatabase';
 import LoadingIndicator from '../common/LoadingIndicator';
 import SellerRoute from '../common/SellerRoute';
 import TherapistRoute from '../common/TherapistRoute';
-import ResearcherRoute from '../common/ResearcherRoute';
+import EvaluatorRoute from '../common/EvaluatorRoute';
 import MiddlemanRoute from '../common/MiddlemanRoute';
 import DealerRoute from '../common/DealerRoute';
 import NotFound from '../common/NotFound';
@@ -170,7 +170,7 @@ class App extends Component {
               </Content>
             </Layout>
         );
-      } else if(this.state.currentUser.role === "researcher") {
+      } else if(this.state.currentUser.role === "evaluator") {
         return (
             <Layout className="app-container">
               <AppHeader isAuthenticated={this.state.isAuthenticated}
@@ -182,7 +182,7 @@ class App extends Component {
                   <Switch>
                     <Route exact path="/" component={Home}>
                     </Route>
-                    <ResearcherRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/generatedata" component={Researcher_generate_data}></ResearcherRoute>
+                    <EvaluatorRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/generatedata" component={Evaluator_generate_data}></EvaluatorRoute>
                     <Route component={NotFound}></Route>
                   </Switch>
                 </div>

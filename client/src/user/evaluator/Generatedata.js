@@ -195,7 +195,7 @@ class GenerateDataForm extends Component {
   }
 }
 
-class Researcher_generate_data extends Component {
+class Evaluator_generate_data extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -211,4 +211,4 @@ class Researcher_generate_data extends Component {
     }
 }
 
-export default Researcher_generate_data;
+export default Evaluator_generate_data;

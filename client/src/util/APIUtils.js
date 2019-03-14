@@ -447,7 +447,7 @@ export function unassign(nrics) {
 
 export function getAnonymousData(data) {
     return request({
-        url: API + "/researcher/getAnonymousData",
+        url: API + "/evaluator/getAnonymousData",
         method: 'POST',
         body: JSON.stringify(data)
     });
