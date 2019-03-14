@@ -5,11 +5,11 @@ import {
 import NotFound from '../common/NotFound';
 
 
-const TherapistRoute = ({ component: Component, authenticated, role, path }) => (
+const BuyerRoute = ({ component: Component, authenticated, role, path }) => (
     <Route
       path={path}
       render={props =>
-        ((authenticated && role === "therapist") ? (
+        ((authenticated && role === "buyer") ? (
           <Component path {...props} />
         ) : (
           <NotFound />
@@ -18,4 +18,4 @@ const TherapistRoute = ({ component: Component, authenticated, role, path }) => 
     />
 );
 
-export default TherapistRoute;
+export default BuyerRoute;

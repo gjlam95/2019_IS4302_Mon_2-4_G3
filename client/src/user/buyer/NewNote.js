@@ -1,57 +1,27 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { matchPath } from 'react-router';
-import { getSellerProfile, getCurrentUser, updateNote, getAllTherapistNotes } from '../../util/APIUtils';
+import { getSellerProfile, createNote } from '../../util/APIUtils';
 import { NOTE_CONTENT_MAX_LENGTH } from '../../constants';
 import { Layout, Button, Input, Form, notification } from 'antd';
-import './EditNote.css';
+import './NewNote.css';
 
 const FormItem = Form.Item;
 const { Content } = Layout;
 const { TextArea } = Input;
 
-class Therapist_editnote extends Component {
+class Buyer_newnote extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            content: '',
-            noteid: '',
+            content: "",
             seller: null,
-            currentUser: null,
             isLoading: false
         }
-        this.getCurrentTherapist = this.getCurrentTherapist.bind(this);
+
         this.loadSellerProfile = this.loadSellerProfile.bind(this);
-        this.loadNoteContent = this.loadNoteContent.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.isFormInvalid = this.isFormInvalid.bind(this);
-    }
-
-    getCurrentTherapist() {
-        this.setState({
-            isLoading: true
-        });
-
-        getCurrentUser()
-        .then((response) => {
-            this.setState({
-                currentUser: response,
-                isLoading: false
-            });
-        }).catch(error => {
-            if(error.status === 404) {
-                this.setState({
-                    notFound: true,
-                    isLoading: false
-                });
-            } else {
-                this.setState({
-                    serverError: true,
-                    isLoading: false
-                });
-            }
-        });
     }
 
     loadSellerProfile(pat_nric) {
@@ -80,42 +50,6 @@ class Therapist_editnote extends Component {
         });
     }
 
-    loadNoteContent(pat_nric, note_id) {
-      this.setState({
-          noteid: note_id,
-          isLoading: true
-      });
-
-      getAllTherapistNotes(pat_nric)
-      .then((response) => {
-
-          for (var i = 0; i < response.content.length; i++) {
-              var currentid = response.content[i].noteID;
-              var currentcreator = response.content[i].creatorNric;
-              if ((currentid == this.state.noteid) && (currentcreator == this.state.currentUser.nric)) {
-                this.setState({
-                    content: { value: response.content[i].noteContent },
-                    isLoading: false
-                });
-                break;
-              }
-          }
-      }).catch(error => {
-          if(error.status === 404) {
-              this.setState({
-                  notFound: true,
-                  isLoading: false
-              });
-          } else {
-              this.setState({
-                  serverError: true,
-                  isLoading: false
-              });
-          }
-      });
-    }
-
-
     handleInputChange(event, validationFun) {
         const target = event.target;
         const inputName = target.name;
@@ -131,15 +65,15 @@ class Therapist_editnote extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const updateRequest = {
-            noteID: this.state.noteid,
+        const noteRequest = {
+            sellerNric: this.state.seller.nric,
             noteContent: this.state.content.value
         };
-        updateNote(updateRequest)
+        createNote(noteRequest)
         .then(response => {
             notification.success({
                 message: 'EquiV',
-                description: `You've successfully edited a note for ${this.state.seller.nric}!`
+                description: `You've successfully created a new note for ${this.state.seller.nric}!`
             });
             const previousLink = `/mysellers/${this.state.seller.nric}`;
             this.props.history.push(previousLink);
@@ -182,25 +116,18 @@ class Therapist_editnote extends Component {
 
     componentDidMount() {
         const match = matchPath(this.props.history.location.pathname, {
-          path: '/mysellers/:nric/editnote/:id',
+          path: '/mysellers/:nric/newnote',
           exact: true,
           strict: false
         });
-
         const pat_nric = match.params.nric;
-        const note_id = match.params.id;
-        this.getCurrentTherapist();
         this.loadSellerProfile(pat_nric);
-        this.loadNoteContent(pat_nric, note_id);
     }
 
 
     componentWillReceiveProps(nextProps) {
-        if(this.props.match.params.nric !== nextProps.match.params.nric ||
-           this.props.match.params.id !== nextProps.match.params.id) {
-            this.getCurrentTherapist();
+        if(this.props.match.params.nric !== nextProps.match.params.nric) {
             this.loadSellerProfile(nextProps.match.params.nric);
-            this.loadNoteContent(nextProps.match.params.nric, nextProps.match.params.id);
         }
     }
 
@@ -218,10 +145,10 @@ class Therapist_editnote extends Component {
                       <br />
                     </div>
                     <div className="title">
-                      Edit Note { this.state.noteid } &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      New Note &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
-                    <div className="editnote-container">
-                      <Form onSubmit={this.handleSubmit} className="editnote-form">
+                    <div className="newnote-container">
+                      <Form onSubmit={this.handleSubmit} className="newnote-form">
                           <FormItem
                               label="Content"
                               hasFeedback
@@ -238,8 +165,8 @@ class Therapist_editnote extends Component {
                               <Button type="primary"
                                   htmlType="submit"
                                   size="large"
-                                  className="editnote-form-button"
-                                  disabled={this.isFormInvalid()}>Edit note</Button>
+                                  className="newnote-form-button"
+                                  disabled={this.isFormInvalid()}>Add note</Button>
                           </FormItem>
                       </Form>
                     </div>
@@ -252,4 +179,4 @@ class Therapist_editnote extends Component {
     }
 }
 
-export default Therapist_editnote;
+export default Buyer_newnote;

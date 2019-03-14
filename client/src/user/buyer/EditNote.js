@@ -1,27 +1,57 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { matchPath } from 'react-router';
-import { getSellerProfile, createNote } from '../../util/APIUtils';
+import { getSellerProfile, getCurrentUser, updateNote, getAllBuyerNotes } from '../../util/APIUtils';
 import { NOTE_CONTENT_MAX_LENGTH } from '../../constants';
 import { Layout, Button, Input, Form, notification } from 'antd';
-import './NewNote.css';
+import './EditNote.css';
 
 const FormItem = Form.Item;
 const { Content } = Layout;
 const { TextArea } = Input;
 
-class Therapist_newnote extends Component {
+class Buyer_editnote extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            content: "",
+            content: '',
+            noteid: '',
             seller: null,
+            currentUser: null,
             isLoading: false
         }
-
+        this.getCurrentBuyer = this.getCurrentBuyer.bind(this);
         this.loadSellerProfile = this.loadSellerProfile.bind(this);
+        this.loadNoteContent = this.loadNoteContent.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.isFormInvalid = this.isFormInvalid.bind(this);
+    }
+
+    getCurrentBuyer() {
+        this.setState({
+            isLoading: true
+        });
+
+        getCurrentUser()
+        .then((response) => {
+            this.setState({
+                currentUser: response,
+                isLoading: false
+            });
+        }).catch(error => {
+            if(error.status === 404) {
+                this.setState({
+                    notFound: true,
+                    isLoading: false
+                });
+            } else {
+                this.setState({
+                    serverError: true,
+                    isLoading: false
+                });
+            }
+        });
     }
 
     loadSellerProfile(pat_nric) {
@@ -50,6 +80,42 @@ class Therapist_newnote extends Component {
         });
     }
 
+    loadNoteContent(pat_nric, note_id) {
+      this.setState({
+          noteid: note_id,
+          isLoading: true
+      });
+
+      getAllBuyerNotes(pat_nric)
+      .then((response) => {
+
+          for (var i = 0; i < response.content.length; i++) {
+              var currentid = response.content[i].noteID;
+              var currentcreator = response.content[i].creatorNric;
+              if ((currentid == this.state.noteid) && (currentcreator == this.state.currentUser.nric)) {
+                this.setState({
+                    content: { value: response.content[i].noteContent },
+                    isLoading: false
+                });
+                break;
+              }
+          }
+      }).catch(error => {
+          if(error.status === 404) {
+              this.setState({
+                  notFound: true,
+                  isLoading: false
+              });
+          } else {
+              this.setState({
+                  serverError: true,
+                  isLoading: false
+              });
+          }
+      });
+    }
+
+
     handleInputChange(event, validationFun) {
         const target = event.target;
         const inputName = target.name;
@@ -65,15 +131,15 @@ class Therapist_newnote extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const noteRequest = {
-            sellerNric: this.state.seller.nric,
+        const updateRequest = {
+            noteID: this.state.noteid,
             noteContent: this.state.content.value
         };
-        createNote(noteRequest)
+        updateNote(updateRequest)
         .then(response => {
             notification.success({
                 message: 'EquiV',
-                description: `You've successfully created a new note for ${this.state.seller.nric}!`
+                description: `You've successfully edited a note for ${this.state.seller.nric}!`
             });
             const previousLink = `/mysellers/${this.state.seller.nric}`;
             this.props.history.push(previousLink);
@@ -116,18 +182,25 @@ class Therapist_newnote extends Component {
 
     componentDidMount() {
         const match = matchPath(this.props.history.location.pathname, {
-          path: '/mysellers/:nric/newnote',
+          path: '/mysellers/:nric/editnote/:id',
           exact: true,
           strict: false
         });
+
         const pat_nric = match.params.nric;
+        const note_id = match.params.id;
+        this.getCurrentBuyer();
         this.loadSellerProfile(pat_nric);
+        this.loadNoteContent(pat_nric, note_id);
     }
 
 
     componentWillReceiveProps(nextProps) {
-        if(this.props.match.params.nric !== nextProps.match.params.nric) {
+        if(this.props.match.params.nric !== nextProps.match.params.nric ||
+           this.props.match.params.id !== nextProps.match.params.id) {
+            this.getCurrentBuyer();
             this.loadSellerProfile(nextProps.match.params.nric);
+            this.loadNoteContent(nextProps.match.params.nric, nextProps.match.params.id);
         }
     }
 
@@ -145,10 +218,10 @@ class Therapist_newnote extends Component {
                       <br />
                     </div>
                     <div className="title">
-                      New Note &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      Edit Note { this.state.noteid } &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
-                    <div className="newnote-container">
-                      <Form onSubmit={this.handleSubmit} className="newnote-form">
+                    <div className="editnote-container">
+                      <Form onSubmit={this.handleSubmit} className="editnote-form">
                           <FormItem
                               label="Content"
                               hasFeedback
@@ -165,8 +238,8 @@ class Therapist_newnote extends Component {
                               <Button type="primary"
                                   htmlType="submit"
                                   size="large"
-                                  className="newnote-form-button"
-                                  disabled={this.isFormInvalid()}>Add note</Button>
+                                  className="editnote-form-button"
+                                  disabled={this.isFormInvalid()}>Edit note</Button>
                           </FormItem>
                       </Form>
                     </div>
@@ -179,4 +252,4 @@ class Therapist_newnote extends Component {
     }
 }
 
-export default Therapist_newnote;
+export default Buyer_editnote;

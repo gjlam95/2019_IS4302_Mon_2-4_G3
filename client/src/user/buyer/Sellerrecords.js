@@ -4,14 +4,14 @@ import {
 } from 'react-router-dom';
 import { matchPath } from 'react-router';
 import { getSellerPermittedRecords, getSellerProfile,
-         getAllTherapistNotes, getCurrentUser, setNotePermission, checkNotePermission } from '../../util/APIUtils';
+         getAllBuyerNotes, getCurrentUser, setNotePermission, checkNotePermission } from '../../util/APIUtils';
 import { Layout, Table, Button, Checkbox, notification } from 'antd';
 import update from 'immutability-helper';
 import './Sellerrecords.css';
 
 const { Content } = Layout;
 
-class Therapist_sellerrecords extends Component {
+class Buyer_sellerrecords extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,7 +23,7 @@ class Therapist_sellerrecords extends Component {
             permissionadded: false,
             isLoading: false
         }
-        this.getCurrentTherapist = this.getCurrentTherapist.bind(this);
+        this.getCurrentBuyer = this.getCurrentBuyer.bind(this);
         this.loadSellerRecords = this.loadSellerRecords.bind(this);
         this.loadSellerProfile = this.loadSellerProfile.bind(this);
         this.loadNotes = this.loadNotes.bind(this);
@@ -31,7 +31,7 @@ class Therapist_sellerrecords extends Component {
 
     }
 
-    getCurrentTherapist() {
+    getCurrentBuyer() {
         this.setState({
             isLoading: true
         });
@@ -62,7 +62,7 @@ class Therapist_sellerrecords extends Component {
           isLoading: true
       });
 
-      getAllTherapistNotes(pat_nric)
+      getAllBuyerNotes(pat_nric)
       .then((response) => {
 
           const mydata = [];
@@ -229,7 +229,7 @@ class Therapist_sellerrecords extends Component {
           strict: false
         });
         const pat_nric = match.params.nric;
-        this.getCurrentTherapist();
+        this.getCurrentBuyer();
         this.loadSellerProfile(pat_nric);
         this.loadNotes(pat_nric);
         this.loadSellerRecords(pat_nric);
@@ -237,7 +237,7 @@ class Therapist_sellerrecords extends Component {
 
     componentWillReceiveProps(nextProps) {
         if(this.props.match.params.nric !== nextProps.match.params.nric) {
-            this.getCurrentTherapist();
+            this.getCurrentBuyer();
             this.loadSellerProfile(nextProps.match.params.nric);
             this.loadNotes(nextProps.match.params.nric);
             this.loadSellerRecords(nextProps.match.params.nric);
@@ -347,7 +347,7 @@ class Therapist_sellerrecords extends Component {
                     </div>
                     <Table dataSource={this.state.patrecords} columns={patcolumns} rowKey="recordID" />
                     <div className="title">
-                      Other Therapists' Notes
+                      Other Buyers' Notes
                     </div>
                     <Table dataSource={this.state.othernotes} columns={othernotescolumns} rowKey="noteID" />
                     <div className="title">
@@ -366,4 +366,4 @@ class Therapist_sellerrecords extends Component {
     }
 }
 
-export default Therapist_sellerrecords;
+export default Buyer_sellerrecords;

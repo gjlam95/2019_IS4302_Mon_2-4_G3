@@ -7,7 +7,7 @@ import './Mysellers.css';
 
 const { Header, Content } = Layout;
 
-class Therapist_mysellers extends Component {
+class Buyer_mysellers extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -117,4 +117,4 @@ class Therapist_mysellers extends Component {
     }
 }
 
-export default Therapist_mysellers;
+export default Buyer_mysellers;

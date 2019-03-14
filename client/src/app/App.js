@@ -11,11 +11,11 @@ import { AUTH_TOKEN } from '../constants';
 
 import Login from '../user/login/Login';
 import AppHeader from '../common/AppHeader';
-import Therapist_mysellers from '../user/therapist/Mysellers';
-import Therapist_sellerrecords from '../user/therapist/Sellerrecords';
-import Therapist_newnote from '../user/therapist/NewNote';
-import Therapist_editnote from '../user/therapist/EditNote';
-import Therapist_uploadrecord from '../user/therapist/UploadRecord';
+import Buyer_mysellers from '../user/buyer/Mysellers';
+import Buyer_sellerrecords from '../user/buyer/Sellerrecords';
+import Buyer_newnote from '../user/buyer/NewNote';
+import Buyer_editnote from '../user/buyer/EditNote';
+import Buyer_uploadrecord from '../user/buyer/UploadRecord';
 import Seller_mydata from '../user/seller/MyData';
 import Seller_newnote from '../user/seller/NewNote';
 import Seller_editnote from '../user/seller/EditNote';
@@ -28,7 +28,7 @@ import Dealer_add_user from '../user/dealer/Adduser';
 import Dealer_upload_database from '../user/dealer/Uploaddatabase';
 import LoadingIndicator from '../common/LoadingIndicator';
 import SellerRoute from '../common/SellerRoute';
-import TherapistRoute from '../common/TherapistRoute';
+import BuyerRoute from '../common/BuyerRoute';
 import EvaluatorRoute from '../common/EvaluatorRoute';
 import MiddlemanRoute from '../common/MiddlemanRoute';
 import DealerRoute from '../common/DealerRoute';
@@ -147,7 +147,7 @@ class App extends Component {
               </Content>
             </Layout>
         );
-      } else if(this.state.currentUser.role === "therapist") {
+      } else if(this.state.currentUser.role === "buyer") {
         return (
             <Layout className="app-container">
               <AppHeader isAuthenticated={this.state.isAuthenticated}
@@ -159,11 +159,11 @@ class App extends Component {
                   <Switch>
                     <Route exact path="/" component={Home}>
                     </Route>
-                    <TherapistRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/mysellers/:nric/uploadrecord" component={Therapist_uploadrecord}></TherapistRoute>
-                    <TherapistRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/mysellers/:nric/editnote/:id" component={Therapist_editnote}></TherapistRoute>
-                    <TherapistRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/mysellers/:nric/newnote" component={Therapist_newnote}></TherapistRoute>
-                    <TherapistRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/mysellers/:nric" component={Therapist_sellerrecords}></TherapistRoute>
-                    <TherapistRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/mysellers" component={Therapist_mysellers}></TherapistRoute>
+                    <BuyerRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/mysellers/:nric/uploadrecord" component={Buyer_uploadrecord}></BuyerRoute>
+                    <BuyerRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/mysellers/:nric/editnote/:id" component={Buyer_editnote}></BuyerRoute>
+                    <BuyerRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/mysellers/:nric/newnote" component={Buyer_newnote}></BuyerRoute>
+                    <BuyerRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/mysellers/:nric" component={Buyer_sellerrecords}></BuyerRoute>
+                    <BuyerRoute authenticated={this.state.isAuthenticated} role={this.state.currentUser.role} path="/mysellers" component={Buyer_mysellers}></BuyerRoute>
                     <Route component={NotFound}></Route>
                   </Switch>
                 </div>

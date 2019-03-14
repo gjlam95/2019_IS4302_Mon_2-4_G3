@@ -20,7 +20,7 @@ const secondData = {
   reading: ['blood pressure'],
 };
 
-class Therapist_uploadrecord extends Component {
+class Buyer_uploadrecord extends Component {
   constructor(props) {
         super(props);
         this.state = {
@@ -402,4 +402,4 @@ function openNotificationError(type) {
   }
 
 
-export default Therapist_uploadrecord;
+export default Buyer_uploadrecord;

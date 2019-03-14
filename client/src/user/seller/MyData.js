@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import {
     Link
 } from 'react-router-dom';
-import { getMyRecords, giveTherapistPermission,
-         removeTherapistPermission, getMyNotes,
-         getGivenPermissions, getTherapistNotes,
-         getAllMyTherapists } from '../../util/APIUtils';
+import { getMyRecords, giveBuyerPermission,
+         removeBuyerPermission, getMyNotes,
+         getGivenPermissions, getBuyerNotes,
+         getAllMyBuyers } from '../../util/APIUtils';
 import { Layout, Table, Button, Select, notification } from 'antd';
 import update from 'immutability-helper';
 import './MyData.css';
@@ -18,55 +18,55 @@ class Seller_mydata extends Component {
         super(props);
         this.state = {
             myrecords: [],
-            mytherapists: [],
+            mybuyers: [],
             mynotes: [],
-            therapistsnotes: [],
+            buyersnotes: [],
             myrecordscompleted: false,
-            mytherapistscompleted: false,
+            mybuyerscompleted: false,
             mynotescompleted: false,
-            therapistsnotescompleted: false,
+            buyersnotescompleted: false,
             isLoading: false
         }
 
-        this.loadMyTherapists = this.loadMyTherapists.bind(this);
+        this.loadMyBuyers = this.loadMyBuyers.bind(this);
         this.loadMyRecords = this.loadMyRecords.bind(this);
         this.loadNotes = this.loadNotes.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
         this.handleDeselect = this.handleDeselect.bind(this);
-        this.generateTherapistOptions = this.generateTherapistOptions.bind(this);
+        this.generateBuyerOptions = this.generateBuyerOptions.bind(this);
 
     }
 
-    generateTherapistOptions(rec_id) {
-      const mytherapistoptions = [];
+    generateBuyerOptions(rec_id) {
+      const mybuyeroptions = [];
 
-      for (var i = 0; i < this.state.mytherapists.length; i++) {
-          mytherapistoptions.push(<Option ref={rec_id} key={i} value={this.state.mytherapists[i].nric}>{this.state.mytherapists[i].name}</Option>);
+      for (var i = 0; i < this.state.mybuyers.length; i++) {
+          mybuyeroptions.push(<Option ref={rec_id} key={i} value={this.state.mybuyers[i].nric}>{this.state.mybuyers[i].name}</Option>);
       }
 
-      return mytherapistoptions;
+      return mybuyeroptions;
     }
 
 
-    loadMyTherapists() {
+    loadMyBuyers() {
         this.setState({
             isLoading: true
         });
 
-        getAllMyTherapists()
+        getAllMyBuyers()
         .then(response => {
-            const mytherapists = [];
+            const mybuyers = [];
 
             for (var i = 0; i < response.content.length; i++) {
-                const therapistnric = response.content[i].treatmentId.therapist;
-                const therapistname = response.content[i].therapistName;
-                mytherapists[i] = { nric: therapistnric,
-                                    name: therapistname };
+                const buyernric = response.content[i].treatmentId.buyer;
+                const buyername = response.content[i].buyerName;
+                mybuyers[i] = { nric: buyernric,
+                                    name: buyername };
             }
 
             this.setState({
-                mytherapists: mytherapists,
-                mytherapistscompleted: true,
+                mybuyers: mybuyers,
+                mybuyerscompleted: true,
                 isLoading: false
             });
 
@@ -97,7 +97,7 @@ class Seller_mydata extends Component {
 
           for (var i = 0; i < response.content.length; i++) {
               myrec[i] = response.content[i];
-              myrec[i].permittedTherapists = [];
+              myrec[i].permittedBuyers = [];
           }
 
           this.setState({
@@ -124,11 +124,11 @@ class Seller_mydata extends Component {
           for (var i = 0; i < response.content.length; i++) {
               const currperm = response.content[i];
               const recid = currperm.recordID;
-              const therapistic = currperm.therapistNric;
+              const buyeric = currperm.buyerNric;
               for (var j = 0; j < this.state.myrecords.length; j++) {
                   if (recid === this.state.myrecords[j].recordID) {
-                        const prevList = this.state.myrecords[j].permittedTherapists;
-                        this.setState({ myrecords: update(this.state.myrecords, {[j]: { permittedTherapists: {$set: [...prevList, therapistic]} }}) });
+                        const prevList = this.state.myrecords[j].permittedBuyers;
+                        this.setState({ myrecords: update(this.state.myrecords, {[j]: { permittedBuyers: {$set: [...prevList, buyeric]} }}) });
                   }
               }
           }
@@ -159,7 +159,7 @@ class Seller_mydata extends Component {
           isLoading: true
       });
 
-      getTherapistNotes()
+      getBuyerNotes()
       .then((response) => {
 
           const therapnotes = [];
@@ -169,8 +169,8 @@ class Seller_mydata extends Component {
           }
 
           this.setState({
-              therapistsnotes: therapnotes,
-              therapistsnotescompleted: true
+              buyersnotes: therapnotes,
+              buyersnotescompleted: true
           });
 
       }).catch(error => {
@@ -220,16 +220,16 @@ class Seller_mydata extends Component {
       });
     }
 
-    handleSelect(therapist_nric, option) {
+    handleSelect(buyer_nric, option) {
       const record_id = option.ref;
 
       const recordPermissionRequest = {
           recordID: record_id,
-          therapistNric: therapist_nric,
+          buyerNric: buyer_nric,
           endDate: "9999-12-30"
       };
 
-      giveTherapistPermission(recordPermissionRequest)
+      giveBuyerPermission(recordPermissionRequest)
       .then(response => {
 
       }).catch(error => {
@@ -240,15 +240,15 @@ class Seller_mydata extends Component {
       });
     }
 
-    handleDeselect(therapist_nric, option) {
+    handleDeselect(buyer_nric, option) {
       const record_id = option.ref;
 
       const revokePermissionRequest = {
           recordID: record_id,
-          therapistNric: therapist_nric
+          buyerNric: buyer_nric
       };
 
-      removeTherapistPermission(revokePermissionRequest)
+      removeBuyerPermission(revokePermissionRequest)
       .then(response => {
 
       }).catch(error => {
@@ -260,7 +260,7 @@ class Seller_mydata extends Component {
     }
 
     componentDidMount() {
-        this.loadMyTherapists();
+        this.loadMyBuyers();
         this.loadMyRecords();
         this.loadNotes();
     }
@@ -287,17 +287,17 @@ class Seller_mydata extends Component {
           align: 'center',
         }, {
           title: '',
-          dataIndex: 'permittedTherapists',
+          dataIndex: 'permittedBuyers',
           render: text => ''
         },{
-          title: 'Allow therapist(s) to view',
+          title: 'Allow buyer(s) to view',
           dataIndex: 'consent',
           width: '20%',
           align: 'center',
-          render: (text, row) => <Select mode="multiple" placeholder="Select therapist(s)" style={{ width: '100%' }}
+          render: (text, row) => <Select mode="multiple" placeholder="Select buyer(s)" style={{ width: '100%' }}
                                   onSelect={this.handleSelect} onDeselect={this.handleDeselect}
-                                  defaultValue={row.permittedTherapists}>
-                                      {this.generateTherapistOptions(row.recordID)}
+                                  defaultValue={row.permittedBuyers}>
+                                      {this.generateBuyerOptions(row.recordID)}
                                  </Select>
         }, {
           title: 'File',
@@ -319,7 +319,7 @@ class Seller_mydata extends Component {
           }
         }];
 
-        const therapistsnotescolumns = [{
+        const buyersnotescolumns = [{
           title: 'Note ID',
           dataIndex: 'noteID',
           key: 'noteID',
@@ -354,7 +354,7 @@ class Seller_mydata extends Component {
 
         return (
           <div className="seller-data">
-           {  (this.state.myrecordscompleted && this.state.mynotescompleted && this.state.mytherapists && this.state.therapistsnotescompleted) ? (
+           {  (this.state.myrecordscompleted && this.state.mynotescompleted && this.state.mybuyers && this.state.buyersnotescompleted) ? (
                  <Layout className="layout">
                    <Content>
                      <div className="title">
@@ -362,9 +362,9 @@ class Seller_mydata extends Component {
                      </div>
                      <Table dataSource={this.state.myrecords} columns={reccolumns} rowKey="recordID" />
                      <div className="title">
-                       My Therapists' Notes
+                       My Buyers' Notes
                      </div>
-                     <Table dataSource={this.state.therapistsnotes} columns={therapistsnotescolumns} rowKey="noteID" />
+                     <Table dataSource={this.state.buyersnotes} columns={buyersnotescolumns} rowKey="noteID" />
                      <div className="title">
                        My Notes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                        <Link to={ this.props.history.location.pathname + "/newnote" }>

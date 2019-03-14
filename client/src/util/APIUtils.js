@@ -224,9 +224,9 @@ export function getCurrentUser() {
 }
 
 // Seller API calls
-export function getAllMyTherapists() {
+export function getAllMyBuyers() {
     return request({
-        url: API + "/treatments/getTherapists/",
+        url: API + "/treatments/getBuyers/",
         method: 'GET'
     });
 }
@@ -245,7 +245,7 @@ export function getMyRecords() {
     });
 }
 
-export function giveTherapistPermission(req) {
+export function giveBuyerPermission(req) {
     return request({
         url: API + "/permissions/permit/",
         method: 'POST',
@@ -283,7 +283,7 @@ export function getGivenPermissions() {
       });
 }
 
-export function removeTherapistPermission(req) {
+export function removeBuyerPermission(req) {
     return request({
         url: API + "/permissions/revoke/",
         method: 'POST',
@@ -298,7 +298,7 @@ export function getMyNotes() {
     });
 }
 
-export function getTherapistNotes() {
+export function getBuyerNotes() {
     return request({
         url: API + "/notes/getPermitted/",
         method: 'GET'
@@ -306,7 +306,7 @@ export function getTherapistNotes() {
 }
 
 
-// Therapist API calls
+// Buyer API calls
 export function getSellerProfile(nric) {
     return request({
         url: API + "/treatments/getUserSummary/" + nric,
@@ -327,12 +327,12 @@ export function createRecord(newRecord, file) {
 
 export function getSellerPermittedRecords(pat_nric) {
     return request({
-        url: API + "/records/therapist/seller/" + pat_nric,
+        url: API + "/records/buyer/seller/" + pat_nric,
         method: 'GET'
     });
 }
 
-export function getAllTherapistNotes(pat_nric) {
+export function getAllBuyerNotes(pat_nric) {
     return request({
         url: API + "/notes/getSeller/" + pat_nric + "/",
         method: 'GET'
@@ -361,7 +361,7 @@ export function getSellers() {
     });
 }
 
-// Therapist and Seller API calls
+// Buyer and Seller API calls
 export function createNote(req) {
     return request({
         url: API + "/notes/create/",

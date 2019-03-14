@@ -223,7 +223,7 @@ class Middleman_add_user extends Component {
                                         value: value
                                     }})}>
                                 <Option value="seller">Seller</Option>
-                                <Option value="therapist">Therapist</Option>
+                                <Option value="buyer">Buyer</Option>
                                 <Option value="evaluator">Evaluator</Option>
                                 <Option value="dealer">Dealer</Option>
                                 <Option value="middleman">Middleman</Option>
