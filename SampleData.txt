@@ -1,0 +1,176 @@
+//Company
+
+	//For Evaluator
+	{
+	  "$class": "org.equiv.Company",
+	  "companyId": "8912",
+	  "name": "EquiV-Evaluators",
+	  "address": {
+		"$class": "org.equiv.Address",
+		"city": "Singapore",
+		"country": "Singapore",
+		"region": "Kallang",
+		"street_1": "535 Kallang Bahru",
+		"street_2": "#02-08 GB Point",
+		"postalCode": "339351"
+	  }
+	}
+
+
+	//For Middleman 
+	{
+	  "$class": "org.equiv.participants.assets.Middleman",
+	  "rating": "resource:org.equiv.participants.assets.Rating#4120",
+	  "employer": "resource:org.equiv.Company#2412",
+	  "id": "5836",
+	  "title": "Mr",
+	  "firstName": "Ben",
+	  "lastName": "Tan",
+	  "gender": "MALE",
+	  "email": "bentan@quatz.com",
+	  "mobilePhone": "87614320",
+	  "address": {
+		"$class": "org.equiv.Address",
+		"city": "Singapore",
+		"country": "Singapore",
+		"region": "Ubi",
+		"street_1": "Ubi Ave 4",
+		"street_2": "BLK64 #11-09",
+		"postalCode": "408064"
+	  }
+	}
+
+
+//Participant
+	//Evaluator
+	{
+	  "$class": "org.equiv.participants.assets.Evaluator",
+	  "employer": "resource:org.equiv.Company#8912",
+	  "id": "8806",
+	  "title": "Mr.",
+	  "firstName": "John",
+	  "lastName": "Doe",
+	  "gender": "MALE",
+	  "email": "johndoe@equiv.com",
+	  "mobilePhone": "98765541",
+	  "address": {
+		"$class": "org.equiv.Address",
+		"city": "Singapore",
+		"country": "Singapore",
+		"region": "Kallang",
+		"street_1": "Kallang Bahru",
+		"street_2": "BLK 65 #08-33",
+		"postalCode": "330065"
+	  }
+	}
+
+	// Middleman
+	{
+	   "$class": "org.equiv.participants.assets.Middleman",
+	   "rating": "resource:org.equiv.participants.assets.Rating#4120",
+	   "employer": "resource:org.equiv.Company#2412",
+	   "id": "5836",
+	   "title": "Mr",
+	   "firstName": "Ben",
+	   "lastName": "Tan",
+	   "gender": "MALE",
+	   "email": "bentan@quatz.com",
+	   "mobilePhone": "87614320",
+	   "address": {
+		"$class": "org.equiv.Address",
+		"city": "Singapore",
+		"country": "Singapore",
+		"region": "Ubi",
+		"street_1": "Ubi Ave 4",
+		"street_2": "BLK64 #11-09",
+		"postalCode": "408064"
+	   }
+	  }
+
+	//Seller
+	{
+	  "$class": "org.equiv.participants.assets.Seller",
+	  "id": "4765",
+	  "title": "Mr",
+	  "firstName": "Peter",
+	  "lastName": "Teh",
+	  "gender": "MALE",
+	  "email": "peter_teh@gmail.com",
+	  "mobilePhone": "98710928",
+	  "address": {
+		"$class": "org.equiv.Address",
+		"city": "Singapore",
+		"country": "Singapore",
+		"region": "Ubi",
+		"street_1": "Ubi Ave 3",
+		"street_2": "Block 310 #03-10",
+		"postalCode": "400310"
+	  }
+	}
+
+	//Buyer
+	{
+	  "$class": "org.equiv.participants.assets.Buyer",
+	  "balanceAmount": 100000,
+	  "id": "9876",
+	  "title": "Ms",
+	  "firstName": "Beatrice",
+	  "lastName": "Tan",
+	  "gender": "FEMALE",
+	  "email": "beatrice_tan@gmail.com",
+	  "mobilePhone": "98761234",
+	  "address": {
+		"$class": "org.equiv.Address",
+		"city": "Singapore",
+		"country": "Singapore",
+		"region": "Tampines",
+		"street_1": "Simei Street 1",
+		"street_2": "BLK171 #06-40",
+		"postalCode": "520171"
+	  }
+	}
+
+
+//Asset 
+
+	//Vehicle (Create this via the identity of Evaluator to test the transaction EvaluateVehicle)
+	{
+	  "$class": "org.equiv.transactions.EvaluateVehicle",
+	  "vehicleId": "Audi A4 Sedan 1.4A TFSI",
+	  "vehicleDetails": {
+		"$class": "org.equiv.VehicleDetails",
+		"vehicleCategory": "Car",
+		"numberPlate": "",
+		"brand": "Audi",
+		"modelType": "Ambiente",
+		"color": "silver",
+		"mileage": 65000,
+		"transmission": "Auto",
+		"engineCap": "1395 cc",
+		"power": "120 bhp",
+		"features": "Airbags, ABS, Sport Rims, Leather Seats, CD Player, Reverse Sensors, Paddle Shift",
+		"description": "CEVS rebate at $15,000, minimum parf at $7,555. Battery good and recharge."
+	  },
+	  "coe_expiry": "2024-05-26T00:00:00.000Z",
+	  "warranty_expiry": "2019-08-26T00:00:00.000Z",
+	  "roadtax_expiry": "2019-05-26T00:00:00.000Z",
+	  "owner": "resource:org.equiv.participants.assets.Seller#4765",
+	  "middleman": "resource:org.equiv.participants.assets.Middleman#5836"
+	}
+	
+	//Listing (Create this via the identity of the Middleman)
+	{
+	  "$class": "org.equiv.transactions.CreateListing",
+	  "vehicleId": "Audi A4 Sedan 1.4A TFSI",
+	  "listingId": "Audi-1000",
+	  "listing_expiry": "2019-04-20T18:25:19.397Z",
+	  "listingStatus": "OPEN_FOR_BIDDING"
+	}	
+
+//Rating 
+//For Middleman
+	{
+	  "$class": "org.equiv.participants.assets.Rating",
+	  "ratingId": "4120",
+	  "score": 0
+	}
