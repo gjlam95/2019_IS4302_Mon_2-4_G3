@@ -234,27 +234,7 @@ class App extends Component {
               </Content>
             </Layout>
         );
-      } else {
-        return (
-            <Layout className="app-container">
-              <AppHeader isAuthenticated={this.state.isAuthenticated}
-                currentUser={this.state.currentUser}
-                onLogout={this.handleLogout} />
-
-              <Content className="app-content">
-                <div className="container">
-                  <Switch>
-                    <Route exact path="/" component={Home}>
-                    </Route>
-                    <Route path="/login"
-                      render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
-                    <Route component={NotFound}></Route>
-                  </Switch>
-                </div>
-              </Content>
-            </Layout>
-        );
-      }
+      } 
     } else {
       return (
           <Layout className="app-container">
