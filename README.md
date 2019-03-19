@@ -7,7 +7,7 @@ Equiv blockchain hyperledger composer network
 ### When first cloning project
 1. At the IFS4302-EQUIV directory, do a "npm install" to install server-side dependencies
 2. Then, at the same directory, do a "npm run client-install" to install client side dependencies
-3. (For Windows) Remove 'browserslist' & 'browserslist.cmd'. Then do "npm run dev" to run both server(port 5000) and client(port 3000) at the same time
+3. (For Windows) Remove 'browserslist' & 'browserslist.cmd' in client directory. Then do "npm run dev" in the IFS4302-EQUIV directory to run both server(port 5000) and client(port 3000) at the same time
 4. To run just the server do "npm run server"
 5. To run just the client do "npm run client"
 
