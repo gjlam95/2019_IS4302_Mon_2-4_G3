@@ -1,5 +1,6 @@
 Archive
 client/yarn.lock
+client/package-lock.json
 
 # Logs
 logs
