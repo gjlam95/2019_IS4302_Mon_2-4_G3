@@ -135,6 +135,30 @@
 	  }
 	}
 
+	//Dealer	
+	{
+	  "$class": "org.equiv.participants.assets.Dealer",
+	  "rating": "resource:org.equiv.participants.assets.Rating#8515",
+	  "balanceAmount": 200000,
+	  "employer": "resource:org.equiv.Company#1556",
+	  "id": "7076",
+	  "title": "Ms",
+	  "firstName": "Katherine",
+	  "lastName": "Wong",
+	  "nric": "S9510911G",
+	  "gender": "FEMALE",
+	  "email": "katherine@gmail.com",
+	  "mobilePhone": "90764530",
+	  "address": {
+		"$class": "org.equiv.Address",
+		"city": "Singapore",
+		"country": "Singapore",
+		"region": "Tampines",
+		"street_1": "1-15 Simei Street 4",
+		"street_2": "Simei Green",
+		"postalCode": "529868"
+	  }
+	}
 
 //Asset 
 
@@ -177,5 +201,12 @@
 	{
 	  "$class": "org.equiv.participants.assets.Rating",
 	  "ratingId": "4120",
+	  "score": 0
+	}
+
+//Dealer
+	{
+	  "$class": "org.equiv.participants.assets.Rating",
+	  "ratingId": "8515",
 	  "score": 0
 	}
