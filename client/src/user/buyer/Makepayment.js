@@ -9,8 +9,9 @@ class MakePayment extends Component {
   constructor(props) {
         super(props);
         this.state = {
-          buyer1: '',
-          seller1: '',
+          listing: '',
+          payer: '',
+          payee: '',
           endDate: ''
         }
         this.handleAssign = this.handleAssign.bind(this);
@@ -20,8 +21,8 @@ class MakePayment extends Component {
   handleAssign(event) {
       event.preventDefault();
       const payuserRequest = {
-          buyerNric: encodeURIComponent(this.state.buyer1.value),
-          sellerNric: encodeURIComponent(this.state.seller1.value),
+          payerNric: encodeURIComponent(this.state.payer.value),
+          payeeNric: encodeURIComponent(this.state.payee.value),
           endDate: encodeURIComponent(this.state.endDate.value)
       };
       assign(payuserRequest)
@@ -30,27 +31,6 @@ class MakePayment extends Component {
               message: 'EquiV',
               description: "You've successfully assigned the users!",
           });
-      }).catch(error => {
-          notification.error({
-              message: 'EquiV',
-              description: error.message || 'Sorry! Something went wrong. Please try again!'
-          });
-      });
-  }
-
-  handleUnassign(event) {
-      event.preventDefault();
-      const depayuserRequest = {
-          buyerNric: this.state.buyer2.value,
-          sellerNric: this.state.seller2.value
-      };
-      unassign(depayuserRequest)
-      .then(response => {
-          notification.success({
-              message: 'EquiV',
-              description: "You've successfully unassigned the users!",
-          });
-          this.props.history.push("/pay");
       }).catch(error => {
           notification.error({
               message: 'EquiV',
@@ -78,19 +58,27 @@ class MakePayment extends Component {
               <div className="payuser-content">
                   <Form onSubmit={this.handleAssign} className="payuser-form">
                       <FormItem
+                      label="Listing">
+                      <Input
+                          size="large"
+                          name="listing"
+                          value={this.state.listing.value}
+                          onChange={(event) => {this.handleInputChange(event)}} />
+                      </FormItem>
+                      <FormItem
                           label="Your NRIC">
                           <Input
                               size="large"
-                              name="buyer1"
-                              value={this.state.buyer1.value}
+                              name="payer"
+                              value={this.state.payer.value}
                               onChange={(event) => {this.handleInputChange(event)}} />
                       </FormItem>
                       <FormItem
                           label="Recipient's NRIC">
                           <Input
                               size="large"
-                              name="seller1"
-                              value={this.state.seller1.value}
+                              name="payee"
+                              value={this.state.payee.value}
                               onChange={(event) => {this.handleInputChange(event)}} />
                       </FormItem>
                       <FormItem
