@@ -82,24 +82,24 @@ class Buyer_mysellers extends Component {
     render() {
 
         const columns = [{
-          title: 'ID',
+          title: 'Number Plate',
           dataIndex: 'car',
           key: 'car',
           align: 'center',
         },  {
-          title: 'Mileage',
+          title: 'Brand',
           dataIndex: 'name',
           align: 'center',
         },  {
-          title: 'COE',
+          title: 'Model',
           dataIndex: 'phone',
           align: 'center',
         },  {
-          title: 'Warranty',
+          title: 'Mileage',
           dataIndex: 'docs_recs',
           align: 'center',
         },  {
-          title: 'Road Tax',
+          title: 'COE expiry',
           dataIndex: 'docs_recs',
           align: 'center',
         },  {
