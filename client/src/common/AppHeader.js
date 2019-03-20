@@ -38,18 +38,13 @@ class AppHeader extends Component {
             ];
           } else if(this.props.currentUser.role === "dealer") {
             menuItems = [
-              <Menu.Item key="/uploaddatabase">
-                <Link to="/uploaddatabase">
-                  <Icon type="upload" />
+              <Menu.Item key="/mylistings">
+                <Link to="/mylistings">
+                  <Icon type="medicine-box" />
                 </Link>
               </Menu.Item>,
-              <Menu.Item key="/adduser">
-                <Link to="/adduser">
-                  <Icon type="usergroup-add" />
-                </Link>
-              </Menu.Item>,
-              <Menu.Item key="/link">
-                <Link to="/link">
+              <Menu.Item key="/managebids">
+                <Link to="/managebids">
                   <Icon type="swap" />
                 </Link>
               </Menu.Item>,

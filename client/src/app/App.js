@@ -12,6 +12,8 @@ import Buyer_sellerrecords from "../user/buyer/Sellerrecords";
 import Buyer_newnote from "../user/buyer/NewNote";
 import Buyer_editnote from "../user/buyer/EditNote";
 import Buyer_uploadrecord from "../user/buyer/UploadRecord";
+import Dealer_managebids from "../user/dealer/Managebids";
+import Dealer_mylistings from "../user/dealer/Mylistings";
 import Seller_mydata from "../user/seller/MyData";
 import Seller_newnote from "../user/seller/NewNote";
 import Seller_editnote from "../user/seller/EditNote";
@@ -20,8 +22,6 @@ import Middleman_link_users from "../user/middleman/Linkusers";
 import Middleman_manage_users from "../user/middleman/Manageusers";
 import Middleman_add_user from "../user/middleman/Adduser";
 import Evaluator_generate_data from "../user/evaluator/Generatedata";
-import Dealer_add_user from "../user/dealer/Adduser";
-import Dealer_upload_database from "../user/dealer/Uploaddatabase";
 import LoadingIndicator from "../common/LoadingIndicator";
 import SellerRoute from "../common/SellerRoute";
 import BuyerRoute from "../common/BuyerRoute";
@@ -242,20 +242,14 @@ class App extends Component {
                   <DealerRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/uploaddatabase"
-                    component={Dealer_upload_database}
+                    path="/mylistings"
+                    component={Dealer_mylistings}
                   />
                   <DealerRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/adduser"
-                    component={Dealer_add_user}
-                  />
-                  <DealerRoute
-                    authenticated={this.state.isAuthenticated}
-                    role={this.state.currentUser.role}
-                    path="/link"
-                    component={Middleman_link_users}
+                    path="/managebids"
+                    component={Dealer_managebids}
                   />
                   <Route component={NotFound} />
                 </Switch>
