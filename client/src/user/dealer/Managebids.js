@@ -57,19 +57,19 @@ class Dealer_managebids extends Component {
         const { Content } = Layout;
 
         const users_columns = [{
-          title: 'Bid ID',
+          title: 'Listing',
           dataIndex: 'nric',
           key: 'nric',
         }, {
-          title: 'Listing',
+          title: 'Status',
           dataIndex: 'name',
           key: 'name',
         }, {
-          title: 'Highest Bid',
+          title: 'Highest Offer',
           dataIndex: 'role',
           key: 'role',
         }, {
-          title: 'Bid Amount',
+          title: 'Enter Bid',
           key: 'remove',
           render: (index) => {
             return (
