@@ -7,11 +7,7 @@ import { AUTH_TOKEN } from "../constants";
 
 import Login from "../user/login/Login";
 import AppHeader from "../common/AppHeader";
-import Buyer_mysellers from "../user/buyer/Mysellers";
-import Buyer_sellerrecords from "../user/buyer/Sellerrecords";
-import Buyer_newnote from "../user/buyer/NewNote";
-import Buyer_editnote from "../user/buyer/EditNote";
-import Buyer_uploadrecord from "../user/buyer/UploadRecord";
+import Buyer_myassets from "../user/buyer/MyAssets";
 import Seller_mydata from "../user/seller/MyData";
 import Seller_newnote from "../user/seller/NewNote";
 import Seller_editnote from "../user/seller/EditNote";
@@ -162,32 +158,8 @@ class App extends Component {
                   <BuyerRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/mysellers/:nric/uploadrecord"
-                    component={Buyer_uploadrecord}
-                  />
-                  <BuyerRoute
-                    authenticated={this.state.isAuthenticated}
-                    role={this.state.currentUser.role}
-                    path="/mysellers/:nric/editnote/:id"
-                    component={Buyer_editnote}
-                  />
-                  <BuyerRoute
-                    authenticated={this.state.isAuthenticated}
-                    role={this.state.currentUser.role}
-                    path="/mysellers/:nric/newnote"
-                    component={Buyer_newnote}
-                  />
-                  <BuyerRoute
-                    authenticated={this.state.isAuthenticated}
-                    role={this.state.currentUser.role}
-                    path="/mysellers/:nric"
-                    component={Buyer_sellerrecords}
-                  />
-                  <BuyerRoute
-                    authenticated={this.state.isAuthenticated}
-                    role={this.state.currentUser.role}
-                    path="/mysellers"
-                    component={Buyer_mysellers}
+                    path="/myassets"
+                    component={Buyer_myassets}
                   />
                   <Route component={NotFound} />
                 </Switch>

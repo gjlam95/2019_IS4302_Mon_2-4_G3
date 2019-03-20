@@ -74,8 +74,8 @@ class AppHeader extends Component {
             ];
           } else if(this.props.currentUser.role === "buyer") {
             menuItems = [
-              <Menu.Item key="/mysellers">
-                <Link to="/mysellers">
+              <Menu.Item key="/myassets">
+                <Link to="/myassets">
                   <Icon type="medicine-box" />
                 </Link>
               </Menu.Item>,
