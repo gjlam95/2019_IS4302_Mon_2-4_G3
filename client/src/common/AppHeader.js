@@ -84,6 +84,11 @@ class AppHeader extends Component {
                   <Icon type="swap" />
                 </Link>
               </Menu.Item>,
+              <Menu.Item key="/rate">
+                <Link to="/rate">
+                  <Icon type="edit" />
+                </Link>
+              </Menu.Item>,
               <Menu.Item key="/profile" className="profile-menu">
                 <ProfileDropdownMenu
                   currentUser={this.props.currentUser}

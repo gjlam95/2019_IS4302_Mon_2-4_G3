@@ -8,11 +8,13 @@ import { AUTH_TOKEN } from "../constants";
 import Login from "../user/login/Login";
 import AppHeader from "../common/AppHeader";
 import Buyer_myassets from "../user/buyer/MyAssets";
+import Buyer_makepayment from "../user/buyer/Makepayment";
+import Buyer_ratedealer from "../user/buyer/Ratedealer";
 import Seller_mydata from "../user/seller/MyData";
 import Seller_newnote from "../user/seller/NewNote";
 import Seller_editnote from "../user/seller/EditNote";
+import MakePayment from "../user/middleman/Makepayment";
 import Middleman_logs from "../user/middleman/Logs";
-import MakePayment from "../user/buyer/Makepayment";
 import Middleman_manage_users from "../user/middleman/Manageusers";
 import Middleman_add_user from "../user/middleman/Adduser";
 import Evaluator_generate_data from "../user/evaluator/Generatedata";
@@ -165,7 +167,13 @@ class App extends Component {
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
                     path="/pay"
-                    component={MakePayment}
+                    component={Buyer_makepayment}
+                  />
+                  <BuyerRoute
+                    authenticated={this.state.isAuthenticated}
+                    role={this.state.currentUser.role}
+                    path="/rate"
+                    component={Buyer_ratedealer}
                   />
                   <Route component={NotFound} />
                 </Switch>
