@@ -12,7 +12,7 @@ import Seller_mydata from "../user/seller/MyData";
 import Seller_newnote from "../user/seller/NewNote";
 import Seller_editnote from "../user/seller/EditNote";
 import Middleman_logs from "../user/middleman/Logs";
-import Middleman_link_users from "../user/middleman/Linkusers";
+import MakePayment from "../user/buyer/Makepayment";
 import Middleman_manage_users from "../user/middleman/Manageusers";
 import Middleman_add_user from "../user/middleman/Adduser";
 import Evaluator_generate_data from "../user/evaluator/Generatedata";
@@ -161,6 +161,12 @@ class App extends Component {
                     path="/myassets"
                     component={Buyer_myassets}
                   />
+                  <BuyerRoute
+                    authenticated={this.state.isAuthenticated}
+                    role={this.state.currentUser.role}
+                    path="/pay"
+                    component={MakePayment}
+                  />
                   <Route component={NotFound} />
                 </Switch>
               </div>
@@ -226,8 +232,8 @@ class App extends Component {
                   <DealerRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/link"
-                    component={Middleman_link_users}
+                    path="/pay"
+                    component={MakePayment}
                   />
                   <Route component={NotFound} />
                 </Switch>
@@ -257,8 +263,8 @@ class App extends Component {
                   <MiddlemanRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/link"
-                    component={Middleman_link_users}
+                    path="/pay"
+                    component={MakePayment}
                   />
                   <MiddlemanRoute
                     authenticated={this.state.isAuthenticated}
