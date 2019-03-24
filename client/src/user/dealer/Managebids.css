@@ -1,0 +1,15 @@
+.usertitle {
+  text-decoration: none;
+  line-height: 64px;
+  font-size: 21px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.requesttitle {
+  text-decoration: none;
+  line-height: 64px;
+  font-size: 21px;
+  font-weight: bold;
+  display: inline-block;
+}
