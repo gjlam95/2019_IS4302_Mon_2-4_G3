@@ -1,0 +1,21 @@
+.payuser-container {
+    max-width: 420px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.payuser-form-button {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.payuser-form-button[disabled], .payuser-form-button[disabled]:hover, .payuser-form-button[disabled]:focus {
+    opacity: 0.6;
+    color: #fff;
+    background-color: #1890ff;
+    border-color: #1890ff;
+}
+
+.payuser-form input {
+    margin-bottom: 3px;
+}
