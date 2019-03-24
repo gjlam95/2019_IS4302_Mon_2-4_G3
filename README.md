@@ -1,8 +1,5 @@
 # IFS4302-EquiV
-Equiv blockchain hyperledger composer network
-
-## equiv-bna
-Equiv blockchain hyperledger composer network
+Equiv blockchain hyperledger (Frontend & Backend)
 
 ### When first cloning project
 1. At the IFS4302-EQUIV directory, do a "npm install" to install server-side dependencies
@@ -19,6 +16,9 @@ For no2 all log in credentials are as follows
 4. Seller -> NRIC: S1234567S, Password: password
 5. Evaluator -> NRIC: S1234567E, Password: password
 
+
+## equiv-bna
+Equiv blockchain hyperledger composer network
 ### Sample Data
 1. For the participants and company, they are created via the admin identity. Please copy & paste the data directly to create via the "Create new participant".
 
