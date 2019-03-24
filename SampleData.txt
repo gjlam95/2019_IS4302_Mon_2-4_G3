@@ -19,29 +19,52 @@
 
 	//For Middleman 
 	{
-	  "$class": "org.equiv.participants.assets.Middleman",
-	  "rating": "resource:org.equiv.participants.assets.Rating#4120",
-	  "employer": "resource:org.equiv.Company#2412",
-	  "id": "5836",
-	  "title": "Mr",
-	  "firstName": "Ben",
-	  "lastName": "Tan",
-	  "nric": "S4780313E",
-	  "gender": "MALE",
-	  "email": "bentan@quatz.com",
-	  "mobilePhone": "87614320",
+	  "$class": "org.equiv.Company",
+	  "companyId": "2412",
+	  "name": "Quotz-Middleman",
 	  "address": {
 		"$class": "org.equiv.Address",
 		"city": "Singapore",
 		"country": "Singapore",
-		"region": "Ubi",
-		"street_1": "Ubi Ave 4",
-		"street_2": "BLK64 #11-09",
-		"postalCode": "408064"
+		"region": "Kallang",
+		"street_1": "535 Kallang Bahru",
+		"street_2": "#02-10 GB Point",
+		"postalCode": "339351"
 	  }
 	}
 
+	//Dealer 1
+	{
+	  "$class": "org.equiv.Company",
+	  "companyId": "2413",
+	  "name": "Qua-Dealers",
+	  "address": {
+		"$class": "org.equiv.Address",
+		"city": "Singapore",
+		"country": "Singapore",
+		"region": "Kallang",
+		"street_1": "534 Kallang Bahru",
+		"street_2": "#03-10 GB Base",
+		"postalCode": "339534"
+	  }
+	}	
 
+	//Dealer 2
+	{
+		"$class": "org.equiv.Company",
+		"companyId": "2414",
+		"name": "Qua-Dealers-Rivals",
+		"address": {
+			"$class": "org.equiv.Address",
+			"city": "Singapore",
+			"country": "Singapore",
+			"region": "Kallang",
+			"street_1": "534 Kallang Bahru",
+			"street_2": "#03-10 GB Base",
+			"postalCode": "339534"
+		}
+	}
+	
 //Participant
 	//Evaluator
 	{
@@ -70,6 +93,7 @@
 	{
 	   "$class": "org.equiv.participants.assets.Middleman",
 	   "rating": "resource:org.equiv.participants.assets.Rating#4120",
+	   "balanceAmount": 0,
 	   "employer": "resource:org.equiv.Company#2412",
 	   "id": "5836",
 	   "title": "Mr",
@@ -93,6 +117,7 @@
 	//Seller
 	{
 	  "$class": "org.equiv.participants.assets.Seller",
+	  "balanceAmount": 0,
 	  "id": "4765",
 	  "title": "Mr",
 	  "firstName": "Peter",
@@ -135,12 +160,12 @@
 	  }
 	}
 
-	//Dealer	
+	//Dealer 1	
 	{
 	  "$class": "org.equiv.participants.assets.Dealer",
 	  "rating": "resource:org.equiv.participants.assets.Rating#8515",
 	  "balanceAmount": 200000,
-	  "employer": "resource:org.equiv.Company#1556",
+	  "employer": "resource:org.equiv.Company#2413",
 	  "id": "7076",
 	  "title": "Ms",
 	  "firstName": "Katherine",
@@ -160,6 +185,32 @@
 	  }
 	}
 
+	//Dealer 2
+	{
+	  "$class": "org.equiv.participants.assets.Dealer",
+	  "rating": "resource:org.equiv.participants.assets.Rating#8515",
+	  "balanceAmount": 200000,
+	  "employer": "resource:org.equiv.Company#2413",
+	  "id": "7077",
+	  "title": "Ms",
+	  "firstName": "Song",
+	  "lastName": "Jun",
+	  "nric": "S9510911G",
+	  "gender": "MALE",
+	  "email": "songjun@gmail.com",
+	  "mobilePhone": "90769530",
+	  "address": {
+		"$class": "org.equiv.Address",
+		"city": "Singapore",
+		"country": "Singapore",
+		"region": "Tampines",
+		"street_1": "1-11 Simei Street 4",
+		"street_2": "Simei Green",
+		"postalCode": "529868"
+	  }
+	}
+	
+	
 //Asset 
 
 	//Vehicle (Create this via the identity of Evaluator to test the transaction EvaluateVehicle)
@@ -204,9 +255,29 @@
 	  "score": 0
 	}
 
-//Dealer
+//Dealer 1
 	{
 	  "$class": "org.equiv.participants.assets.Rating",
 	  "ratingId": "8515",
 	  "score": 0
 	}
+	
+//Dealer 2
+	{
+	  "$class": "org.equiv.participants.assets.Rating",
+	  "ratingId": "8516",
+	  "score": 0
+	}	
+	
+//SubmitBid
+{
+  "$class": "org.equiv.transactions.SubmitBid",
+  "listingId": "Audi-1000",
+  "bidAmount": 50000
+}
+
+//CloseListing
+{
+  "$class": "org.equiv.transactions.CloseListing",
+  "listing": "resource:org.equiv.participants.assets.Listing#Audi-1000"
+}
