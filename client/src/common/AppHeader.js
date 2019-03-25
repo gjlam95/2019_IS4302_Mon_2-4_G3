@@ -47,7 +47,7 @@ class AppHeader extends Component {
                 <Link to="/managebids">,
                   <Icon type="edit" />
                 </Link>
-              </Menu.Item>
+              </Menu.Item>,
               <Menu.Item key="/pay">
                 <Link to="/pay">
                   <Icon type="swap" />
