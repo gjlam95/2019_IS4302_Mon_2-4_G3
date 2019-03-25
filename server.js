@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const config = require("config");
+const proxy = require("express-http-proxy");
 
 const app = express();
 
@@ -18,6 +19,14 @@ mongoose
   })
   .then(() => console.log("MongoDB connected..."))
   .catch(err => console.log(err));
+
+//reverse proxy
+//evaluator
+app.use("/evaluator", proxy("localhost:3001/"));
+app.use("/middleman", proxy("localhost:3002/"));
+app.use("/buyer", proxy("localhost:3003/"));
+app.use("/dealer1", proxy("localhost:3004/"));
+app.use("/dealer2", proxy("localhost:3005/"));
 
 //Use Routes
 app.use("/api/items", require("./routes/api/items"));

@@ -3,7 +3,7 @@ import update from 'immutability-helper';
 import findIndex from 'lodash.findindex';
 import { Layout, Table } from 'antd';
 import { getSellers, getSellerProfile } from '../../util/APIUtils';
-import './Mysellers.css';
+import './MyAssets.css';
 
 const { Header, Content } = Layout;
 
@@ -82,32 +82,37 @@ class Buyer_mysellers extends Component {
     render() {
 
         const columns = [{
-          title: 'NRIC',
-          dataIndex: 'nric',
-          key: 'nric',
+          title: 'Number Plate',
+          dataIndex: 'car',
+          key: 'car',
           align: 'center',
         },  {
-          title: 'Name',
+          title: 'Brand',
           dataIndex: 'name',
           align: 'center',
-          defaultSortOrder: 'ascend',
-          sorter: (a, b) => a.name - b.name
         },  {
-          title: 'Phone',
+          title: 'Model',
           dataIndex: 'phone',
           align: 'center',
         },  {
-          title: 'Documents & records',
+          title: 'Mileage',
           dataIndex: 'docs_recs',
           align: 'center',
-          render: (text, row) => <a href={ "/mysellers/" + row.nric }>View, Edit or Create</a>,
+        },  {
+          title: 'COE expiry',
+          dataIndex: 'docs_recs',
+          align: 'center',
+        },  {
+          title: 'Features',
+          dataIndex: 'docs_recs',
+          align: 'center',
         }];
 
 
         return (
               <Layout className="layout">
                 <Header>
-                  <div className="title">My Sellers</div>
+                  <div className="title">My Assets</div>
                 </Header>
                 <Content>
                   <Table dataSource={this.state.sellers} columns={columns} rowKey="nric" />

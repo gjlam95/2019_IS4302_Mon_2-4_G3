@@ -44,7 +44,12 @@ class AppHeader extends Component {
                 </Link>
               </Menu.Item>,
               <Menu.Item key="/managebids">
-                <Link to="/managebids">
+                <Link to="/managebids">,
+                  <Icon type="edit" />
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="/pay">
+                <Link to="/pay">
                   <Icon type="swap" />
                 </Link>
               </Menu.Item>,
@@ -69,9 +74,19 @@ class AppHeader extends Component {
             ];
           } else if(this.props.currentUser.role === "buyer") {
             menuItems = [
-              <Menu.Item key="/mysellers">
-                <Link to="/mysellers">
+              <Menu.Item key="/myassets">
+                <Link to="/myassets">
                   <Icon type="medicine-box" />
+                </Link>
+              </Menu.Item>,
+              <Menu.Item key="/pay">
+                <Link to="/pay">
+                  <Icon type="swap" />
+                </Link>
+              </Menu.Item>,
+              <Menu.Item key="/rate">
+                <Link to="/rate">
+                  <Icon type="edit" />
                 </Link>
               </Menu.Item>,
               <Menu.Item key="/profile" className="profile-menu">
@@ -87,8 +102,8 @@ class AppHeader extends Component {
                   <Icon type="database" />
                 </Link>
               </Menu.Item>,
-              <Menu.Item key="/link">
-                <Link to="/link">
+              <Menu.Item key="/pay">
+                <Link to="/pay">
                   <Icon type="swap" />
                 </Link>
               </Menu.Item>,
@@ -164,7 +179,7 @@ function ProfileDropdownMenu(props) {
     overlay={dropdownMenu}
     trigger={['click']}
     getPopupContainer = { () => document.getElementsByClassName('profile-menu')[0]}>
-    <a href="/" className="ant-dropdown-link">
+    <a href="/" className="ant-dropdown-pay">
     <Icon type="user" className="nav-icon" style={{marginRight: 0}} /> <Icon type="down" />
     </a>
     </Dropdown>

@@ -7,18 +7,16 @@ import { AUTH_TOKEN } from "../constants";
 
 import Login from "../user/login/Login";
 import AppHeader from "../common/AppHeader";
-import Buyer_mysellers from "../user/buyer/Mysellers";
-import Buyer_sellerrecords from "../user/buyer/Sellerrecords";
-import Buyer_newnote from "../user/buyer/NewNote";
-import Buyer_editnote from "../user/buyer/EditNote";
-import Buyer_uploadrecord from "../user/buyer/UploadRecord";
 import Dealer_managebids from "../user/dealer/Managebids";
 import Dealer_mylistings from "../user/dealer/Mylistings";
+import Buyer_myassets from "../user/buyer/MyAssets";
+import Buyer_makepayment from "../user/buyer/Makepayment";
+import Buyer_ratedealer from "../user/buyer/Ratedealer";
 import Seller_mydata from "../user/seller/MyData";
 import Seller_newnote from "../user/seller/NewNote";
 import Seller_editnote from "../user/seller/EditNote";
+import MakePayment from "../user/middleman/Makepayment";
 import Middleman_logs from "../user/middleman/Logs";
-import Middleman_link_users from "../user/middleman/Linkusers";
 import Middleman_manage_users from "../user/middleman/Manageusers";
 import Middleman_add_user from "../user/middleman/Adduser";
 import Evaluator_generate_data from "../user/evaluator/Generatedata";
@@ -162,32 +160,20 @@ class App extends Component {
                   <BuyerRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/mysellers/:nric/uploadrecord"
-                    component={Buyer_uploadrecord}
+                    path="/myassets"
+                    component={Buyer_myassets}
                   />
                   <BuyerRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/mysellers/:nric/editnote/:id"
-                    component={Buyer_editnote}
+                    path="/pay"
+                    component={Buyer_makepayment}
                   />
                   <BuyerRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/mysellers/:nric/newnote"
-                    component={Buyer_newnote}
-                  />
-                  <BuyerRoute
-                    authenticated={this.state.isAuthenticated}
-                    role={this.state.currentUser.role}
-                    path="/mysellers/:nric"
-                    component={Buyer_sellerrecords}
-                  />
-                  <BuyerRoute
-                    authenticated={this.state.isAuthenticated}
-                    role={this.state.currentUser.role}
-                    path="/mysellers"
-                    component={Buyer_mysellers}
+                    path="/rate"
+                    component={Buyer_ratedealer}
                   />
                   <Route component={NotFound} />
                 </Switch>
@@ -251,6 +237,12 @@ class App extends Component {
                     path="/managebids"
                     component={Dealer_managebids}
                   />
+                  <DealerRoute
+                    authenticated={this.state.isAuthenticated}
+                    role={this.state.currentUser.role}
+                    path="/pay"
+                    component={MakePayment}
+                  />
                   <Route component={NotFound} />
                 </Switch>
               </div>
@@ -279,8 +271,8 @@ class App extends Component {
                   <MiddlemanRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/link"
-                    component={Middleman_link_users}
+                    path="/pay"
+                    component={MakePayment}
                   />
                   <MiddlemanRoute
                     authenticated={this.state.isAuthenticated}

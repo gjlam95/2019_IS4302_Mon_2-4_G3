@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { assign, unassign } from '../../util/APIUtils';
 import { Form, Input, Button, notification } from 'antd';
-import './Linkusers.css';
+import './Makepayment.css';
 
 const FormItem = Form.Item;
 
-class Middleman_link_users extends Component {
+class MakePayment extends Component {
   constructor(props) {
         super(props);
         this.state = {
@@ -22,12 +22,12 @@ class Middleman_link_users extends Component {
 
   handleAssign(event) {
       event.preventDefault();
-      const linkuserRequest = {
+      const payuserRequest = {
           buyerNric: encodeURIComponent(this.state.buyer1.value),
           sellerNric: encodeURIComponent(this.state.seller1.value),
           endDate: encodeURIComponent(this.state.endDate.value)
       };
-      assign(linkuserRequest)
+      assign(payuserRequest)
       .then(response => {
           notification.success({
               message: 'EquiV',
@@ -43,17 +43,17 @@ class Middleman_link_users extends Component {
 
   handleUnassign(event) {
       event.preventDefault();
-      const delinkuserRequest = {
+      const depayuserRequest = {
           buyerNric: this.state.buyer2.value,
           sellerNric: this.state.seller2.value
       };
-      unassign(delinkuserRequest)
+      unassign(depayuserRequest)
       .then(response => {
           notification.success({
               message: 'EquiV',
               description: "You've successfully unassigned the users!",
           });
-          this.props.history.push("/link");
+          this.props.history.push("/pay");
       }).catch(error => {
           notification.error({
               message: 'EquiV',
@@ -76,10 +76,10 @@ class Middleman_link_users extends Component {
 
   render() {
       return (
-          <div className="linkuser-container">
+          <div className="payuser-container">
               <h1 className="page-title">Buyer -> Seller(s)</h1>
-              <div className="linkuser-content">
-                  <Form onSubmit={this.handleAssign} className="linkuser-form">
+              <div className="payuser-content">
+                  <Form onSubmit={this.handleAssign} className="payuser-form">
                       <FormItem
                           label="Buyer NRIC">
                           <Input
@@ -109,14 +109,14 @@ class Middleman_link_users extends Component {
                           <Button type="primary" icon="shrink"
                               htmlType="submit"
                               size="large"
-                              className="linkuser-form-button"
+                              className="payuser-form-button"
                               >Assign</Button>
                       </FormItem>
                   </Form>
               </div>
               <h1 className="page-title">Buyer -/> Seller(s)</h1>
-              <div className="linkuser-content">
-                  <Form onSubmit={this.handleUnassign} className="linkuser-form">
+              <div className="payuser-content">
+                  <Form onSubmit={this.handleUnassign} className="payuser-form">
                       <FormItem
                           label="Buyer NRIC">
                           <Input
@@ -137,7 +137,7 @@ class Middleman_link_users extends Component {
                           <Button type="primary" icon="arrow-alt"
                               htmlType="submit"
                               size="large"
-                              className="linkuser-form-button"
+                              className="payuser-form-button"
                               >Unassign</Button>
                       </FormItem>
                   </Form>
@@ -147,4 +147,4 @@ class Middleman_link_users extends Component {
   }
 }
 
-export default Middleman_link_users;
+export default MakePayment;

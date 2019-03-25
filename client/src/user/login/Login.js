@@ -57,6 +57,9 @@ class LoginForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    fetch("middleman/api/org.equiv.participants.assets.Middleman").then(res => {
+      res.json().then(response => console.log(response));
+    });
     const loginRequest = {
       nric: this.state.nric.value,
       password: this.state.password.value,
