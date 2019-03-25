@@ -7,6 +7,8 @@ import { AUTH_TOKEN } from "../constants";
 
 import Login from "../user/login/Login";
 import AppHeader from "../common/AppHeader";
+import Dealer_managebids from "../user/dealer/Managebids";
+import Dealer_mylistings from "../user/dealer/Mylistings";
 import Buyer_myassets from "../user/buyer/MyAssets";
 import Buyer_makepayment from "../user/buyer/Makepayment";
 import Buyer_ratedealer from "../user/buyer/Ratedealer";
@@ -18,8 +20,6 @@ import Middleman_logs from "../user/middleman/Logs";
 import Middleman_manage_users from "../user/middleman/Manageusers";
 import Middleman_add_user from "../user/middleman/Adduser";
 import Evaluator_generate_data from "../user/evaluator/Generatedata";
-import Dealer_add_user from "../user/dealer/Adduser";
-import Dealer_upload_database from "../user/dealer/Uploaddatabase";
 import LoadingIndicator from "../common/LoadingIndicator";
 import SellerRoute from "../common/SellerRoute";
 import BuyerRoute from "../common/BuyerRoute";
@@ -228,14 +228,14 @@ class App extends Component {
                   <DealerRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/uploaddatabase"
-                    component={Dealer_upload_database}
+                    path="/mylistings"
+                    component={Dealer_mylistings}
                   />
                   <DealerRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/adduser"
-                    component={Dealer_add_user}
+                    path="/managebids"
+                    component={Dealer_managebids}
                   />
                   <DealerRoute
                     authenticated={this.state.isAuthenticated}
