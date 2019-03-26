@@ -46,10 +46,6 @@ class Buyer_myassets extends Component {
           dataIndex: 'vehicleId',
           align: 'center',
         }, {
-          title: 'Number Plate',
-          dataIndex: 'vehicleDetails.numberPlate',
-          align: 'center',
-        }, {
           title: 'Mileage',
           dataIndex: 'vehicleDetails.mileage',
           align: 'center',
