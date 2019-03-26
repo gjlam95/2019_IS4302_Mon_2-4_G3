@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { assign, unassign } from '../../util/APIUtils';
+import { assign } from '../../util/APIUtils';
 import { Form, Input, Button, notification } from 'antd';
 import './Ratedealer.css';
 
