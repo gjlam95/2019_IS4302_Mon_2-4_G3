@@ -195,7 +195,7 @@
 	  "title": "Ms",
 	  "firstName": "Song",
 	  "lastName": "Jun",
-	  "nric": "S9510911G",
+	  "nric": "S9510922H",
 	  "gender": "MALE",
 	  "email": "songjun@gmail.com",
 	  "mobilePhone": "90769530",
@@ -234,8 +234,8 @@
 	  "coe_expiry": "2024-05-26T00:00:00.000Z",
 	  "warranty_expiry": "2019-08-26T00:00:00.000Z",
 	  "roadtax_expiry": "2019-05-26T00:00:00.000Z",
-	  "owner": "resource:org.equiv.participants.assets.Seller#4765",
-	  "middleman": "resource:org.equiv.participants.assets.Middleman#5836"
+	  "owner": "resource:org.equiv.participants.assets.Seller#S4790125D",
+	  "middleman": "resource:org.equiv.participants.assets.Middleman#S9040111C"
 	}
 	
 	//Listing (Create this via the identity of the Middleman)
@@ -280,4 +280,20 @@
 {
   "$class": "org.equiv.transactions.CloseListing",
   "listing": "resource:org.equiv.participants.assets.Listing#Audi-1000"
+}
+
+
+//IncludeDealerOffers
+{
+  "$class": "org.equiv.transactions.IncludeDealerOffers",
+  "dealerListing": "resource:org.equiv.participants.assets.Listing#Audi-1000",
+  "dealerOffers": "2 year warranty, Monthly maintenance for 1 year"
+}
+
+//Payment from Dealer 2 to Middleman
+{
+  "$class": "org.equiv.transactions.MakePayment",
+  "listing": "resource:org.equiv.participants.assets.Listing#Audi-1000",
+  "payer": "resource:org.equiv.participants.assets.Dealer#S9510922H",
+  "payee": "resource:org.equiv.participants.assets.Middleman#S9040111C"
 }
