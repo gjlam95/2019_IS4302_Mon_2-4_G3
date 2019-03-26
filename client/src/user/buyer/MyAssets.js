@@ -2,64 +2,24 @@ import React, { Component } from 'react';
 import update from 'immutability-helper';
 import findIndex from 'lodash.findindex';
 import { Layout, Table } from 'antd';
-import { getSellers, getSellerProfile } from '../../util/APIUtils';
+import { buyerGetAssets } from '../../util/APIUtils';
 import './MyAssets.css';
 
 const { Header, Content } = Layout;
 
-class Buyer_mysellers extends Component {
+class Buyer_myassets extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sellers: [],
-            isLoading: false
+            data: []
         }
-
-        this.loadSellers = this.loadSellers.bind(this);
+        this.loadAssets = this.loadAssets.bind(this);
     }
 
-    loadSellers() {
-        this.setState({
-            isLoading: true
-        });
-
-        getSellers()
-        .then(response => {
-                const patdata = [];
-
-                for (var i = 0; i < response.content.length; i++) {
-                    var currentnric = response.content[i].treatmentId.seller;
-
-                    patdata[i] = ({ key: i,
-                                    nric: currentnric
-                                  });
-                }
-
-                this.setState({ sellers: patdata });
-
-                for (var j = 0; j < response.content.length; j++) {
-
-                    var currnric = response.content[j].treatmentId.seller;
-
-                    getSellerProfile(currnric)
-                    .then((result) => { var i = findIndex(this.state.sellers, ['nric', result.nric]);
-                                        this.setState({ sellers: update(this.state.sellers, {[i]: { name: {$set: result.name},
-                                                                                                      phone: {$set: result.phone} }}) });
-                                      }
-                    ).catch(error => {
-                        if(error.status === 404) {
-                            this.setState({
-                                notFound: true,
-                            });
-                        } else {
-                            this.setState({
-                                serverError: true,
-                            });
-                        }
-                    });
-
-                }
-              }
+    loadAssets() {
+        buyerGetAssets()
+        .then(data =>
+          this.setState({data})
         )
         .catch(error => {
             if(error.status === 404) {
@@ -76,35 +36,42 @@ class Buyer_mysellers extends Component {
     }
 
     componentDidMount() {
-        this.loadSellers();
+        this.loadAssets();
     }
 
     render() {
 
         const columns = [{
+          title: 'Vehicle ID',
+          dataIndex: 'vehicleId',
+          align: 'center',
+        }, {
           title: 'Number Plate',
-          dataIndex: 'car',
-          key: 'car',
+          dataIndex: 'vehicleDetails.numberPlate',
           align: 'center',
-        },  {
-          title: 'Brand',
-          dataIndex: 'name',
-          align: 'center',
-        },  {
-          title: 'Model',
-          dataIndex: 'phone',
-          align: 'center',
-        },  {
+        }, {
           title: 'Mileage',
-          dataIndex: 'docs_recs',
+          dataIndex: 'vehicleDetails.mileage',
           align: 'center',
-        },  {
-          title: 'COE expiry',
-          dataIndex: 'docs_recs',
-          align: 'center',
-        },  {
+        }, {
           title: 'Features',
-          dataIndex: 'docs_recs',
+          dataIndex: 'vehicleDetails.features',
+          align: 'center',
+        }, {
+          title: 'Description',
+          dataIndex: 'vehicleDetails.description',
+          align: 'center',
+        }, {
+          title: 'COE Expiry',
+          dataIndex: 'coe_expiry',
+          align: 'center',
+        }, {
+          title: 'Warranty Expiry',
+          dataIndex: 'warranty_expiry',
+          align: 'center',
+        }, {
+          title: 'Roadtax Expiry',
+          dataIndex: 'roadtax_expiry',
           align: 'center',
         }];
 
@@ -115,11 +82,11 @@ class Buyer_mysellers extends Component {
                   <div className="title">My Assets</div>
                 </Header>
                 <Content>
-                  <Table dataSource={this.state.sellers} columns={columns} rowKey="nric" />
+                  <Table dataSource={this.state.data} columns={columns} />
                 </Content>
               </Layout>
         );
     }
 }
 
-export default Buyer_mysellers;
+export default Buyer_myassets;

@@ -165,6 +165,21 @@ function arrayBufferToBase64(buffer) {
   return window.btoa(binary);
 }
 
+export function buyerMakePayment(payment) {
+  return request({
+    url: "buyer/api/org.equiv.participants.transactions.MakePayment",
+    method: "POST",
+    body: JSON.stringify(payment)
+  });
+}
+
+export function buyerGetAssets() {
+  return request({
+    url: "buyer/api/org.equiv.participants.assets.Vehicle",
+    method: "GET",
+  });
+}
+
 export function login(loginRequest) {
   return request({
     url: API + "/auth",
