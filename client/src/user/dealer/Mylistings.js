@@ -1,118 +1,113 @@
 import React, { Component } from 'react';
-import update from 'immutability-helper';
-import findIndex from 'lodash.findindex';
-import { Layout, Table } from 'antd';
-import { getSellers, getSellerProfile } from '../../util/APIUtils';
+import { Form, Input, Button, Layout, Table, notification } from 'antd';
+import { dealerViewListings, dealerIncludeOffers } from '../../util/APIUtils';
 import './Mylistings.css';
 
-const { Header, Content } = Layout;
+const FormItem = Form.Item;
 
 class Dealer_mylistings extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            sellers: [],
-            isLoading: false
+  constructor(props) {
+      super(props);
+      this.state = {
+          listingId: "",
+          description: "",
+          tableData: []
+      }
+      this.includeOffers = this.includeOffers.bind(this);
+      this.loadAllListings = this.loadAllListings.bind(this);
+  }
+
+  loadAllListings() {
+      dealerViewListings()
+      .then(data => {
+        this.setState({ tableData: data })
+      })
+      .catch(error => {
+          if(error.status === 404) {
+              this.setState({
+                  notFound: true,
+              });
+          } else {
+              this.setState({
+                  serverError: true,
+              });
+          }
+      });
+  }
+
+  includeOffers(event) {
+    event.preventDefault()
+    const offers = {
+      dealerListing: this.state.listingId,
+      dealerOffers: this.state.description,
+    };
+    dealerIncludeOffers(offers)
+    .then(response => {
+        notification.success({
+            message: 'EquiV',
+            description: "You've successfully entered your bid!",
+        });
+        window.location.reload();
+    }).catch(error => {
+        notification.error({
+            message: 'EquiV',
+            description: error.message || 'Sorry! Something went wrong. Please try again!'
+        });
+    });
+  }
+
+  componentDidMount() {
+      this.loadAllListings();
+  }
+
+  render() {
+      const { Content } = Layout;
+
+      const users_columns = [{
+        title: 'Listing',
+        dataIndex: 'listingId',
+      }, {
+        title: 'Dealer Offers',
+        dataIndex: 'dealerOffers',
+      }, {
+        title: 'Edit',
+        render: (text) => {
+          return (
+            <Form onSubmit={this.includeOffers} className="dealer-offers">
+              <FormItem>
+                <Input
+                size="small"
+                value={this.state.description}
+                onChange={event => {
+                  this.setState({listingId: text.listingId})
+                  this.setState({description: event.target.value});
+                }}/>
+              </FormItem>
+              <FormItem>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="dealer-offers-form-button"
+                >
+                Submit
+                </Button>
+              </FormItem>
+            </Form>
+          )
         }
+      }];
 
-        this.loadSellers = this.loadSellers.bind(this);
-    }
-
-    loadSellers() {
-        this.setState({
-            isLoading: true
-        });
-
-        getSellers()
-        .then(response => {
-                const patdata = [];
-
-                for (var i = 0; i < response.content.length; i++) {
-                    var currentnric = response.content[i].treatmentId.seller;
-
-                    patdata[i] = ({ key: i,
-                                    nric: currentnric
-                                  });
-                }
-
-                this.setState({ sellers: patdata });
-
-                for (var j = 0; j < response.content.length; j++) {
-
-                    var currnric = response.content[j].treatmentId.seller;
-
-                    getSellerProfile(currnric)
-                    .then((result) => { var i = findIndex(this.state.sellers, ['nric', result.nric]);
-                                        this.setState({ sellers: update(this.state.sellers, {[i]: { name: {$set: result.name},
-                                                                                                      phone: {$set: result.phone} }}) });
-                                      }
-                    ).catch(error => {
-                        if(error.status === 404) {
-                            this.setState({
-                                notFound: true,
-                            });
-                        } else {
-                            this.setState({
-                                serverError: true,
-                            });
-                        }
-                    });
-
-                }
-              }
-        )
-        .catch(error => {
-            if(error.status === 404) {
-                this.setState({
-                    notFound: true,
-                });
-            } else {
-                this.setState({
-                    serverError: true,
-                });
-            }
-        });
-
-    }
-
-    componentDidMount() {
-        this.loadSellers();
-    }
-
-    render() {
-
-        const columns = [{
-          title: 'Listing ID',
-          dataIndex: 'nric',
-          key: 'nric',
-          align: 'center',
-        },  {
-          title: 'Information',
-          dataIndex: 'name',
-          align: 'center',
-        },  {
-          title: 'Features',
-          dataIndex: 'phone',
-          align: 'center',
-        },  {
-          title: 'Edit',
-          dataIndex: 'docs_recs',
-          align: 'center',
-          render: (text, row) => <a href={ "/mysellers/" + row.nric }>View, Edit or Create</a>,
-        }];
-
-
-        return (
-              <Layout className="layout">
-                <Header>
-                  <div className="title">Listings</div>
-                </Header>
-                <Content>
-                  <Table dataSource={this.state.sellers} columns={columns} rowKey="nric" />
-                </Content>
-              </Layout>
-        );
-    }
+      return (
+            <Layout className="userlayout">
+              <Content>
+                <div className="usertitle">
+                  Listings
+                </div>
+                <Table dataSource={this.state.tableData} columns={users_columns}/>
+              </Content>
+            </Layout>
+      );
+  }
 }
 
 export default Dealer_mylistings;
