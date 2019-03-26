@@ -43,13 +43,8 @@ class AppHeader extends Component {
                   <Icon type="medicine-box" />
                 </Link>
               </Menu.Item>,
-<<<<<<< HEAD
-              <Menu.Item key="/pay">
-                <Link to="/pay">
-=======
               <Menu.Item key="/managebids">
                 <Link to="/managebids">
->>>>>>> d396c8ec5a04e22a45a8a684ad8b8d61eb5ab1af
                   <Icon type="swap" />
                 </Link>
               </Menu.Item>,

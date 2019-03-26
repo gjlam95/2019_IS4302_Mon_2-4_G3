@@ -7,19 +7,11 @@ import { AUTH_TOKEN } from "../constants";
 
 import Login from "../user/login/Login";
 import AppHeader from "../common/AppHeader";
-<<<<<<< HEAD
+import Dealer_managebids from "../user/dealer/Managebids";
+import Dealer_mylistings from "../user/dealer/Mylistings";
 import Buyer_myassets from "../user/buyer/MyAssets";
 import Buyer_makepayment from "../user/buyer/Makepayment";
 import Buyer_ratedealer from "../user/buyer/Ratedealer";
-=======
-import Buyer_mysellers from "../user/buyer/Mysellers";
-import Buyer_sellerrecords from "../user/buyer/Sellerrecords";
-import Buyer_newnote from "../user/buyer/NewNote";
-import Buyer_editnote from "../user/buyer/EditNote";
-import Buyer_uploadrecord from "../user/buyer/UploadRecord";
-import Dealer_managebids from "../user/dealer/Managebids";
-import Dealer_mylistings from "../user/dealer/Mylistings";
->>>>>>> d396c8ec5a04e22a45a8a684ad8b8d61eb5ab1af
 import Seller_mydata from "../user/seller/MyData";
 import Seller_newnote from "../user/seller/NewNote";
 import Seller_editnote from "../user/seller/EditNote";
@@ -242,19 +234,14 @@ class App extends Component {
                   <DealerRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-<<<<<<< HEAD
-                    path="/adduser"
-                    component={Dealer_add_user}
+                    path="/managebids"
+                    component={Dealer_managebids}
                   />
                   <DealerRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
                     path="/pay"
                     component={MakePayment}
-=======
-                    path="/managebids"
-                    component={Dealer_managebids}
->>>>>>> d396c8ec5a04e22a45a8a684ad8b8d61eb5ab1af
                   />
                   <Route component={NotFound} />
                 </Switch>
