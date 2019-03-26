@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { assign, unassign } from '../../util/APIUtils';
+import { buyerMakePayment } from '../../util/APIUtils';
 import { Form, Input, Button, notification } from 'antd';
 import './Makepayment.css';
 
@@ -12,24 +12,23 @@ class Buyer_makepayment extends Component {
           listing: '',
           payer: '',
           payee: '',
-          endDate: ''
         }
-        this.handleAssign = this.handleAssign.bind(this);
+        this.handleMakePayment = this.handleMakePayment.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-  handleAssign(event) {
+  handleMakePayment(event) {
       event.preventDefault();
-      const payuserRequest = {
-          payerNric: encodeURIComponent(this.state.payer.value),
-          payeeNric: encodeURIComponent(this.state.payee.value),
-          endDate: encodeURIComponent(this.state.endDate.value)
+      const makePayment = {
+          listing: encodeURIComponent(this.state.listing.value),
+          payer: encodeURIComponent(this.state.payer.value),
+          payee: encodeURIComponent(this.state.payee.value),
       };
-      assign(payuserRequest)
+      buyerMakePayment(makePayment)
       .then(response => {
           notification.success({
               message: 'EquiV',
-              description: "You've successfully assigned the users!",
+              description: "You've successfully made a payment!",
           });
       }).catch(error => {
           notification.error({
@@ -56,7 +55,7 @@ class Buyer_makepayment extends Component {
           <div className="payuser-container">
               <h1 className="page-title">Make Payment</h1>
               <div className="payuser-content">
-                  <Form onSubmit={this.handleAssign} className="payuser-form">
+                  <Form onSubmit={this.handleMakePayment} className="payuser-form">
                       <FormItem
                       label="Listing">
                       <Input
@@ -79,14 +78,6 @@ class Buyer_makepayment extends Component {
                               size="large"
                               name="payee"
                               value={this.state.payee.value}
-                              onChange={(event) => {this.handleInputChange(event)}} />
-                      </FormItem>
-                      <FormItem
-                          label="Amount">
-                          <Input
-                              size="large"
-                              name="endDate"
-                              value={this.state.endDate.value}
                               onChange={(event) => {this.handleInputChange(event)}} />
                       </FormItem>
                       <FormItem>

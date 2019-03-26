@@ -17,14 +17,14 @@ For no2 all log in credentials are as follows
 5. Evaluator -> NRIC: S1234567E, Password: password
 
 ### reverse proxy (rest server)
+To start the reverse proxy, do 'npm run start_rest-server evaluator@equiv-blockchain 3001'
 1. evaluator: proxy: /evaluator, port: 3001
 -> Meaning to say in for your playground, make sure you use port 3001 for the evaluator.
 -> On the client side, use e.g. fetch("evaluator/api/org.equiv.participants.assets.Evaluator") to access the APIs, /evaluator will replace http://localhost:3001
 
 2. middleman: proxy: /middleman, port:3002
 3. buyer: proxy: /buyer, port:3003
-4. dealer1: proxy: /dealer1, port:3004
-5. dealer2: proxy: /dealer2, port:3005
+4. dealer: proxy: /dealer, port:9090
 
 
 ## equiv-bna

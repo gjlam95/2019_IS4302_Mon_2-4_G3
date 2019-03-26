@@ -25,8 +25,7 @@ mongoose
 app.use("/evaluator", proxy("localhost:3001/"));
 app.use("/middleman", proxy("localhost:3002/"));
 app.use("/buyer", proxy("localhost:3003/"));
-app.use("/dealer1", proxy("localhost:3004/"));
-app.use("/dealer2", proxy("localhost:3005/"));
+app.use("/dealer", proxy("localhost:9090/"));
 
 //Use Routes
 app.use("/api/items", require("./routes/api/items"));
