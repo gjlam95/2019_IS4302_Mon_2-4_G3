@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Layout, Table, notification } from 'antd';
 import { dealerViewListings, dealerIncludeOffers } from '../../util/APIUtils';
-import './Mylistings.css';
+import './Viewlistings.css';
 
 const FormItem = Form.Item;
 
-class Dealer_mylistings extends Component {
+class Buyer_mylistings extends Component {
   constructor(props) {
       super(props);
       this.state = {
@@ -69,32 +69,6 @@ class Dealer_mylistings extends Component {
       }, {
         title: 'Dealer Offers',
         dataIndex: 'dealerOffers',
-      }, {
-        title: 'Edit',
-        render: (text) => {
-          return (
-            <Form onSubmit={this.includeOffers} className="dealer-offers">
-              <FormItem>
-                <Input
-                size="small"
-                value={this.state.description}
-                onChange={event => {
-                  this.setState({listingId: text.listingId})
-                  this.setState({description: event.target.value});
-                }}/>
-              </FormItem>
-              <FormItem>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="dealer-offers-form-button"
-                >
-                Submit
-                </Button>
-              </FormItem>
-            </Form>
-          )
-        }
       }];
 
       return (
@@ -110,4 +84,4 @@ class Dealer_mylistings extends Component {
   }
 }
 
-export default Dealer_mylistings;
+export default Buyer_mylistings;

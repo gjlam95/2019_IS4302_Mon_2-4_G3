@@ -165,6 +165,37 @@ function arrayBufferToBase64(buffer) {
   return window.btoa(binary);
 }
 
+export function dealerIncludeOffers(offers) {
+  return request({
+    url: "dealer/api/org.equiv.transactions.IncludeDealerOffers",
+    method: "POST",
+    body: JSON.stringify(offers)
+  });
+}
+
+export function dealerViewListings() {
+  return request({
+    url: "middleman/api/org.equiv.participants.assets.Listing",
+    method: "GET",
+  });
+}
+
+export function dealerSubmitBid(bid) {
+  return request({
+    url: "dealer/api/org.equiv.transactions.SubmitBid",
+    method: "POST",
+    body: JSON.stringify(bid)
+  });
+}
+
+export function dealerUpdateBid(bid) {
+  return request({
+    url: "dealer/api/org.equiv.transactions.UpdateBid",
+    method: "POST",
+    body: JSON.stringify(bid)
+  });
+}
+
 export function buyerMakePayment(payment) {
   return request({
     url: "buyer/api/org.equiv.participants.transactions.MakePayment",
