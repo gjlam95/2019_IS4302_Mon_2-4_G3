@@ -16,6 +16,7 @@ class Dealer_viewlistings extends Component {
         }
         this.submitBid = this.submitBid.bind(this);
         this.updateBid = this.updateBid.bind(this);
+        this.viewListings = this.viewListings.bind(this);
         this.loadAllListings = this.loadAllListings.bind(this);
     }
 
@@ -35,6 +36,18 @@ class Dealer_viewlistings extends Component {
                 });
             }
         });
+    }
+
+    viewListings() {
+      fetch("dealer/api/org.equiv.transactions.ViewOpenListings")
+      .then(data => {
+        console.log(data)
+      }).catch(error => {
+          notification.error({
+              message: 'EquiV',
+              description: error.message || 'Sorry! Something went wrong. Please try again!'
+          });
+      });
     }
 
     submitBid(event) {
@@ -81,6 +94,7 @@ class Dealer_viewlistings extends Component {
 
     componentDidMount() {
         this.loadAllListings();
+        this.viewListings();
     }
 
     render() {
