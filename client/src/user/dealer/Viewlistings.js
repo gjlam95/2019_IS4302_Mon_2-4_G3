@@ -39,8 +39,9 @@ class Dealer_viewlistings extends Component {
     }
 
     viewListings() {
-      fetch("dealer/api/org.equiv.transactions.ViewOpenListings")
+      fetch("dealer/api/org.equiv.participants.assets.Listing")
       .then(data => {
+        console.log("View Open Listings");
         console.log(data)
       }).catch(error => {
           notification.error({

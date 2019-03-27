@@ -175,7 +175,7 @@ export function dealerIncludeOffers(offers) {
 
 export function dealerViewListings() {
   return request({
-    url: "middleman/api/org.equiv.participants.assets.Listing",
+    url: "dealer/api/org.equiv.participants.assets.Listing",
     method: "GET",
   });
 }
