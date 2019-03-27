@@ -7,15 +7,16 @@ import { AUTH_TOKEN } from "../constants";
 
 import Login from "../user/login/Login";
 import AppHeader from "../common/AppHeader";
-import Dealer_managebids from "../user/dealer/Managebids";
+import Dealer_viewlistings from "../user/dealer/Viewlistings";
 import Dealer_mylistings from "../user/dealer/Mylistings";
+import Dealer_makepayment from "../user/dealer/Makepayment";
 import Buyer_myassets from "../user/buyer/MyAssets";
 import Buyer_makepayment from "../user/buyer/Makepayment";
 import Buyer_ratedealer from "../user/buyer/Ratedealer";
+import Buyer_viewlistings from "../user/buyer/Viewlistings";
 import Seller_mydata from "../user/seller/MyData";
 import Seller_newnote from "../user/seller/NewNote";
 import Seller_editnote from "../user/seller/EditNote";
-import MakePayment from "../user/middleman/Makepayment";
 import Middleman_logs from "../user/middleman/Logs";
 import Middleman_manage_users from "../user/middleman/Manageusers";
 import Middleman_add_user from "../user/middleman/Adduser";
@@ -175,6 +176,12 @@ class App extends Component {
                     path="/rate"
                     component={Buyer_ratedealer}
                   />
+                  <BuyerRoute
+                    authenticated={this.state.isAuthenticated}
+                    role={this.state.currentUser.role}
+                    path="/listings"
+                    component={Buyer_viewlistings}
+                  />
                   <Route component={NotFound} />
                 </Switch>
               </div>
@@ -235,13 +242,13 @@ class App extends Component {
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
                     path="/managebids"
-                    component={Dealer_managebids}
+                    component={Dealer_viewlistings}
                   />
                   <DealerRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
                     path="/pay"
-                    component={MakePayment}
+                    component={Dealer_makepayment}
                   />
                   <Route component={NotFound} />
                 </Switch>
@@ -267,12 +274,6 @@ class App extends Component {
                     role={this.state.currentUser.role}
                     path="/logs"
                     component={Middleman_logs}
-                  />
-                  <MiddlemanRoute
-                    authenticated={this.state.isAuthenticated}
-                    role={this.state.currentUser.role}
-                    path="/pay"
-                    component={MakePayment}
                   />
                   <MiddlemanRoute
                     authenticated={this.state.isAuthenticated}

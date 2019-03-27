@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import update from 'immutability-helper';
-import findIndex from 'lodash.findindex';
 import { Layout, Table } from 'antd';
 import { buyerGetAssets } from '../../util/APIUtils';
 import './MyAssets.css';
