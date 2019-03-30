@@ -165,6 +165,20 @@ function arrayBufferToBase64(buffer) {
   return window.btoa(binary);
 }
 
+export function balanceAmt(role1,role2) {
+  return request({
+    url: role1 + "/api/org.equiv.participants.assets." + role2,
+    method: "GET",
+  });
+}
+
+export function dealerGetHighestBid(bid) {
+  return request({
+    url: "dealer/api/org.equiv.participants.assets.Bid/" + bid,
+    method: "GET",
+  });
+}
+
 export function dealerIncludeOffers(offers) {
   return request({
     url: "dealer/api/org.equiv.transactions.IncludeDealerOffers",

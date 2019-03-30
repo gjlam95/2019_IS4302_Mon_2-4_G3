@@ -33,6 +33,7 @@ class AppHeader extends Component {
               <Menu.Item key="/profile" className="profile-menu">
                 <ProfileDropdownMenu
                   currentUser={this.props.currentUser}
+                  balanceAmt={this.props.balanceAmt}
                   handleMenuClick={this.handleMenuClick}/>
               </Menu.Item>
             ];
@@ -56,6 +57,7 @@ class AppHeader extends Component {
               <Menu.Item key="/profile" className="profile-menu">
                 <ProfileDropdownMenu
                   currentUser={this.props.currentUser}
+                  balanceAmt={this.props.balanceAmt}
                   handleMenuClick={this.handleMenuClick}/>
               </Menu.Item>
             ];
@@ -69,6 +71,7 @@ class AppHeader extends Component {
               <Menu.Item key="/profile" className="profile-menu">
                 <ProfileDropdownMenu
                   currentUser={this.props.currentUser}
+                  balanceAmt={this.props.balanceAmt}
                   handleMenuClick={this.handleMenuClick}/>
               </Menu.Item>
             ];
@@ -97,6 +100,7 @@ class AppHeader extends Component {
               <Menu.Item key="/profile" className="profile-menu">
                 <ProfileDropdownMenu
                   currentUser={this.props.currentUser}
+                  balanceAmt={this.props.balanceAmt}
                   handleMenuClick={this.handleMenuClick}/>
               </Menu.Item>
             ];
@@ -120,6 +124,7 @@ class AppHeader extends Component {
               <Menu.Item key="/profile" className="profile-menu">
                 <ProfileDropdownMenu
                   currentUser={this.props.currentUser}
+                  balanceAmt={this.props.balanceAmt}
                   handleMenuClick={this.handleMenuClick}/>
               </Menu.Item>
             ];
@@ -169,7 +174,10 @@ function ProfileDropdownMenu(props) {
     {props.currentUser.name}
     </div>
     <div className="nric-info">
-    @{props.currentUser.nric}
+    {props.currentUser.nric}
+    </div>
+    <div className="balance-amt">
+    Balance: ${props.balanceAmt}
     </div>
     </Menu.Item>
     <Menu.Divider />

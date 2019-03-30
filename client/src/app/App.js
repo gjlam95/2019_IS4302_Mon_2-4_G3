@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import { Route, withRouter, Switch } from "react-router-dom";
 
-import { getCurrentUser } from "../util/APIUtils";
+import { balanceAmt, getCurrentUser } from "../util/APIUtils";
 import { AUTH_TOKEN } from "../constants";
 
 import Login from "../user/login/Login";
@@ -44,11 +44,13 @@ class App extends Component {
     this.state = {
       currentUser: null,
       isAuthenticated: false,
-      isLoading: false
+      isLoading: false,
+      balanceAmt: ''
     };
     this.handleLogout = this.handleLogout.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.loadCurrentUser = this.loadCurrentUser.bind(this);
+    this.getBalanceAmt = this.getBalanceAmt.bind(this);
 
     notification.config({
       placement: "topRight",
@@ -88,8 +90,9 @@ class App extends Component {
         this.setState({
           currentUser: response,
           isAuthenticated: true,
-          isLoading: false
+          isLoading: false,
         });
+        this.getBalanceAmt(response.role, response.role.charAt(0).toUpperCase() + response.role.substring(1))
       })
       .catch(error => {
         this.setState({
@@ -101,6 +104,25 @@ class App extends Component {
   componentWillMount() {
     this.loadCurrentUser();
   }
+
+
+    getBalanceAmt(role1, role2) {
+      balanceAmt(role1, role2)
+      .then(data => {
+        this.setState({balanceAmt: data[0].balanceAmount})
+      })
+      .catch(error => {
+          if(error.status === 404) {
+              this.setState({
+                  notFound: true,
+              });
+          } else {
+              this.setState({
+                  serverError: true,
+              });
+          }
+      });
+    }
 
   render() {
     if (this.state.isLoading) {
@@ -115,6 +137,7 @@ class App extends Component {
               isAuthenticated={this.state.isAuthenticated}
               currentUser={this.state.currentUser}
               onLogout={this.handleLogout}
+              balanceAmt = {this.state.balanceAmt}
             />
 
             <Content className="app-content">
@@ -152,6 +175,7 @@ class App extends Component {
               isAuthenticated={this.state.isAuthenticated}
               currentUser={this.state.currentUser}
               onLogout={this.handleLogout}
+              balanceAmt = {this.state.balanceAmt}
             />
 
             <Content className="app-content">
@@ -195,6 +219,7 @@ class App extends Component {
               isAuthenticated={this.state.isAuthenticated}
               currentUser={this.state.currentUser}
               onLogout={this.handleLogout}
+              balanceAmt = {this.state.balanceAmt}
             />
 
             <Content className="app-content">
@@ -220,6 +245,7 @@ class App extends Component {
               isAuthenticated={this.state.isAuthenticated}
               currentUser={this.state.currentUser}
               onLogout={this.handleLogout}
+              balanceAmt = {this.state.balanceAmt}
             />
 
             <Content className="app-content">
@@ -263,6 +289,7 @@ class App extends Component {
               isAuthenticated={this.state.isAuthenticated}
               currentUser={this.state.currentUser}
               onLogout={this.handleLogout}
+              balanceAmt = {this.state.balanceAmt}
             />
 
             <Content className="app-content">

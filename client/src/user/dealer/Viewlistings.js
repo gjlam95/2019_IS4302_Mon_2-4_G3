@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Layout, Table, notification } from 'antd';
 import './Viewlistings.css';
-import { dealerSubmitBid, dealerUpdateBid, dealerViewListings } from '../../util/APIUtils';
+import { dealerGetHighestBid, dealerSubmitBid, dealerUpdateBid, dealerViewListings } from '../../util/APIUtils';
 
 const FormItem = Form.Item;
 
@@ -12,18 +12,22 @@ class Dealer_viewlistings extends Component {
             listingId: "",
             initialBid: "",
             updatedBid: "",
+            highestBid: "",
             tableData: []
         }
         this.submitBid = this.submitBid.bind(this);
         this.updateBid = this.updateBid.bind(this);
-        this.viewListings = this.viewListings.bind(this);
+        this.viewHighestBid = this.viewHighestBid.bind(this);
         this.loadAllListings = this.loadAllListings.bind(this);
+
     }
 
     loadAllListings() {
         dealerViewListings()
         .then(data => {
-          this.setState({ tableData: data })
+          this.setState({
+            tableData: data
+          })
         })
         .catch(error => {
             if(error.status === 404) {
@@ -38,16 +42,26 @@ class Dealer_viewlistings extends Component {
         });
     }
 
-    viewListings() {
-      fetch("dealer/api/org.equiv.participants.assets.Listing")
+    viewHighestBid(index) {
+      dealerViewListings()
       .then(data => {
-        console.log("View Open Listings");
-        console.log(data)
-      }).catch(error => {
-          notification.error({
-              message: 'EquiV',
-              description: error.message || 'Sorry! Something went wrong. Please try again!'
-          });
+        dealerGetHighestBid(data[index].highestBid.split('#')[1])
+        .then(response => {
+          this.setState({
+            highestBid: response.bidAmount
+          })
+        })
+      })
+      .catch(error => {
+          if(error.status === 404) {
+              this.setState({
+                  notFound: true,
+              });
+          } else {
+              this.setState({
+                  serverError: true,
+              });
+          }
       });
     }
 
@@ -95,12 +109,10 @@ class Dealer_viewlistings extends Component {
 
     componentDidMount() {
         this.loadAllListings();
-        this.viewListings();
     }
 
     render() {
         const { Content } = Layout;
-
         const users_columns = [{
           title: 'Listing',
           dataIndex: 'listingId',
@@ -109,12 +121,17 @@ class Dealer_viewlistings extends Component {
           dataIndex: 'listingStatus',
         }, {
           title: 'Highest Offer',
-          dataIndex: 'bids[0].bidAmount',
+          render: (text, record, index) => {
+            this.viewHighestBid(index)
+            return (
+              <div>{this.state.highestBid}</div>
+            )
+          }
         }, {
           title: 'Initial Bid',
           render: (text) => {
             return (
-              <Form onSubmit={this.updateBid} className="initial-bid-form">
+              <Form onSubmit={this.submitBid} className="initial-bid-form">
                 <FormItem>
                   <Input
                   size="small"
@@ -147,7 +164,7 @@ class Dealer_viewlistings extends Component {
                   value={this.state.updatedBid}
                   onChange={event => {
                     this.setState({listingId: text.bids[0].bidId})
-                    this.setState({updatedBid: event.target.value});
+                    this.setState({updatedBid: event.target.value})
                   }}/>
                 </FormItem>
                 <FormItem>
