@@ -172,6 +172,13 @@ export function balanceAmt(role1,role2) {
   });
 }
 
+export function dealerGetHighestBid(bid) {
+  return request({
+    url: "dealer/api/org.equiv.participants.assets.Bid/" + bid,
+    method: "GET",
+  });
+}
+
 export function dealerIncludeOffers(offers) {
   return request({
     url: "dealer/api/org.equiv.transactions.IncludeDealerOffers",
