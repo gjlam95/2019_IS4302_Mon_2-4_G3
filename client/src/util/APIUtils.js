@@ -179,6 +179,13 @@ export function dealerGetHighestBid(bid) {
   });
 }
 
+export function EvaluatorCreateVehicle(vehicle) {
+  return request({
+    url: "evaluator/api/org.equiv.transactions.EvaluateVehicle",
+    method: "POST",
+    body: JSON.stringify(vehicle)
+  });
+
 export function dealerIncludeOffers(offers) {
   return request({
     url: "dealer/api/org.equiv.transactions.IncludeDealerOffers",
