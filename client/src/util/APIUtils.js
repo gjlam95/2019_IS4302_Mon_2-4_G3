@@ -240,6 +240,13 @@ export function buyerGetAssets() {
   });
 }
 
+export function sellerGetAssets() {
+  return request({
+    url: "seller/api/org.equiv.participants.assets.Vehicle",
+    method: "GET"
+  });
+}
+
 export function middlemanGetAssets() {
   return request({
     url: "middleman/api/org.equiv.participants.assets.Vehicle",
