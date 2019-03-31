@@ -1,70 +1,3 @@
-//Company
-
-	//For Evaluator
-	{
-	  "$class": "org.equiv.Company",
-	  "companyId": "8912",
-	  "name": "EquiV-Evaluators",
-	  "address": {
-		"$class": "org.equiv.Address",
-		"city": "Singapore",
-		"country": "Singapore",
-		"region": "Kallang",
-		"street_1": "535 Kallang Bahru",
-		"street_2": "#02-08 GB Point",
-		"postalCode": "339351"
-	  }
-	}
-
-
-	//For Middleman 
-	{
-	  "$class": "org.equiv.Company",
-	  "companyId": "2412",
-	  "name": "Quotz-Middleman",
-	  "address": {
-		"$class": "org.equiv.Address",
-		"city": "Singapore",
-		"country": "Singapore",
-		"region": "Kallang",
-		"street_1": "535 Kallang Bahru",
-		"street_2": "#02-10 GB Point",
-		"postalCode": "339351"
-	  }
-	}
-
-	//Dealer 1
-	{
-	  "$class": "org.equiv.Company",
-	  "companyId": "2413",
-	  "name": "Qua-Dealers",
-	  "address": {
-		"$class": "org.equiv.Address",
-		"city": "Singapore",
-		"country": "Singapore",
-		"region": "Kallang",
-		"street_1": "534 Kallang Bahru",
-		"street_2": "#03-10 GB Base",
-		"postalCode": "339534"
-	  }
-	}	
-
-	//Dealer 2
-	{
-		"$class": "org.equiv.Company",
-		"companyId": "2414",
-		"name": "Qua-Dealers-Rivals",
-		"address": {
-			"$class": "org.equiv.Address",
-			"city": "Singapore",
-			"country": "Singapore",
-			"region": "Kallang",
-			"street_1": "534 Kallang Bahru",
-			"street_2": "#03-10 GB Base",
-			"postalCode": "339534"
-		}
-	}
-	
 //Participant
 	//Evaluator
 	{
@@ -74,7 +7,7 @@
 	  "title": "Mr.",
 	  "firstName": "John",
 	  "lastName": "Doe",
-	  "nric": "S8790323G",
+	  "nric": "S1234567E",
 	  "gender": "MALE",
 	  "email": "johndoe@equiv.com",
 	  "mobilePhone": "98765541",
@@ -99,7 +32,7 @@
 	   "title": "Mr",
 	   "firstName": "Ben",
 	   "lastName": "Tan",
-	    "nric": "S9040111C",
+	    "nric": "S1234567M",
 	   "gender": "MALE",
 	   "email": "bentan@quatz.com",
 	   "mobilePhone": "87614320",
@@ -122,7 +55,7 @@
 	  "title": "Mr",
 	  "firstName": "Peter",
 	  "lastName": "Teh",
-	  "nric": "S4790125D",
+	  "nric": "S1234567S",
 	  "gender": "MALE",
 	  "email": "peter_teh@gmail.com",
 	  "mobilePhone": "98710928",
@@ -145,7 +78,7 @@
 	  "title": "Ms",
 	  "firstName": "Beatrice",
 	  "lastName": "Tan",
-	  "nric": "S9190124B",
+	  "nric": "S1234567B",
 	  "gender": "FEMALE",
 	  "email": "beatrice_tan@gmail.com",
 	  "mobilePhone": "98761234",
@@ -170,7 +103,7 @@
 	  "title": "Ms",
 	  "firstName": "Katherine",
 	  "lastName": "Wong",
-	  "nric": "S9510911G",
+	  "nric": "S1234567D",
 	  "gender": "FEMALE",
 	  "email": "katherine@gmail.com",
 	  "mobilePhone": "90764530",
@@ -195,7 +128,7 @@
 	  "title": "Ms",
 	  "firstName": "Song",
 	  "lastName": "Jun",
-	  "nric": "S9510922H",
+	  "nric": "S7654321D",
 	  "gender": "MALE",
 	  "email": "songjun@gmail.com",
 	  "mobilePhone": "90769530",
@@ -234,7 +167,7 @@
 	  "coe_expiry": "2024-05-26T00:00:00.000Z",
 	  "warranty_expiry": "2019-08-26T00:00:00.000Z",
 	  "roadtax_expiry": "2019-05-26T00:00:00.000Z",
-	  "owner": "resource:org.equiv.participants.assets.Seller#S4790125D",
+	  "owner": "resource:org.equiv.participants.assets.Seller#S1234567S",
 	  "middleman": "resource:org.equiv.participants.assets.Middleman#S9040111C"
 	}
 	
