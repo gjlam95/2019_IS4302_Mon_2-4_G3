@@ -1,70 +1,3 @@
-//Company
-
-	//For Evaluator
-	{
-	  "$class": "org.equiv.Company",
-	  "companyId": "8912",
-	  "name": "EquiV-Evaluators",
-	  "address": {
-		"$class": "org.equiv.Address",
-		"city": "Singapore",
-		"country": "Singapore",
-		"region": "Kallang",
-		"street_1": "535 Kallang Bahru",
-		"street_2": "#02-08 GB Point",
-		"postalCode": "339351"
-	  }
-	}
-
-
-	//For Middleman 
-	{
-	  "$class": "org.equiv.Company",
-	  "companyId": "2412",
-	  "name": "Quotz-Middleman",
-	  "address": {
-		"$class": "org.equiv.Address",
-		"city": "Singapore",
-		"country": "Singapore",
-		"region": "Kallang",
-		"street_1": "535 Kallang Bahru",
-		"street_2": "#02-10 GB Point",
-		"postalCode": "339351"
-	  }
-	}
-
-	//Dealer 1
-	{
-	  "$class": "org.equiv.Company",
-	  "companyId": "2413",
-	  "name": "Qua-Dealers",
-	  "address": {
-		"$class": "org.equiv.Address",
-		"city": "Singapore",
-		"country": "Singapore",
-		"region": "Kallang",
-		"street_1": "534 Kallang Bahru",
-		"street_2": "#03-10 GB Base",
-		"postalCode": "339534"
-	  }
-	}	
-
-	//Dealer 2
-	{
-		"$class": "org.equiv.Company",
-		"companyId": "2414",
-		"name": "Qua-Dealers-Rivals",
-		"address": {
-			"$class": "org.equiv.Address",
-			"city": "Singapore",
-			"country": "Singapore",
-			"region": "Kallang",
-			"street_1": "534 Kallang Bahru",
-			"street_2": "#03-10 GB Base",
-			"postalCode": "339534"
-		}
-	}
-	
 //Participant
 	//Evaluator
 	{
@@ -195,7 +128,7 @@
 	  "title": "Ms",
 	  "firstName": "Song",
 	  "lastName": "Jun",
-	  "nric": "S9510922H",
+	  "nric": "S7654321D",
 	  "gender": "MALE",
 	  "email": "songjun@gmail.com",
 	  "mobilePhone": "90769530",
@@ -275,13 +208,6 @@
   "listingId": "Audi-1000",
   "bidAmount": 50000
 }
-
-//CloseListing
-{
-  "$class": "org.equiv.transactions.CloseListing",
-  "listing": "resource:org.equiv.participants.assets.Listing#Audi-1000"
-}
-
 
 //IncludeDealerOffers
 {

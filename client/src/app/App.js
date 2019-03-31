@@ -7,6 +7,7 @@ import { AUTH_TOKEN } from "../constants";
 
 import Login from "../user/login/Login";
 import AppHeader from "../common/AppHeader";
+import Dealer_myassets from "../user/dealer/DealerAssets";
 import Dealer_viewlistings from "../user/dealer/Viewlistings";
 import Dealer_mylistings from "../user/dealer/Mylistings";
 import Dealer_makepayment from "../user/dealer/Makepayment";
@@ -14,12 +15,11 @@ import Buyer_myassets from "../user/buyer/MyAssets";
 import Buyer_makepayment from "../user/buyer/Makepayment";
 import Buyer_ratedealer from "../user/buyer/Ratedealer";
 import Buyer_viewlistings from "../user/buyer/Viewlistings";
-import Seller_mydata from "../user/seller/MyData";
-import Seller_newnote from "../user/seller/NewNote";
-import Seller_editnote from "../user/seller/EditNote";
-import Middleman_logs from "../user/middleman/Logs";
-import Middleman_manage_users from "../user/middleman/Manageusers";
-import Middleman_add_user from "../user/middleman/Adduser";
+import Seller_myassets from "../user/seller/MyAssets";
+import Seller_finalbid from "../user/seller/FinalBid";
+import Middleman_myassets from "../user/middleman/Viewlistings";
+import Middleman_mylistings from "../user/middleman/Mylistings";
+import Middleman_createlisting from "../user/middleman/Createlisting";
 import Evaluator_generate_data from "../user/evaluator/Generatedata";
 import LoadingIndicator from "../common/LoadingIndicator";
 import SellerRoute from "../common/SellerRoute";
@@ -45,7 +45,7 @@ class App extends Component {
       currentUser: null,
       isAuthenticated: false,
       isLoading: false,
-      balanceAmt: ''
+      balanceAmt: ""
     };
     this.handleLogout = this.handleLogout.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
@@ -90,9 +90,12 @@ class App extends Component {
         this.setState({
           currentUser: response,
           isAuthenticated: true,
-          isLoading: false,
+          isLoading: false
         });
-        this.getBalanceAmt(response.role, response.role.charAt(0).toUpperCase() + response.role.substring(1))
+        this.getBalanceAmt(
+          response.role,
+          response.role.charAt(0).toUpperCase() + response.role.substring(1)
+        );
       })
       .catch(error => {
         this.setState({
@@ -105,24 +108,23 @@ class App extends Component {
     this.loadCurrentUser();
   }
 
-
-    getBalanceAmt(role1, role2) {
-      balanceAmt(role1, role2)
+  getBalanceAmt(role1, role2) {
+    balanceAmt(role1, role2)
       .then(data => {
-        this.setState({balanceAmt: data[0].balanceAmount})
+        this.setState({ balanceAmt: data[0].balanceAmount });
       })
       .catch(error => {
-          if(error.status === 404) {
-              this.setState({
-                  notFound: true,
-              });
-          } else {
-              this.setState({
-                  serverError: true,
-              });
-          }
+        if (error.status === 404) {
+          this.setState({
+            notFound: true
+          });
+        } else {
+          this.setState({
+            serverError: true
+          });
+        }
       });
-    }
+  }
 
   render() {
     if (this.state.isLoading) {
@@ -137,7 +139,7 @@ class App extends Component {
               isAuthenticated={this.state.isAuthenticated}
               currentUser={this.state.currentUser}
               onLogout={this.handleLogout}
-              balanceAmt = {this.state.balanceAmt}
+              balanceAmt={this.state.balanceAmt}
             />
 
             <Content className="app-content">
@@ -147,20 +149,14 @@ class App extends Component {
                   <SellerRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/mydata/editnote/:id"
-                    component={Seller_editnote}
+                    path="/myassets"
+                    component={Seller_myassets}
                   />
                   <SellerRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/mydata/newnote"
-                    component={Seller_newnote}
-                  />
-                  <SellerRoute
-                    authenticated={this.state.isAuthenticated}
-                    role={this.state.currentUser.role}
-                    path="/mydata"
-                    component={Seller_mydata}
+                    path="/finalbid"
+                    component={Seller_finalbid}
                   />
                   <Route component={NotFound} />
                 </Switch>
@@ -175,7 +171,7 @@ class App extends Component {
               isAuthenticated={this.state.isAuthenticated}
               currentUser={this.state.currentUser}
               onLogout={this.handleLogout}
-              balanceAmt = {this.state.balanceAmt}
+              balanceAmt={this.state.balanceAmt}
             />
 
             <Content className="app-content">
@@ -219,7 +215,7 @@ class App extends Component {
               isAuthenticated={this.state.isAuthenticated}
               currentUser={this.state.currentUser}
               onLogout={this.handleLogout}
-              balanceAmt = {this.state.balanceAmt}
+              balanceAmt={this.state.balanceAmt}
             />
 
             <Content className="app-content">
@@ -245,7 +241,7 @@ class App extends Component {
               isAuthenticated={this.state.isAuthenticated}
               currentUser={this.state.currentUser}
               onLogout={this.handleLogout}
-              balanceAmt = {this.state.balanceAmt}
+              balanceAmt={this.state.balanceAmt}
             />
 
             <Content className="app-content">
@@ -257,6 +253,12 @@ class App extends Component {
                     render={props => (
                       <Login onLogin={this.handleLogin} {...props} />
                     )}
+                  />
+                  <DealerRoute
+                    authenticated={this.state.isAuthenticated}
+                    role={this.state.currentUser.role}
+                    path="/dealerassets"
+                    component={Dealer_myassets}
                   />
                   <DealerRoute
                     authenticated={this.state.isAuthenticated}
@@ -289,7 +291,7 @@ class App extends Component {
               isAuthenticated={this.state.isAuthenticated}
               currentUser={this.state.currentUser}
               onLogout={this.handleLogout}
-              balanceAmt = {this.state.balanceAmt}
+              balanceAmt={this.state.balanceAmt}
             />
 
             <Content className="app-content">
@@ -299,20 +301,20 @@ class App extends Component {
                   <MiddlemanRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/logs"
-                    component={Middleman_logs}
+                    path="/myassets"
+                    component={Middleman_myassets}
                   />
                   <MiddlemanRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/manageusers"
-                    component={Middleman_manage_users}
+                    path="/mylistings"
+                    component={Middleman_mylistings}
                   />
                   <MiddlemanRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/adduser"
-                    component={Middleman_add_user}
+                    path="/createlisting"
+                    component={Middleman_createlisting}
                   />
                   <Route component={NotFound} />
                 </Switch>
