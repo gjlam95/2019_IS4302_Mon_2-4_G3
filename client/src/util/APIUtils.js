@@ -225,6 +225,44 @@ export function buyerGetAssets() {
   });
 }
 
+export function middlemanGetAssets() {
+  return request({
+    url: "middleman/api/org.equiv.participants.assets.Vehicle",
+    method: "GET",
+  });
+}
+
+export function middlemanViewListings() {
+  return request({
+    url: "middleman/api/org.equiv.participants.assets.Listing",
+    method: "GET",
+  });
+}
+
+export function middlemanCreateListing(listing) {
+  return request({
+    url: "middleman/api/org.equiv.transactions.CreateListing",
+    method: "POST",
+    body: JSON.stringify(listing)
+  });
+}
+
+export function middlemanDeleteListing(listingId) {
+  return request({
+    url: "middleman/api/org.equiv.transactions.DeleteListing",
+    method: "POST",
+    body: JSON.stringify(listingId)
+  });
+}
+
+export function middlemanUpdateListingExpiry(listingId) {
+  return request({
+    url: "middleman/api/org.equiv.transactions.UpdateListingExpiry",
+    method: "POST",
+    body: JSON.stringify(listingId)
+  });
+}
+
 export function login(loginRequest) {
   return request({
     url: API + "/auth",

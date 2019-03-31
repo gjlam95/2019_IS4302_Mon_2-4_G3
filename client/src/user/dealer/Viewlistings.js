@@ -67,11 +67,11 @@ class Dealer_viewlistings extends Component {
 
     submitBid(event) {
       event.preventDefault()
-      const intialBidAmt = {
+      const initialBidAmt = {
         listingId: this.state.listingId,
         bidAmount: Number(this.state.initialBid),
       };
-      dealerSubmitBid(intialBidAmt)
+      dealerSubmitBid(initialBidAmt)
       .then(response => {
           notification.success({
               message: 'EquiV',

@@ -106,19 +106,19 @@ class AppHeader extends Component {
             ];
           } else if(this.props.currentUser.role === "middleman") {
             menuItems = [
-              <Menu.Item key="/logs">
-                <Link to="/logs">
+              <Menu.Item key="/myassets">
+                <Link to="/myassets">
                   <Icon type="database" />
                 </Link>
               </Menu.Item>,
-              <Menu.Item key="/pay">
-                <Link to="/pay">
-                  <Icon type="swap" />
+              <Menu.Item key="/createlisting">
+                <Link to="/createlisting">
+                  <Icon type="file-text" />
                 </Link>
               </Menu.Item>,
-              <Menu.Item key="/manageusers">
-                <Link to="/manageusers">
-                  <Icon type="usergroup-add" />
+              <Menu.Item key="/mylistings">
+                <Link to="/mylistings">
+                  <Icon type="copy" />
                 </Link>
               </Menu.Item>,
               <Menu.Item key="/profile" className="profile-menu">

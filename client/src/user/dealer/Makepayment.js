@@ -5,7 +5,7 @@ import './Makepayment.css';
 
 const FormItem = Form.Item;
 
-class Dealer_makepayment extends Component {
+class Middleman_makepayment extends Component {
   constructor(props) {
         super(props);
         this.state = {
@@ -94,4 +94,4 @@ class Dealer_makepayment extends Component {
   }
 }
 
-export default Dealer_makepayment;
+export default Middleman_makepayment;
