@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Layout, Table, notification } from 'antd';
 import './Mylistings.css';
-import { middlemanViewListings, middlemanCloseListing, middlemanDeleteListing, middlemanUpdateListingExpiry } from '../../util/APIUtils';
+import { middlemanViewListings, middlemanCloseListing, middlemanDeleteListing, middlemanUpdateListingExpiry, dealerGetHighestBid, dealerViewListings } from '../../util/APIUtils';
 
 const FormItem = Form.Item;
 
@@ -16,6 +16,7 @@ class Middleman_mylistings extends Component {
         this.updateListingExpiry = this.updateListingExpiry.bind(this);
         this.deleteListing = this.deleteListing.bind(this);
         this.closeListing = this.closeListing.bind(this);
+        this.viewHighestBid = this.viewHighestBid.bind(this);
         this.loadAllListings = this.loadAllListings.bind(this);
 
     }
@@ -105,6 +106,29 @@ class Middleman_mylistings extends Component {
       });
     }
 
+    viewHighestBid(index) {
+      dealerViewListings()
+      .then(data => {
+        dealerGetHighestBid(data[index].highestBid.split('#')[1])
+        .then(response => {
+          this.setState({
+            highestBid: response.bidAmount
+          })
+        })
+      })
+      .catch(error => {
+          if(error.status === 404) {
+              this.setState({
+                  notFound: true,
+              });
+          } else {
+              this.setState({
+                  serverError: true,
+              });
+          }
+      });
+    }
+
     render() {
         const { Content } = Layout;
         const users_columns = [{
@@ -116,7 +140,15 @@ class Middleman_mylistings extends Component {
         }, {
           title: 'Listing Expiry',
           dataIndex: 'listing_expiry'
-        },  {
+        }, {
+          title: 'Highest Offer',
+          render: (text, record, index) => {
+            this.viewHighestBid(index)
+            return (
+              <div>{this.state.highestBid}</div>
+            )
+          }
+        }, {
           title: 'Update Listing Expiry',
           render: (text) => {
             return (
