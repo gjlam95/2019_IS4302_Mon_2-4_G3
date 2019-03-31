@@ -168,7 +168,7 @@
 	  "warranty_expiry": "2019-08-26T00:00:00.000Z",
 	  "roadtax_expiry": "2019-05-26T00:00:00.000Z",
 	  "owner": "resource:org.equiv.participants.assets.Seller#S1234567S",
-	  "middleman": "resource:org.equiv.participants.assets.Middleman#S9040111C"
+	  "middleman": "resource:org.equiv.participants.assets.Middleman#S1234567M"
 	}
 	
 	//Listing (Create this via the identity of the Middleman)
@@ -209,24 +209,9 @@
   "bidAmount": 50000
 }
 
-//CloseListing
-{
-  "$class": "org.equiv.transactions.CloseListing",
-  "listing": "resource:org.equiv.participants.assets.Listing#Audi-1000"
-}
-
-
 //IncludeDealerOffers
 {
   "$class": "org.equiv.transactions.IncludeDealerOffers",
   "dealerListing": "resource:org.equiv.participants.assets.Listing#Audi-1000",
   "dealerOffers": "2 year warranty, Monthly maintenance for 1 year"
-}
-
-//Payment from Dealer 2 to Middleman
-{
-  "$class": "org.equiv.transactions.MakePayment",
-  "listing": "resource:org.equiv.participants.assets.Listing#Audi-1000",
-  "payer": "resource:org.equiv.participants.assets.Dealer#S9510922H",
-  "payee": "resource:org.equiv.participants.assets.Middleman#S9040111C"
 }
