@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Layout, Table, notification } from 'antd';
-import './Viewlistings.css';
-import { dealerGetHighestBid, dealerSubmitBid, dealerUpdateBid, dealerViewListings } from '../../util/APIUtils';
+import './Mylistings.css';
+import { middlemanViewListings, middlemanCloseListing, middlemanDeleteListing, middlemanUpdateListingExpiry } from '../../util/APIUtils';
 
 const FormItem = Form.Item;
 
-class Dealer_viewlistings extends Component {
+class Middleman_mylistings extends Component {
     constructor(props) {
         super(props);
         this.state = {
             listingId: "",
-            initialBid: "",
-            updatedBid: "",
-            highestBid: "",
+            date: "",
             tableData: []
         }
-        this.submitBid = this.submitBid.bind(this);
-        this.updateBid = this.updateBid.bind(this);
-        this.viewHighestBid = this.viewHighestBid.bind(this);
+        this.updateListingExpiry = this.updateListingExpiry.bind(this);
+        this.deleteListing = this.deleteListing.bind(this);
+        this.closeListing = this.closeListing.bind(this);
         this.loadAllListings = this.loadAllListings.bind(this);
 
     }
 
     loadAllListings() {
-        dealerViewListings()
+        middlemanViewListings()
         .then(data => {
           this.setState({
             tableData: data
@@ -42,73 +40,69 @@ class Dealer_viewlistings extends Component {
         });
     }
 
-    viewHighestBid(index) {
-      dealerViewListings()
-      .then(data => {
-        dealerGetHighestBid(data[index].highestBid.split('#')[1])
-        .then(response => {
-          this.setState({
-            highestBid: response.bidAmount
-          })
-        })
-      })
-      .catch(error => {
-          if(error.status === 404) {
-              this.setState({
-                  notFound: true,
-              });
-          } else {
-              this.setState({
-                  serverError: true,
-              });
-          }
-      });
-    }
-
-    submitBid(event) {
-      event.preventDefault()
-      const initialBidAmt = {
-        listingId: this.state.listingId,
-        bidAmount: Number(this.state.initialBid),
-      };
-      dealerSubmitBid(initialBidAmt)
-      .then(response => {
-          notification.success({
-              message: 'EquiV',
-              description: "You've successfully entered your bid!",
-          });
-          window.location.reload();
-      }).catch(error => {
-          notification.error({
-              message: 'EquiV',
-              description: error.message || 'Sorry! Something went wrong. Please try again!'
-          });
-      });
-    }
-
-    updateBid(event) {
-      event.preventDefault()
-      const updatedBidAmt = {
-        bid: this.state.listingId,
-        newBidAmount: Number(this.state.updatedBid),
-      };
-      dealerUpdateBid(updatedBidAmt)
-      .then(response => {
-          notification.success({
-              message: 'EquiV',
-              description: "You've successfully updated your bid!",
-          });
-          window.location.reload();
-      }).catch(error => {
-          notification.error({
-              message: 'EquiV',
-              description: error.message || 'Sorry! Something went wrong. Please try again!'
-          });
-      });
-    }
-
     componentDidMount() {
         this.loadAllListings();
+    }
+
+    updateListingExpiry(event) {
+      event.preventDefault()
+      const expiry = {
+        listingToUpdate: this.state.listingId,
+        newListing_expiry: this.state.date,
+      };
+      middlemanUpdateListingExpiry(expiry)
+      .then(response => {
+          notification.success({
+              message: 'EquiV',
+              description: "You've successfully updated the expiry date!",
+          });
+          window.location.reload();
+      }).catch(error => {
+          notification.error({
+              message: 'EquiV',
+              description: error.message || 'Sorry! Something went wrong. Please try again!'
+          });
+      });
+    }
+
+    deleteListing(event) {
+      event.preventDefault()
+      const id = {
+        listingToDelete: this.state.listingId,
+      };
+      middlemanDeleteListing(id)
+      .then(response => {
+          notification.success({
+              message: 'EquiV',
+              description: "You've successfully deleted the listing!",
+          });
+          window.location.reload();
+      }).catch(error => {
+          notification.error({
+              message: 'EquiV',
+              description: error.message || 'Sorry! Something went wrong. Please try again!'
+          });
+      });
+    }
+
+    closeListing(event) {
+      event.preventDefault()
+      const id = {
+        listing: this.state.listingId,
+      };
+      middlemanCloseListing(id)
+      .then(response => {
+          notification.success({
+              message: 'EquiV',
+              description: "You've successfully closed the listing!",
+          });
+          window.location.reload();
+      }).catch(error => {
+          notification.error({
+              message: 'EquiV',
+              description: error.message || 'Sorry! Something went wrong. Please try again!'
+          });
+      });
     }
 
     render() {
@@ -120,60 +114,69 @@ class Dealer_viewlistings extends Component {
           title: 'Status',
           dataIndex: 'listingStatus',
         }, {
-          title: 'Highest Offer',
-          render: (text, record, index) => {
-            this.viewHighestBid(index)
-            return (
-              <div>{this.state.highestBid}</div>
-            )
-          }
-        }, {
-          title: 'Initial Bid',
+          title: 'Listing Expiry',
+          dataIndex: 'listing_expiry'
+        },  {
+          title: 'Update Listing Expiry',
           render: (text) => {
             return (
-              <Form onSubmit={this.submitBid} className="initial-bid-form">
+              <Form onSubmit={this.updateListingExpiry} className="update-listing">
                 <FormItem>
                   <Input
                   size="small"
-                  value={this.state.initialBid}
+                  value={this.state.date}
                   onChange={event => {
                     this.setState({listingId: text.listingId})
-                    this.setState({initialBid: event.target.value});
+                    this.setState({date: event.target.value});
                   }}/>
                 </FormItem>
                 <FormItem>
                   <Button
                     type="primary"
                     htmlType="submit"
-                    className="initial-bid-form-button"
+                    className="update-listing-form-button"
                   >
-                  Bid
+                  Update Listing
                   </Button>
                 </FormItem>
               </Form>
             )
           }
         }, {
-          title: 'Update Bid',
+          title: 'Close Listing',
           render: (text) => {
             return (
-              <Form onSubmit={this.updateBid} className="updated-bid-form">
-                <FormItem>
-                  <Input
-                  size="small"
-                  value={this.state.updatedBid}
-                  onChange={event => {
-                    this.setState({listingId: text.bids[0].bidId})
-                    this.setState({updatedBid: event.target.value})
-                  }}/>
-                </FormItem>
+              <Form onSubmit={this.closeListing} className="close-listing">
                 <FormItem>
                   <Button
                     type="primary"
                     htmlType="submit"
-                    className="updated-bid-form-button"
+                    className="close-listing-form-button"
+                    onClick={event => {
+                      this.setState({listingId: text.listingId})
+                    }}
                   >
-                  Bid
+                  Close Listing
+                  </Button>
+                </FormItem>
+              </Form>
+            )
+          }
+        }, {
+          title: 'Delete Listing',
+          render: (text) => {
+            return (
+              <Form onSubmit={this.deleteListing} className="delete-listing">
+                <FormItem>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="delete-listing-form-button"
+                    onClick={event => {
+                      this.setState({listingId: text.listingId})
+                    }}
+                  >
+                  Delete Listing
                   </Button>
                 </FormItem>
               </Form>
@@ -185,7 +188,7 @@ class Dealer_viewlistings extends Component {
               <Layout className="userlayout">
                 <Content>
                   <div className="usertitle">
-                    Bids
+                    My Listings
                   </div>
                   <Table dataSource={this.state.tableData} columns={users_columns}/>
                 </Content>
@@ -194,4 +197,4 @@ class Dealer_viewlistings extends Component {
     }
 }
 
-export default Dealer_viewlistings;
+export default Middleman_mylistings;

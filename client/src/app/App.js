@@ -18,9 +18,9 @@ import Buyer_viewlistings from "../user/buyer/Viewlistings";
 import Seller_mydata from "../user/seller/MyData";
 import Seller_newnote from "../user/seller/NewNote";
 import Seller_editnote from "../user/seller/EditNote";
-import Middleman_logs from "../user/middleman/Logs";
-import Middleman_manage_users from "../user/middleman/Manageusers";
-import Middleman_add_user from "../user/middleman/Adduser";
+import Middleman_myassets from "../user/middleman/Viewlistings";
+import Middleman_mylistings from "../user/middleman/Mylistings";
+import Middleman_createlisting from "../user/middleman/Createlisting";
 import Evaluator_generate_data from "../user/evaluator/Generatedata";
 import LoadingIndicator from "../common/LoadingIndicator";
 import SellerRoute from "../common/SellerRoute";
@@ -308,20 +308,20 @@ class App extends Component {
                   <MiddlemanRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/logs"
-                    component={Middleman_logs}
+                    path="/myassets"
+                    component={Middleman_myassets}
                   />
                   <MiddlemanRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/manageusers"
-                    component={Middleman_manage_users}
+                    path="/mylistings"
+                    component={Middleman_mylistings}
                   />
                   <MiddlemanRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/adduser"
-                    component={Middleman_add_user}
+                    path="/createlisting"
+                    component={Middleman_createlisting}
                   />
                   <Route component={NotFound} />
                 </Switch>
