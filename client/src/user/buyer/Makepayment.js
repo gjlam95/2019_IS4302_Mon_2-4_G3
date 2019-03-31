@@ -37,6 +37,7 @@ class Buyer_makepayment extends Component {
           message: "EquiV",
           description: "You've successfully made a payment!"
         });
+        window.location.reload();
       })
       .catch(error => {
         notification.error({
