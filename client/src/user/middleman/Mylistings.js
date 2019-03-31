@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Layout, Table, notification } from 'antd';
 import './Mylistings.css';
-import { middlemanViewListings, middlemanDeleteListing, middlemanUpdateListingExpiry } from '../../util/APIUtils';
+import { middlemanViewListings, middlemanCloseListing, middlemanDeleteListing, middlemanUpdateListingExpiry } from '../../util/APIUtils';
 
 const FormItem = Form.Item;
 
@@ -15,6 +15,7 @@ class Middleman_mylistings extends Component {
         }
         this.updateListingExpiry = this.updateListingExpiry.bind(this);
         this.deleteListing = this.deleteListing.bind(this);
+        this.closeListing = this.closeListing.bind(this);
         this.loadAllListings = this.loadAllListings.bind(this);
 
     }
@@ -84,6 +85,26 @@ class Middleman_mylistings extends Component {
       });
     }
 
+    closeListing(event) {
+      event.preventDefault()
+      const id = {
+        listing: this.state.listingId,
+      };
+      middlemanCloseListing(id)
+      .then(response => {
+          notification.success({
+              message: 'EquiV',
+              description: "You've successfully closed the listing!",
+          });
+          window.location.reload();
+      }).catch(error => {
+          notification.error({
+              message: 'EquiV',
+              description: error.message || 'Sorry! Something went wrong. Please try again!'
+          });
+      });
+    }
+
     render() {
         const { Content } = Layout;
         const users_columns = [{
@@ -116,6 +137,26 @@ class Middleman_mylistings extends Component {
                     className="update-listing-form-button"
                   >
                   Update Listing
+                  </Button>
+                </FormItem>
+              </Form>
+            )
+          }
+        }, {
+          title: 'Close Listing',
+          render: (text) => {
+            return (
+              <Form onSubmit={this.closeListing} className="close-listing">
+                <FormItem>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="close-listing-form-button"
+                    onClick={event => {
+                      this.setState({listingId: text.listingId})
+                    }}
+                  >
+                  Close Listing
                   </Button>
                 </FormItem>
               </Form>

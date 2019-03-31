@@ -255,6 +255,14 @@ export function middlemanDeleteListing(listingId) {
   });
 }
 
+export function middlemanCloseListing(listingId) {
+  return request({
+    url: "middleman/api/org.equiv.transactions.CloseListing",
+    method: "POST",
+    body: JSON.stringify(listingId)
+  });
+}
+
 export function middlemanUpdateListingExpiry(listingId) {
   return request({
     url: "middleman/api/org.equiv.transactions.UpdateListingExpiry",
