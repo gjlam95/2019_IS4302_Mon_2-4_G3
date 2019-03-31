@@ -213,5 +213,22 @@
 {
   "$class": "org.equiv.transactions.IncludeDealerOffers",
   "dealerListing": "resource:org.equiv.participants.assets.Listing#Audi-1000",
-  "dealerOffers": "2 year warranty, Monthly maintenance for 1 year"
+  "dealerSellingPrice": 55000,
+  "dealerOffers": "2 year warranty & monthly maintenance at special price"
+}
+
+//Payment from Dealer to Seller
+{
+  "$class": "org.equiv.transactions.MakePayment",
+  "listing": "resource:org.equiv.participants.assets.Listing#Audi-1000",
+  "payer": "resource:org.equiv.participants.assets.Dealer#S1234567D",
+  "payee": "resource:org.equiv.participants.assets.Seller#S1234567S"
+}
+
+//Payment from Buyer to Dealer
+{
+  "$class": "org.equiv.transactions.MakePayment",
+  "listing": "resource:org.equiv.participants.assets.Listing#Audi-1000",
+  "payer": "resource:org.equiv.participants.assets.Buyer#S1234567B",
+  "payee": "resource:org.equiv.participants.assets.Dealer#S1234567D"
 }
