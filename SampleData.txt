@@ -181,7 +181,7 @@
 	}	
 
 //Rating 
-//For Middleman
+//For Middleman under admin card
 	{
 	  "$class": "org.equiv.participants.assets.Rating",
 	  "ratingId": "4120",
@@ -202,7 +202,7 @@
 	  "score": 0
 	}	
 	
-//SubmitBid
+//SubmitBid for dealer 1
 {
   "$class": "org.equiv.transactions.SubmitBid",
   "listingId": "Audi-1000",

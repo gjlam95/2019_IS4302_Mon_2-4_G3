@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\client",
+    "\\client\\src",
+    "\\client\\src\\app",
+    "\\client\\src\\constants",
+    "\\client\\src\\user",
+    "\\client\\src\\user\\buyer",
+    "\\client\\src\\user\\evaluator",
+    "\\client\\src\\util",
+    "\\routes\\api"
+  ],
+  "SelectedNode": "\\client\\src\\user\\evaluator\\Generatedata.css",
+  "PreviewInSolutionExplorer": false
+}
