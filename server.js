@@ -21,7 +21,6 @@ mongoose
   .catch(err => console.log(err));
 
 //reverse proxy
-//evaluator
 app.use("/evaluator", proxy("localhost:3001/"));
 app.use("/middleman", proxy("localhost:3002/"));
 app.use("/buyer", proxy("localhost:3003/"));

@@ -165,17 +165,17 @@ function arrayBufferToBase64(buffer) {
   return window.btoa(binary);
 }
 
-export function balanceAmt(role1,role2) {
+export function balanceAmt(role1, role2) {
   return request({
     url: role1 + "/api/org.equiv.participants.assets." + role2,
-    method: "GET",
+    method: "GET"
   });
 }
 
 export function dealerGetHighestBid(bid) {
   return request({
     url: "dealer/api/org.equiv.participants.assets.Bid/" + bid,
-    method: "GET",
+    method: "GET"
   });
 }
 
@@ -190,7 +190,7 @@ export function dealerIncludeOffers(offers) {
 export function dealerViewListings() {
   return request({
     url: "dealer/api/org.equiv.participants.assets.Listing",
-    method: "GET",
+    method: "GET"
   });
 }
 
@@ -210,9 +210,24 @@ export function dealerUpdateBid(bid) {
   });
 }
 
+export function dealerGetAssets() {
+  return request({
+    url: "dealer/api/org.equiv.participants.assets.Vehicle",
+    method: "GET"
+  });
+}
+
+export function dealerMakePayment(payment) {
+  return request({
+    url: "dealer/api/org.equiv.transactions.MakePayment",
+    method: "POST",
+    body: JSON.stringify(payment)
+  });
+}
+
 export function buyerMakePayment(payment) {
   return request({
-    url: "buyer/api/org.equiv.participants.transactions.MakePayment",
+    url: "buyer/api/org.equiv.transactions.MakePayment",
     method: "POST",
     body: JSON.stringify(payment)
   });
@@ -221,7 +236,7 @@ export function buyerMakePayment(payment) {
 export function buyerGetAssets() {
   return request({
     url: "buyer/api/org.equiv.participants.assets.Vehicle",
-    method: "GET",
+    method: "GET"
   });
 }
 
