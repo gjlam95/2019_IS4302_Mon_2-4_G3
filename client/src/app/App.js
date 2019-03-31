@@ -15,9 +15,8 @@ import Buyer_myassets from "../user/buyer/MyAssets";
 import Buyer_makepayment from "../user/buyer/Makepayment";
 import Buyer_ratedealer from "../user/buyer/Ratedealer";
 import Buyer_viewlistings from "../user/buyer/Viewlistings";
-import Seller_mydata from "../user/seller/MyData";
-import Seller_newnote from "../user/seller/NewNote";
-import Seller_editnote from "../user/seller/EditNote";
+import Seller_myassets from "../user/seller/MyAssets";
+import Seller_finalbid from "../user/seller/FinalBid";
 import Middleman_myassets from "../user/middleman/Viewlistings";
 import Middleman_mylistings from "../user/middleman/Mylistings";
 import Middleman_createlisting from "../user/middleman/Createlisting";
@@ -150,20 +149,14 @@ class App extends Component {
                   <SellerRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/mydata/editnote/:id"
-                    component={Seller_editnote}
+                    path="/myassets"
+                    component={Seller_myassets}
                   />
                   <SellerRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
-                    path="/mydata/newnote"
-                    component={Seller_newnote}
-                  />
-                  <SellerRoute
-                    authenticated={this.state.isAuthenticated}
-                    role={this.state.currentUser.role}
-                    path="/mydata"
-                    component={Seller_mydata}
+                    path="/finalbid"
+                    component={Seller_finalbid}
                   />
                   <Route component={NotFound} />
                 </Switch>

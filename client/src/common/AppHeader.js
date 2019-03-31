@@ -43,7 +43,7 @@ class AppHeader extends Component {
           </Menu.Item>,
               <Menu.Item key="/mylistings">
                 <Link to="/mylistings">
-                  <Icon type="medicine-box" />
+                  <Icon type="copy" />
                 </Link>
               </Menu.Item>,
               <Menu.Item key="/managebids">
@@ -65,9 +65,14 @@ class AppHeader extends Component {
             ];
           } else if(this.props.currentUser.role === "seller") {
             menuItems = [
-              <Menu.Item key="/mydata">
-                <Link to="/mydata">
+              <Menu.Item key="/myassets">
+                <Link to="/myassets">
                   <Icon type="reconciliation" theme="outlined" className="nav-icon" />
+                </Link>
+              </Menu.Item>,
+              <Menu.Item key="/finalbid">
+                <Link to="/finalbid">
+                  <Icon type="copy" theme="outlined" className="nav-icon" />
                 </Link>
               </Menu.Item>,
               <Menu.Item key="/profile" className="profile-menu">
@@ -164,7 +169,7 @@ class AppHeader extends Component {
           </Header>
         );
       }
-    } 
+    }
 
 function ProfileDropdownMenu(props) {
   var dropdownMenu = "";
