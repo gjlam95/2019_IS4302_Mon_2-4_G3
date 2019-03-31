@@ -164,33 +164,7 @@ class AppHeader extends Component {
           </Header>
         );
       }
-    } else {
-      menuItems = [
-        <Menu.Item key="/login">
-          <Link to="/login">Login</Link>
-        </Menu.Item>
-      ];
-    }
-
-    return (
-      <Header className="app-header">
-        <div className="container">
-          <div className="app-title">
-            <Link to="/">EquiV</Link>
-          </div>
-          <Menu
-            className="app-menu"
-            mode="horizontal"
-            selectedKeys={[this.props.location.pathname]}
-            style={{ lineHeight: "64px" }}
-          >
-            {menuItems}
-          </Menu>
-        </div>
-      </Header>
-    );
-  }
-}
+    } 
 
 function ProfileDropdownMenu(props) {
   var dropdownMenu = "";
