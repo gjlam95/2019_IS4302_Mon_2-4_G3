@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Layout, Table, Button } from 'antd';
+import { Layout, Table } from 'antd';
 import { middlemanGetAssets } from '../../util/APIUtils';
 import './Viewlistings.css';
 

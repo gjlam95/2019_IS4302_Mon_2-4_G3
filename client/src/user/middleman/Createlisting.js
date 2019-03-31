@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { matchPath } from 'react-router';
 import { middlemanCreateListing } from '../../util/APIUtils';
 import './Createlisting.css';
 import { Form, Input, Button, notification } from 'antd';
