@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, Layout, Table, notification } from 'antd';
+import { Layout, Table, notification } from 'antd';
 import { dealerViewListings, dealerIncludeOffers } from '../../util/APIUtils';
 import './Viewlistings.css';
-
-const FormItem = Form.Item;
 
 class Buyer_mylistings extends Component {
   constructor(props) {
