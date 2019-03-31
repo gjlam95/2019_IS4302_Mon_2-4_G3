@@ -248,7 +248,7 @@
 	}	
 
 //Rating 
-//For Middleman
+//For Middleman under admin card
 	{
 	  "$class": "org.equiv.participants.assets.Rating",
 	  "ratingId": "4120",
@@ -269,7 +269,7 @@
 	  "score": 0
 	}	
 	
-//SubmitBid
+//SubmitBid for dealer 1
 {
   "$class": "org.equiv.transactions.SubmitBid",
   "listingId": "Audi-1000",
@@ -287,10 +287,11 @@
 {
   "$class": "org.equiv.transactions.IncludeDealerOffers",
   "dealerListing": "resource:org.equiv.participants.assets.Listing#Audi-1000",
+  "dealerSellingPrice": 0,
   "dealerOffers": "2 year warranty, Monthly maintenance for 1 year"
 }
 
-//Payment from Dealer 2 to Middleman
+//Payment from Dealer 1 to Middleman
 {
   "$class": "org.equiv.transactions.MakePayment",
   "listing": "resource:org.equiv.participants.assets.Listing#Audi-1000",

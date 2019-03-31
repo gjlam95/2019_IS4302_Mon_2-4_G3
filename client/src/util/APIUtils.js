@@ -165,6 +165,14 @@ function arrayBufferToBase64(buffer) {
   return window.btoa(binary);
 }
 
+export function EvaluatorCreateVehicle(vehicle) {
+  return request({
+    url: "evaluator/api/org.equiv.transactions.EvaluateVehicle",
+    method: "POST",
+    body: JSON.stringify(vehicle)
+  });
+}
+
 export function dealerIncludeOffers(offers) {
   return request({
     url: "dealer/api/org.equiv.transactions.IncludeDealerOffers",
@@ -176,7 +184,7 @@ export function dealerIncludeOffers(offers) {
 export function dealerViewListings() {
   return request({
     url: "middleman/api/org.equiv.participants.assets.Listing",
-    method: "GET",
+    method: "GET"
   });
 }
 
@@ -207,7 +215,7 @@ export function buyerMakePayment(payment) {
 export function buyerGetAssets() {
   return request({
     url: "buyer/api/org.equiv.participants.assets.Vehicle",
-    method: "GET",
+    method: "GET"
   });
 }
 

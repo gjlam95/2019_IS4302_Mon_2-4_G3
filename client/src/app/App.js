@@ -21,6 +21,7 @@ import Middleman_logs from "../user/middleman/Logs";
 import Middleman_manage_users from "../user/middleman/Manageusers";
 import Middleman_add_user from "../user/middleman/Adduser";
 import Evaluator_generate_data from "../user/evaluator/Generatedata";
+import Evaluator_createvehicle from "../user/evaluator/createVehicle";
 import LoadingIndicator from "../common/LoadingIndicator";
 import SellerRoute from "../common/SellerRoute";
 import BuyerRoute from "../common/BuyerRoute";
@@ -201,11 +202,17 @@ class App extends Component {
               <div className="container">
                 <Switch>
                   <Route exact path="/" component={Home} />
-                  <EvaluatorRoute
+                  {/* <EvaluatorRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}
                     path="/generatedata"
                     component={Evaluator_generate_data}
+                  />*/}
+                  <EvaluatorRoute
+                    authenticated={this.state.isAuthenticated}
+                    role={this.state.currentUser.role}
+                    path="/createVehicle"
+                    component={Evaluator_createvehicle}
                   />
                   <Route component={NotFound} />
                 </Switch>
