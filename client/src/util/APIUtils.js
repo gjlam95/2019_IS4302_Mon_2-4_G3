@@ -185,6 +185,7 @@ export function EvaluatorCreateVehicle(vehicle) {
     method: "POST",
     body: JSON.stringify(vehicle)
   });
+}
 
 export function dealerIncludeOffers(offers) {
   return request({
