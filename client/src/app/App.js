@@ -20,7 +20,6 @@ import Seller_finalbid from "../user/seller/FinalBid";
 import Middleman_myassets from "../user/middleman/Viewlistings";
 import Middleman_mylistings from "../user/middleman/Mylistings";
 import Middleman_createlisting from "../user/middleman/Createlisting";
-import Evaluator_generate_data from "../user/evaluator/Generatedata";
 import Evaluator_createvehicle from "../user/evaluator/createVehicle";
 import LoadingIndicator from "../common/LoadingIndicator";
 import SellerRoute from "../common/SellerRoute";

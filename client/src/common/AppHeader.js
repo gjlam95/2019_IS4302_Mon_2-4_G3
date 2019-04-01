@@ -31,14 +31,20 @@ class AppHeader extends Component {
             <ProfileDropdownMenu
               currentUser={this.props.currentUser}
               handleMenuClick={this.handleMenuClick}
+              balanceAmt={this.props.balanceAmt}
             />
           </Menu.Item>
         ];
       } else if (this.props.currentUser.role === "dealer") {
         menuItems = [
+          <Menu.Item key="/myassets">
+            <Link to="/dealerassets">
+              <Icon type="medicine-box" />
+            </Link>
+          </Menu.Item>,
           <Menu.Item key="/mylistings">
             <Link to="/mylistings">
-              <Icon type="medicine-box" />
+              <Icon type="file" />
             </Link>
           </Menu.Item>,
           <Menu.Item key="/managebids">
@@ -56,13 +62,14 @@ class AppHeader extends Component {
             <ProfileDropdownMenu
               currentUser={this.props.currentUser}
               handleMenuClick={this.handleMenuClick}
+              balanceAmt={this.props.balanceAmt}
             />
           </Menu.Item>
         ];
       } else if (this.props.currentUser.role === "seller") {
         menuItems = [
-          <Menu.Item key="/mydata">
-            <Link to="/mydata">
+          <Menu.Item key="/myassets">
+            <Link to="/myassets">
               <Icon
                 type="reconciliation"
                 theme="outlined"
@@ -70,10 +77,16 @@ class AppHeader extends Component {
               />
             </Link>
           </Menu.Item>,
+          <Menu.Item key="/finalbid">
+                <Link to="/finalbid">
+                  <Icon type="copy" theme="outlined" className="nav-icon" />
+                </Link>
+              </Menu.Item>,
           <Menu.Item key="/profile" className="profile-menu">
             <ProfileDropdownMenu
               currentUser={this.props.currentUser}
               handleMenuClick={this.handleMenuClick}
+              balanceAmt={this.props.balanceAmt}
             />
           </Menu.Item>
         ];
@@ -103,30 +116,32 @@ class AppHeader extends Component {
             <ProfileDropdownMenu
               currentUser={this.props.currentUser}
               handleMenuClick={this.handleMenuClick}
+              balanceAmt={this.props.balanceAmt}
             />
           </Menu.Item>
         ];
       } else if (this.props.currentUser.role === "middleman") {
         menuItems = [
-          <Menu.Item key="/logs">
-            <Link to="/logs">
+          <Menu.Item key="/myassets">
+            <Link to="/myassets">
               <Icon type="database" />
             </Link>
           </Menu.Item>,
-          <Menu.Item key="/pay">
-            <Link to="/pay">
-              <Icon type="swap" />
+          <Menu.Item key="/createlisting">
+            <Link to="/createlisting">
+              <Icon type="file-text" />
             </Link>
           </Menu.Item>,
-          <Menu.Item key="/manageusers">
-            <Link to="/manageusers">
-              <Icon type="usergroup-add" />
+          <Menu.Item key="/mylistings">
+            <Link to="/mylistings">
+              <Icon type="copy" />
             </Link>
           </Menu.Item>,
           <Menu.Item key="/profile" className="profile-menu">
             <ProfileDropdownMenu
               currentUser={this.props.currentUser}
               handleMenuClick={this.handleMenuClick}
+              balanceAmt={this.props.balanceAmt}
             />
           </Menu.Item>
         ];

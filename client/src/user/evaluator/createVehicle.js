@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { EvaluatorCreateVehicle } from "../../util/APIUtils";
-import { Form, Input, Button, notification, Select } from "antd";
+import { Form, Input, Button, notification } from "antd";
 import "./Createvehicle.css";
 
 const FormItem = Form.Item;
-const Option = Select.Option;
 class Evaluator_createvehicle extends Component {
   constructor(props) {
     super(props);
@@ -82,7 +81,7 @@ class Evaluator_createvehicle extends Component {
           message: "EquiV",
           description: "Vehicle Has been created!"
         });
-        //window.location.reload();
+        window.location.reload();
       })
       .catch(error => {
         notification.error({

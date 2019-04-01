@@ -65,8 +65,14 @@ class Buyer_mylistings extends Component {
         title: 'Listing',
         dataIndex: 'listingId',
       }, {
+        title: 'Dealer',
+        dataIndex: 'dealer',
+      }, {
         title: 'Dealer Offers',
         dataIndex: 'dealerOffers',
+      }, {
+        title: 'Rating',
+        dataIndex: 'rating',
       }];
 
       return (
