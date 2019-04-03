@@ -1,3 +1,4 @@
+export const API = '/api'
 export const AUTH_TOKEN = 'auth-token'
 
 export const NRIC_LENGTH = 9;

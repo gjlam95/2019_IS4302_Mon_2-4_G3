@@ -47,7 +47,7 @@ class Dealer_mylistings extends Component {
       .then(response => {
         notification.success({
           message: "EquiV",
-          description: "You've successfully entered your bid!"
+          description: "You've successfully entered your details!"
         });
         window.location.reload();
       })
