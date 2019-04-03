@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { assign } from '../../util/APIUtils';
+import { buyerRateDealer } from '../../util/APIUtils';
 import { Form, Input, Button, notification } from 'antd';
 import './Ratedealer.css';
 
@@ -9,27 +9,24 @@ class RateDealer extends Component {
   constructor(props) {
         super(props);
         this.state = {
-          listing: '',
-          payer: '',
-          payee: '',
-          endDate: ''
+          dealerIC: '',
+          rating: '',
         }
-        this.handleAssign = this.handleAssign.bind(this);
+        this.handleRateDealer = this.handleRateDealer.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-  handleAssign(event) {
+  handleRateDealer(event) {
       event.preventDefault();
-      const payuserRequest = {
-          payerNric: encodeURIComponent(this.state.payer.value),
-          payeeNric: encodeURIComponent(this.state.payee.value),
-          endDate: encodeURIComponent(this.state.endDate.value)
+      const dealerRating = {
+          payerNric: this.state.dealerIC.value,
+          payeeNric: this.state.rating.value
       };
-      assign(payuserRequest)
+      buyerRateDealer(dealerRating)
       .then(response => {
           notification.success({
               message: 'EquiV',
-              description: "You've successfully assigned the users!",
+              description: "You've successfully rated a dealer!",
           });
       }).catch(error => {
           notification.error({
@@ -56,21 +53,21 @@ class RateDealer extends Component {
           <div className="payuser-container">
               <h1 className="page-title">Rate Dealer</h1>
               <div className="payuser-content">
-                  <Form onSubmit={this.handleAssign} className="payuser-form">
+                  <Form onSubmit={this.handleRateDealer} className="ratedealer-form">
                       <FormItem
                           label="Dealer's NRIC">
                           <Input
                               size="large"
-                              name="payee"
-                              value={this.state.payee.value}
+                              name="dealerIC"
+                              value={this.state.dealerIC.value}
                               onChange={(event) => {this.handleInputChange(event)}} />
                       </FormItem>
                       <FormItem
                           label="Rating">
                           <Input
                               size="large"
-                              name="endDate"
-                              value={this.state.endDate.value}
+                              name="rating"
+                              value={this.state.rating.value}
                               onChange={(event) => {this.handleInputChange(event)}} />
                       </FormItem>
                       <FormItem>
