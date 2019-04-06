@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { buyerRateDealer } from '../../util/APIUtils';
+import { buyerRateDealer, buyerUpdateRatings } from '../../util/APIUtils';
 import { Form, Input, Button, notification } from 'antd';
 import './Ratedealer.css';
 
@@ -19,15 +19,20 @@ class RateDealer extends Component {
   handleRateDealer(event) {
       event.preventDefault();
       const dealerRating = {
-          payerNric: this.state.dealerIC.value,
-          payeeNric: this.state.rating.value
+          dealer: this.state.dealerIC.value,
+          rating: Number(this.state.rating.value)
       };
+      const updateRating = {
+        dealer: this.state.dealerIC.value
+      }
       buyerRateDealer(dealerRating)
       .then(response => {
           notification.success({
               message: 'EquiV',
               description: "You've successfully rated a dealer!",
           });
+          buyerUpdateRatings(updateRating)
+          window.location.reload()
       }).catch(error => {
           notification.error({
               message: 'EquiV',

@@ -106,9 +106,24 @@ export function buyerGetAssets() {
   });
 }
 
+export function buyerViewRating() {
+  return request({
+    url: "buyer/api/org.equiv.participants.assets.Rating",
+    method: "GET"
+  });
+}
+
 export function buyerRateDealer(rating) {
   return request({
     url: "buyer/api/org.equiv.transactions.RateDealer",
+    method: "POST",
+    body: JSON.stringify(rating)
+  });
+}
+
+export function buyerUpdateRatings(rating) {
+  return request({
+    url: "buyer/api/org.equiv.transactions.UpdateRatings",
     method: "POST",
     body: JSON.stringify(rating)
   });

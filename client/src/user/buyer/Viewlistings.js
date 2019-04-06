@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Layout, Table, notification } from 'antd';
-import { dealerViewListings, dealerIncludeOffers } from '../../util/APIUtils';
+import { dealerViewListings, dealerIncludeOffers, buyerViewRating } from '../../util/APIUtils';
 import './Viewlistings.css';
 
 class Buyer_mylistings extends Component {
@@ -9,10 +9,31 @@ class Buyer_mylistings extends Component {
       this.state = {
           listingId: "",
           description: "",
+          rating: "",
           tableData: []
       }
       this.includeOffers = this.includeOffers.bind(this);
       this.loadAllListings = this.loadAllListings.bind(this);
+  }
+
+  viewRating(index) {
+    buyerViewRating()
+    .then(data => {
+        this.setState({
+          rating: data[index].score
+        })
+    })
+    .catch(error => {
+        if(error.status === 404) {
+            this.setState({
+                notFound: true,
+            });
+        } else {
+            this.setState({
+                serverError: true,
+            });
+        }
+    });
   }
 
   loadAllListings() {
@@ -72,7 +93,12 @@ class Buyer_mylistings extends Component {
         dataIndex: 'dealerOffers',
       }, {
         title: 'Rating',
-        dataIndex: 'rating',
+        render: (text, record, index) => {
+          this.viewRating(index)
+          return (
+            <div>{this.state.rating}</div>
+          )
+        }
       }];
 
       return (
