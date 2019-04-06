@@ -13,17 +13,17 @@ __As we are using AWS MongoDB, please note that you need to use an alternative n
   i. Change directory into the /client directory, run the following command to install __client-side dependencies__.    
   ```npm install```  
   ii. Return the the main directory.  
-  ```cd ..``` 
+  ```cd ..```   
   iii. Install the __server-side dependencies__.    
   ```npm install```  
   iv. __\*For Winows Users Only__, remove 'browserlist' & 'browserlist.cmd' in the /client directory.  
 3. To start the project, return to the main directory and run this command. Please note that the *__client__* is on __port 3000__ and the *__server__* is on __port 5000__. Do change/add assigned ports used by Vagrant in order to avoid '*Bind failed: Address already in use*' error.  
   ```npm run dev```
-4. Additional notes to start the server and/or client:
+4. Additional notes to start the server and/or client:  
   i. To run the server only, run the command:  
   ```npm run server```  
   ii. To run the client only, run the command:  
-  ```npm run client```
+  ```npm run client```  
 5. Login credentials to interact with the Frontend Interface are as follows:  
 
   | Role      | NRIC      | Password |  
@@ -60,7 +60,8 @@ You will have to start your local environment Hyperledger Composer Playground. T
 3. Select the BNA file - equiv-blockchain_v4.4.bna 
 
 ### Sample Data
-* For the participants and assets, they are created via the `Admin` identity. Please copy & paste the data directly to create via the "Create new participant" in Hyperledger Composer Playground. You can either refer to 1) Demo Order.docx which we used during the presentation and 2) Refer to the README.md in the BNA file.
+* For the participants and assets, they are created via the `Admin` identity. Please copy & paste the data directly to create via the "Create new participant" in Hyperledger Composer Playground.  
+* You can either refer to 1) Demo Order.docx which we used during the presentation and 2) Refer to the README.md in the BNA file.  
 
 ### Network Cards
 They are the identity/persona to use when testing/using the transactions. Please create them into Hyperledger Composer Playground in the business network.
