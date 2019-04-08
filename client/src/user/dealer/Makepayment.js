@@ -17,6 +17,10 @@ class Middleman_makepayment extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
+  /*
+  Make payment from dealer to seller
+  Transfer ownership from seller to dealer
+  */
   handleMakePayment(event) {
     event.preventDefault();
     const makePayment = {

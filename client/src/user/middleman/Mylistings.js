@@ -21,6 +21,9 @@ class Middleman_mylistings extends Component {
 
     }
 
+    /*
+    Active listings by middleman
+    */
     loadAllListings() {
         middlemanViewListings()
         .then(data => {

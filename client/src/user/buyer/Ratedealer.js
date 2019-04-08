@@ -16,6 +16,9 @@ class RateDealer extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
+    /*
+    Rate a dealer after purchase of vehicle
+    */
   handleRateDealer(event) {
       event.preventDefault();
       const dealerRating = {

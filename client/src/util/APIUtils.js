@@ -1,5 +1,8 @@
 import { API, AUTH_TOKEN } from "../constants";
 
+/*
+Default fetch statement
+*/
 const request = options => {
   const headers = new Headers({
     "Content-Type": "application/json"
@@ -23,6 +26,9 @@ const request = options => {
   );
 };
 
+/*
+API calls for different users
+*/
 export function balanceAmt(role1, role2) {
   return request({
     url: role1 + "/api/org.equiv.participants.assets." + role2,

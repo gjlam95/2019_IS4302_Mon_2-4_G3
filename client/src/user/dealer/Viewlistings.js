@@ -22,6 +22,9 @@ class Dealer_viewlistings extends Component {
 
     }
 
+    /*
+    View listings put up my middleman
+    */
     loadAllListings() {
         dealerViewListings()
         .then(data => {
@@ -42,6 +45,9 @@ class Dealer_viewlistings extends Component {
         });
     }
 
+    /*
+    Function to return highestBid in real time
+    */
     viewHighestBid(index) {
       dealerViewListings()
       .then(data => {
@@ -65,6 +71,9 @@ class Dealer_viewlistings extends Component {
       });
     }
 
+    /*
+    Submit initial bid
+    */
     submitBid(event) {
       event.preventDefault()
       const initialBidAmt = {
@@ -86,6 +95,9 @@ class Dealer_viewlistings extends Component {
       });
     }
 
+    /*
+    Update from initial bid
+    */
     updateBid(event) {
       event.preventDefault()
       const updatedBidAmt = {

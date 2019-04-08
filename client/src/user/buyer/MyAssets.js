@@ -14,6 +14,9 @@ class Buyer_myassets extends Component {
         this.loadAssets = this.loadAssets.bind(this);
     }
 
+    /*
+    Assets owned by buyer
+    */
     loadAssets() {
         buyerGetAssets()
         .then(data =>

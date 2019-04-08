@@ -17,6 +17,10 @@ class Buyer_makepayment extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
+  /*
+  Make payment from buyer to dealer
+  Transfer ownership from dealer to buyer
+  */
   handleMakePayment(event) {
     event.preventDefault();
     const makePayment = {

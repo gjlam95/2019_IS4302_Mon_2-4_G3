@@ -14,6 +14,9 @@ class Middleman_myassets extends Component {
         this.loadAssets = this.loadAssets.bind(this);
     }
 
+    /*
+    List of vehicles evaluated by evaluator
+    */
     loadAssets() {
         middlemanGetAssets()
         .then(data =>

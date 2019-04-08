@@ -14,6 +14,9 @@ class Dealer_myassets extends Component {
     this.loadAssets = this.loadAssets.bind(this);
   }
 
+  /*
+  Assets for dealer
+  */
   loadAssets() {
     dealerGetAssets()
       .then(data => this.setState({ data }))

@@ -81,6 +81,10 @@ class App extends Component {
     this.props.history.push("/");
   }
 
+  /*
+  Checks role and only allow pages accessible to the role
+  Also shows balanceAmt for each user
+  */
   loadCurrentUser() {
     this.setState({
       isLoading: true
@@ -108,6 +112,9 @@ class App extends Component {
     this.loadCurrentUser();
   }
 
+  /*
+  Gets balanceAmt for user
+  */
   getBalanceAmt(role1, role2) {
     balanceAmt(role1, role2)
       .then(data => {
@@ -222,12 +229,6 @@ class App extends Component {
               <div className="container">
                 <Switch>
                   <Route exact path="/" component={Home} />
-                  {/* <EvaluatorRoute
-                    authenticated={this.state.isAuthenticated}
-                    role={this.state.currentUser.role}
-                    path="/generatedata"
-                    component={Evaluator_generate_data}
-                  />*/}
                   <EvaluatorRoute
                     authenticated={this.state.isAuthenticated}
                     role={this.state.currentUser.role}

@@ -18,6 +18,9 @@ class Dealer_mylistings extends Component {
     this.loadAllListings = this.loadAllListings.bind(this);
   }
 
+  /*
+  Listings to show to potential buyers
+  */
   loadAllListings() {
     dealerViewListings()
       .then(data => {
@@ -36,6 +39,9 @@ class Dealer_mylistings extends Component {
       });
   }
 
+  /*
+  Include price and additional offers by dealers
+  */
   includeOffers(event) {
     event.preventDefault();
     const offers = {

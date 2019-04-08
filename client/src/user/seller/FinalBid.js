@@ -36,6 +36,9 @@ class Seller_finalbid extends Component {
         });
     }
 
+    /*
+    Views status of bids for own vehicle
+    */
     viewHighestBid(index) {
       dealerViewListings()
       .then(data => {

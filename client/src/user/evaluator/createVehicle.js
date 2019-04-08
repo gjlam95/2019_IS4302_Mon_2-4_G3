@@ -21,20 +21,6 @@ class Evaluator_createvehicle extends Component {
       power: "",
       features: "",
       description: "",
-      /*vehicleDetails: {
-        vehicleCategory: "",
-        brand: "",
-        numberPlate: "",
-        color: "",
-        modelType: "",
-        mileage: "",
-        transmission: "",
-        engineCap: "",
-        power: "",
-        features: "",
-        description: ""
-      },
-      */
       coe_expiry: "",
       warranty_expiry: "",
       roadtax_expiry: "",
@@ -42,10 +28,12 @@ class Evaluator_createvehicle extends Component {
       middleman: ""
     };
     this.createVehicle = this.createVehicle.bind(this);
-    //this.handleMakePayment = this.handleMakePayment.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
+  /*
+  Input vehicle details for evaluator
+  */
   createVehicle(event) {
     event.preventDefault();
     const createVehicle = {
@@ -74,7 +62,6 @@ class Evaluator_createvehicle extends Component {
         "resource:org.equiv.participants.assets.Middleman#" +
         this.state.middleman.value
     };
-    console.log(createVehicle);
     EvaluatorCreateVehicle(createVehicle)
       .then(response => {
         notification.success({

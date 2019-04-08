@@ -16,6 +16,9 @@ class Buyer_mylistings extends Component {
       this.loadAllListings = this.loadAllListings.bind(this);
   }
 
+  /*
+  View rating of each dealer
+  */
   viewRating(index) {
     buyerViewRating()
     .then(data => {
@@ -36,6 +39,9 @@ class Buyer_mylistings extends Component {
     });
   }
 
+  /*
+  See listings put up by dealer
+  */
   loadAllListings() {
       dealerViewListings()
       .then(data => {

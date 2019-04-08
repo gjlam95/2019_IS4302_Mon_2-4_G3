@@ -27,6 +27,9 @@ class Middleman_createlisting extends Component {
         });
     }
 
+    /*
+    Create new listing based on evaluator's evaluated vehicle's details
+    */
     handleSubmit(event) {
         event.preventDefault();
         const listing = {

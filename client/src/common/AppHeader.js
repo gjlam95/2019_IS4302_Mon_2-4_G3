@@ -17,6 +17,9 @@ class AppHeader extends Component {
     }
   }
 
+  /*
+  Icons on top right hand corner of app for access to different pages
+  */
   render() {
     let menuItems;
     if (this.props.currentUser) {

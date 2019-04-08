@@ -14,6 +14,9 @@ class Seller_myassets extends Component {
         this.loadAssets = this.loadAssets.bind(this);
     }
 
+    /*
+    Seller's assets
+    */
     loadAssets() {
         sellerGetAssets()
         .then(data =>
